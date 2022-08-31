@@ -10,6 +10,7 @@ export default function Routers() {
         <BrowserRouter>
             <Routes>
                 <Route path='/' element={<Dashboard/>}/> 
+                
             </Routes>
         </BrowserRouter>
     )
