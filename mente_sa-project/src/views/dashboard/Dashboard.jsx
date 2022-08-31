@@ -1,11 +1,8 @@
 import * as React from 'react';
 import { styled, createTheme, ThemeProvider } from '@mui/material/styles';
 import CssBaseline from '@mui/material/CssBaseline';
-
 import Box from '@mui/material/Box';
-
 import Toolbar from '@mui/material/Toolbar';
-
 import Typography from '@mui/material/Typography';
 import Divider from '@mui/material/Divider';
 import IconButton from '@mui/material/IconButton';
@@ -18,22 +15,18 @@ import MenuIcon from '@mui/icons-material/Menu';
 import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
 import NotificationsIcon from '@mui/icons-material/Notifications';
 
+import AppBar from '../../components/Header/AppBar';
 
 //COMPONENTS
-import AppBar from '../../components/Header';
-import Drawer from '../../components/NavBar';
+import Drawer from '../../components/NavBar/Drawer';
 import MenuItem from '../../components/Menu/MenuItem';
 import Copyright from '../../components/Footer';
 
-
-
+import Header from '../../components/Header';
 
 import Chart from './Chart';
 import Deposits from './Deposits';
 import Orders from './Orders';
-
-
-
 
 
 const mdTheme = createTheme();
@@ -48,63 +41,9 @@ function DashboardContent() {
     <ThemeProvider theme={mdTheme}>
       <Box sx={{ display: 'flex' }}>
         <CssBaseline />
-
-        <AppBar position="absolute" open={open}>
-          <Toolbar
-            sx={{
-              pr: '24px', // keep right padding when drawer closed
-            }}
-          >
-            <IconButton
-              edge="start"
-              color="inherit"
-              aria-label="open drawer"
-              onClick={toggleDrawer}
-              sx={{
-                marginRight: '36px',
-                ...(open && { display: 'none' }),
-              }}
-            >
-              <MenuIcon />
-            </IconButton>
-            <Typography
-              component="h1"
-              variant="h6"
-              color="inherit"
-              noWrap
-              sx={{ flexGrow: 1 }}
-            >
-              Dashboard
-            </Typography>
-            <IconButton color="inherit">
-              <Badge badgeContent={4} color="secondary">
-                <NotificationsIcon />
-              </Badge>
-            </IconButton>
-          </Toolbar>
-        </AppBar>
-        <Drawer variant="permanent" open={open}>
-          <Toolbar
-            sx={{
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'flex-end',
-              px: [1],
-            }}
-          >
-            <IconButton onClick={toggleDrawer}>
-              <ChevronLeftIcon />
-            </IconButton>
-          </Toolbar>
-          <Divider />
-          <MenuItem>
-          </MenuItem>
-          {/* <List component="nav">
-            {mainListItems}
-            <Divider sx={{ my: 1 }} />
-            {secondaryListItems}
-          </List> */}
-        </Drawer>
+        {/* component shared => Title and Drawer */}
+        <Header></Header>
+        
         <Box
           component="main"
           sx={{
@@ -119,6 +58,8 @@ function DashboardContent() {
         >
           <Toolbar />
           <Container maxWidth="lg" sx={{ mt: 4, mb: 4 }}>
+
+          {/* element to be change */}
           <Grid container spacing={3}>
               {/* Chart */}
               <Grid item xs={12} md={8} lg={9}>
@@ -152,7 +93,9 @@ function DashboardContent() {
                   <Orders />
                 </Paper>
               </Grid>
-            </Grid>
+          </Grid>
+          {/* element to be change */}
+
             <Copyright sx={{ pt: 4 }} />
           </Container>
         </Box>
