@@ -1,0 +1,27 @@
+/* .container {
+    background-color: red;
+    min-height: 75em;
+    width: 1200px;
+
+} */
+/* .container {
+    width: 1200px;
+    display: flex;
+    justify-content: space-between;
+    margin: 0 auto;
+    flex-wrap: wrap;
+    background-color: red;
+}
+
+.min_height {
+    min-height: 75%;
+}
+
+.start {
+   justify-content: flex-start; 
+}
+
+.column {
+    flex-direction: column;
+    justify-content: flex-start;
+} */
