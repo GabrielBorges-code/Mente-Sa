@@ -1,16 +1,17 @@
 import React from 'react'
-import {BrowserRouter, Routes, Route} from 'react-router-dom'
+import {BrowserRouter, Routes, Route, Navigate} from 'react-router-dom'
 
-//VIEWS
-import Dashboard from '../views/dashboard/'
+import Home from '../views/home'
+import Landing from '../views/landing'
 
 export default function Routers() {
     return (
 
         <BrowserRouter>
             <Routes>
-                <Route path='/' element={<Dashboard/>}/> 
                 
+                <Route path='/' element={<Landing/>}/>
+                <Route path="*" element={<Navigate to="/"/>}/>
             </Routes>
         </BrowserRouter>
     )
