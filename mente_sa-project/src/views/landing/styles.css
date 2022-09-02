@@ -1,11 +1,22 @@
-html, body{
-    background-color: var(--blue);
-}
 
-.image{
+
+.logo-div{
     align-items: center;
     display: flex;
     height: 100vh;
     justify-content: center;
+    flex-direction: column;
      
+}
+.logo{
+    max-width: 50%;
+}
+
+.default{
+    background-color: #94BDEB;
+}
+
+.dark{
+    background-color: #143885;
+
 }

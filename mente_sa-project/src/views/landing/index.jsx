@@ -7,7 +7,15 @@ export default function Landing() {
     return (
         <>
             <div className='container-md'>
-                <img src={Logo} alt="" />
+                <div>
+                <div className='row align-items logo-div'>
+                    <img className='logo' src={Logo} alt="" />
+                </div>
+                <div>
+                    <div><button type='button' class='btn btn-primary default'> teste</button></div>
+                    <div><button type='button' class='btn  btn-primary dark '> teste</button></div>
+                </div>
+                </div>
             </div>
         </>
        
