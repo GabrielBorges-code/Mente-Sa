@@ -1,6 +1,7 @@
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
 import Container from "react-bootstrap/Container";
+import { Link } from "react-router-dom";
 
 import Input from "../../../components/Input";
 import InputSelect from "../../../components/Input/inputSelect";
@@ -28,12 +29,12 @@ function Personal() {
             </div>
 
             <div className="row">
-            <Input type={'email'} typeForm={'form-control'} label={'Email'}/>
-            <Input type={'text'} typeForm={'form-control'} label={'Telefone'}/>
+            <Input type={'email'} typeForm={'form-control'} setClassCol={'col-sm'} label={'Email'}/>
+            <Input type={'text'} typeForm={'form-control'} setClassCol={'col-sm'} label={'Telefone'}/>
             
             </div>
             <div className="row">
-              <Input type={'date'} typeForm={'form-control'} label={'Data Nascimento'}/>
+              <Input type={'date'} typeForm={'form-control'} setClassCol={'col-sm'} label={'Data Nascimento'}/>
               
               <InputSelect label={'Estado Civil'}/>
               
@@ -54,24 +55,23 @@ function Personal() {
           
           <h3>Endereço</h3>
           <div className="row">
-            <Input type={'text'} typeForm={'form-control'} label={'Logradouro'}/>
-            <Input type={'text'} typeForm={'form-control'} label={'Número'}/>
-            <Input type={'text'} typeForm={'form-control'} label={'Complemento'}/>
+            <Input type={'text'} typeForm={'form-control'} setClassCol={'col-sm-7'} label={'Logradouro'}/>
+            <Input type={'text'} typeForm={'form-control'} setClassCol={'col-sm'} label={'Número'}/>
+            <Input type={'text'} typeForm={'form-control'} setClassCol={'col-sm'} label={'Complemento'}/>
             </div>
 
-            <div className="row">
-            <Input type={'text'} typeForm={'form-control'} label={'Bairro'}/>
-            <Input type={'text'} typeForm={'form-control'} label={'Estado'}/>
-            <Input type={'text'} typeForm={'form-control'} label={'Cidade'}/>
+            <div className="row g-3">
+            <Input type={'text'} typeForm={'form-control'} setClassCol={'col-sm-7'} label={'Bairro'}/>
+            <Input type={'text'} typeForm={'form-control'} setClassCol={'col-sm'} label={'Estado'}/>
+            <Input type={'text'} typeForm={'form-control col-sm'} setClassCol={'col-sm'} label={'Cidade'}/>
             </div>
             </Form.Group>
 
           
 
-          <div className="row d-flex justify-content-center">
-            <Button className="btn btn-lg col-md-3"  type="submit">
-              Avançar
-            </Button>
+          <div className="row d-flex justify-content-md-center row align-items-end col-md-3">
+            {/* <Link><Button className="btn btn-lg col-md-3"  type="submit">Avançar</Button></Link> */}
+            <Link to="/registro/profissional/sobre"><button type={'submit'} className='btn btn-lg btn-primary'> Avançar</button></Link>
           </div>
         </Form>
       </Container>
