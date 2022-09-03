@@ -13,7 +13,7 @@ import styles from "./index.module.css";
 function Personal() {
   return (
     <>
-      <Header />
+      <Header mensage={'Olá profissional, queremos te conhecer!'}/>
 
       {/* steper */}
 

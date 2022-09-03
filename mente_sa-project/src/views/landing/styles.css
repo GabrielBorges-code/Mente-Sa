@@ -1,4 +1,10 @@
-
+.divAll{
+    position: block;
+    width: 100vw;
+    height: 100vh;
+    background: #2A68AD;
+    margin: 0; 
+}
 
 .logo-div{
     align-items: center;
@@ -15,24 +21,33 @@
 
 .default{
     background-color: #94BDEB;
-    border-radius: 1.5rem;
-    height: 5rem;
+    border-radius: 1rem;
     border: none;
+    padding: 0.5rem 1.5rem;
+    font-size: 1.5rem;
+}
+
+.default i{ 
+    font-size: 2rem;
 }
 
 .dark {
-    height: 5rem;
+    /* height: 5rem; */
     background-color: #143885;
     border: none;
-    border-radius: 1.5rem;
+    border-radius: 1rem;
+    padding: 0.5rem 1.5rem;
+    font-size: 1.5rem;
 }
 
-span{
-    padding: 0.5rem;
+
+.dark i{ 
     font-size: 2rem;
 }
 
-button{
-    font-size: 2rem;
-}
+
+
+
+
+
 

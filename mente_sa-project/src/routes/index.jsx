@@ -5,6 +5,7 @@ import Home from '../views/home';
 import Landing from '../views/landing'
 import Personal from '../views/professionalRegistration/personal'
 import Professional from '../views/professionalRegistration/professional';
+import Enterprise from '../views/professionalRegistration/enterprise';
 
 
 export default function Routers() {
@@ -13,8 +14,9 @@ export default function Routers() {
         <BrowserRouter>
             <Routes>
                 <Route path='/' element={<Landing/>}/> 
-                <Route path ='/registro/professional/about' element={<Personal/>}/>
-                <Route path ='/registro/professional/' element={<Professional/>}/>
+                <Route path ='/registro/profissional/' element={<Personal/>}/>
+                <Route path ='/registro/profissional/sobre' element={<Professional/>}/>
+                <Route path ='/registro/profissional/empresa' element={<Enterprise/>}/>
                
                 <Route path="*" element={<Navigate to="/"/>}/>
                 

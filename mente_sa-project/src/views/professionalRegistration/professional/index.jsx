@@ -13,21 +13,22 @@ import styles from "./index.module.css";
 function Professional() {
   return (
     <>
-      <Header />
+      <Header mensage={'só mais um pouquinho...'}/>
 
       {/* steper 2 */}
 
       <Container className={`${styles.min_height} bg-light card`}>
         
-
+ 
         <Form>
         <Form.Group className="mb-5" >
-        <h3>Dados Pessoais</h3>
+        <h3>Dados Profissionais</h3>
             
 
             <div className="row">
-                <Input type={'text'} typeForm={'form-control'} label={'Faculdade/Universidade'}/>
-                <Input type={'date'} typeForm={'form-control'} label={'Ano de Conclusão'}/>
+                <Input type={'text'} typeForm={'form-control'} label={'Faculdade/Univesidade'}/>
+                <Input type={'text'} typeForm={'form-control'} label={'Ano de Conclusão'}/>
+                
             </div>
             <div className="row">
                 <Input type={'text'} typeForm={'form-control'} label={'Especialização'}/>
@@ -40,12 +41,13 @@ function Professional() {
             <div className="row">
                 <Input type={'text'} typeForm={'form-control'} label={'Mestrado'}/>
                 <Input type={'date'} typeForm={'form-control'} label={'Ano de Conclusão'}/>
+                
             </div>
             <div className="row">
                 <Input type={'text'} typeForm={'form-control'} label={'Doutorado'}/>
                 <Input type={'date'} typeForm={'form-control'} label={'Ano de Conclusão'}/>
             </div>
-            
+                        
           </Form.Group>          
 
           <div className="row d-flex justify-content-center">
