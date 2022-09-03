@@ -1,17 +1,20 @@
-import React from 'react'
-import {BrowserRouter, Routes, Route} from 'react-router-dom'
+import React from 'react';
+import {BrowserRouter, Routes, Route, Navigate} from 'react-router-dom';
 
-import Views from '../views/home'
+import Home from '../views/home';
+import ProfessionalRegistration from '../views/professionalRegistration'
 
 export default function Routers() {
     return (
 
         <BrowserRouter>
             <Routes>
-                <Route path='/' element={<Views/>}/> 
-                {/* <Route path="*" element={<Navigate to="/"/>}/> */}
+                <Route path='/' element={<Home/>}/> 
+                <Route path='/registro-profissional' element={<ProfessionalRegistration/>}/> 
+                <Route path="*" element={<Navigate to="/"/>}/>
                 
             </Routes>
+
         </BrowserRouter>
     )
 }
