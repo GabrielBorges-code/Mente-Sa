@@ -2,6 +2,7 @@ import React from 'react';
 import {BrowserRouter, Routes, Route, Navigate} from 'react-router-dom';
 
 import Home from '../views/home';
+import Landing from '../views/landing'
 import ProfessionalRegistration from '../views/professionalRegistration'
 
 export default function Routers() {
@@ -9,12 +10,12 @@ export default function Routers() {
 
         <BrowserRouter>
             <Routes>
-                <Route path='/' element={<Home/>}/> 
-                <Route path='/registro-profissional' element={<ProfessionalRegistration/>}/> 
+                <Route path='/' element={<Landing/>}/> 
+                <Route path='/registro/profissional' element={<ProfessionalRegistration/>}/> 
                 <Route path="*" element={<Navigate to="/"/>}/>
                 
-                <Route path='/' element={<Landing/>}/>
-                <Route path="*" element={<Navigate to="/"/>}/>
+                
+                
             </Routes>
 
         </BrowserRouter>

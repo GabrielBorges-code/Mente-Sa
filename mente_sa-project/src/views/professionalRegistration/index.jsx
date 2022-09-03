@@ -1,10 +1,12 @@
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
-
-import Footer from "../../components/footer";
-import Header from "../../components/header";
-
 import Container from "react-bootstrap/Container";
+
+import Input from "../../components/Input";
+import InputSelect from "../../components/Input/inputSelect";
+
+import Footer from "../../components/Footer";
+import Header from "../../components/Header";
 
 import styles from "./index.module.css";
 
@@ -15,111 +17,59 @@ function ProfessionalRegistration() {
 
       {/* steper */}
 
-      <Container className={`${styles.min_height} bg-light`}>
-        <h3>Dados Pessoais</h3>
+      <Container className={`${styles.min_height} bg-light card`}>
+        
 
         <Form>
-          <Form.Group className="mb-3" >
-            <Form.Label>Nome Completo</Form.Label>
-            <Form.Control type="text" placeholder="Jose Alvez Pereira" />
-          </Form.Group>
-
-          <Form.Group className="mb-3" >
-            <Form.Label>E-mail</Form.Label>
-            <Form.Control type="email" placeholder="nome@email.com" />
-
-            <Form.Label>Telefone</Form.Label>
-            <Form.Control type="tel" placeholder="61 9 7777-6666" />
-
-          </Form.Group>
-
-          <Form.Group className="mb-3" >
-            <Form.Label>Telefone</Form.Label>
-            <Form.Control type="tel" placeholder="61 9 7777-6666" />
-          </Form.Group>
-
-          <Form.Group className="mb-3" >
-            <Form.Label>Data de Nascimento</Form.Label>
-            <Form.Control type="text" placeholder="05/08/1987" />
-          </Form.Group>
-
-          <Form.Group className="mb-3" >
-            <Form.Label>Estado Civil</Form.Label>
-            <Form.Select aria-label="Default select example">
-              <option disabled>Escolha</option>
-              <option value="Solteiro">Solteiro</option>
-              <option value="Casado">Casado</option>
-              <option value="Separado">Separado</option>
-              <option value="Divorciado">Divorciado</option>
-              <option value="Viúvo">Viúvo</option>
-            </Form.Select>
-          </Form.Group>
-
-          <Form.Label>Sexo</Form.Label>
-          <Form.Group className="mb-3" >
-            <div class="form-check form-check-inline">
-              <input
-                class="form-check-input"
-                type="radio"
-                name="inlineRadioOptions"
-                id="inlineRadio1"
-                value="option1"
-              />
-              <label class="form-check-label" for="inlineRadio1">
-                Masculino
-              </label>
+        <Form.Group className="mb-5" >
+        <h3>Dados Pessoais</h3>
+            <div className="row">
+            <Input type={'text'} typeForm={'form-control'} label={'Nome Completo'}/>
             </div>
-            <div class="form-check form-check-inline">
-              <input
-                class="form-check-input"
-                type="radio"
-                name="inlineRadioOptions"
-                id="inlineRadio2"
-                value="option2"
-              />
-              <label class="form-check-label" for="inlineRadio2">
-                Feminino
-              </label>
-            </div>
+
+            <div className="row">
+            <Input type={'email'} typeForm={'form-control'} label={'Email'}/>
+            <Input type={'text'} typeForm={'form-control'} label={'Telefone'}/>
             
-          </Form.Group>
-
+            </div>
+            <div className="row">
+              <Input type={'date'} typeForm={'form-control'} label={'Data Nascimento'}/>
+              
+              <InputSelect label={'Estado Civil'}/>
+              
+              <div className="col-md-3">
+              <label  className="form-label">Sexo</label>
+                <select className="form-select form-select">
+                  <option >Escolha</option>
+                  <option value="Masculino">Masculino</option>
+                  <option value="Feminino">Feminino</option>
+                </select>
+              </div>
+            </div>
           {/* <br/><br/><br/> */}
+          </Form.Group>
+          
+          
+          <Form.Group className="mb-5" >
           
           <h3>Endereço</h3>
+          <div className="row">
+            <Input type={'text'} typeForm={'form-control'} label={'Logradouro'}/>
+            <Input type={'text'} typeForm={'form-control'} label={'Número'}/>
+            <Input type={'text'} typeForm={'form-control'} label={'Complemento'}/>
+            </div>
 
-          <Form.Group className="mb-3" >
-            <Form.Label>Logradouro</Form.Label>
-            <Form.Control type="text"/>
-          </Form.Group>
+            <div className="row">
+            <Input type={'text'} typeForm={'form-control'} label={'Bairro'}/>
+            <Input type={'text'} typeForm={'form-control'} label={'Estado'}/>
+            <Input type={'text'} typeForm={'form-control'} label={'Cidade'}/>
+            </div>
+            </Form.Group>
 
-          <Form.Group className="mb-3" >
-            <Form.Label>Numero</Form.Label>
-            <Form.Control type="number"/>
-          </Form.Group>
+          
 
-          <Form.Group className="mb-3" >
-            <Form.Label>Complemento</Form.Label>
-            <Form.Control type="text"/>
-          </Form.Group>
-
-          <Form.Group className="mb-3" >
-            <Form.Label>Bairro</Form.Label>
-            <Form.Control type="text"/>
-          </Form.Group>
-
-          <Form.Group className="mb-3" >
-            <Form.Label>Estado</Form.Label>
-            <Form.Control type="text"/>
-          </Form.Group>
-
-          <Form.Group className="mb-3" >
-            <Form.Label>Cidade</Form.Label>
-            <Form.Control type="text"/>
-          </Form.Group>
-
-          <div class="row d-flex justify-content-center">
-            <Button className="col-md-6" variant="primary" type="submit">
+          <div className="row d-flex justify-content-center">
+            <Button className="btn btn-lg col-md-3"  type="submit">
               Avançar
             </Button>
           </div>
