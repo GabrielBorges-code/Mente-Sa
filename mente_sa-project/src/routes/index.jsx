@@ -13,6 +13,8 @@ export default function Routers() {
                 <Route path='/registro-profissional' element={<ProfessionalRegistration/>}/> 
                 <Route path="*" element={<Navigate to="/"/>}/>
                 
+                <Route path='/' element={<Landing/>}/>
+                <Route path="*" element={<Navigate to="/"/>}/>
             </Routes>
 
         </BrowserRouter>

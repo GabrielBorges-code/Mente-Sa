@@ -1,0 +1,11 @@
+html, body{
+    background-color: var(--blue);
+}
+
+.image{
+    align-items: center;
+    display: flex;
+    height: 100vh;
+    justify-content: center;
+     
+}
