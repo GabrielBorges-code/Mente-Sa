@@ -9,14 +9,30 @@
      
 }
 .logo{
-    max-width: 50%;
+    max-width: 70%;
+    min-width: 50%;
 }
 
 .default{
     background-color: #94BDEB;
+    border-radius: 1.5rem;
+    height: 5rem;
+    border: none;
 }
 
-.dark{
+.dark {
+    height: 5rem;
     background-color: #143885;
-
+    border: none;
+    border-radius: 1.5rem;
 }
+
+span{
+    padding: 0.5rem;
+    font-size: 2rem;
+}
+
+button{
+    font-size: 2rem;
+}
+
