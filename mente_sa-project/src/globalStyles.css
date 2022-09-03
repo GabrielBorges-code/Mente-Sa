@@ -2,5 +2,17 @@
     --blue: #5086C1,
     --blue-light: #94BDEB,
     --blue-dark: #143885,
+    
 }
+body, html{
+    margin:0;
+    padding: 0;
+}
+
+*{
+    margin: 0;
+    padding: 0;
+}
+
+
 
