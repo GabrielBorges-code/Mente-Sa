@@ -10,7 +10,7 @@ import Header from "../../../components/Header";
 
 import styles from "./index.module.css";
 
-function ProfessionalRegistration() {
+function Personal() {
   return (
     <>
       <Header />
@@ -81,4 +81,4 @@ function ProfessionalRegistration() {
   );
 }
 
-export default ProfessionalRegistration;
+export default Personal;

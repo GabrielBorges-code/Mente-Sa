@@ -3,7 +3,9 @@ import {BrowserRouter, Routes, Route, Navigate} from 'react-router-dom';
 
 import Home from '../views/home';
 import Landing from '../views/landing'
-import ProfessionalRegistration from '../views/professionalRegistration/personalData'
+import Personal from '../views/professionalRegistration/personal'
+import Professional from '../views/professionalRegistration/professional';
+
 
 export default function Routers() {
     return (
@@ -11,7 +13,9 @@ export default function Routers() {
         <BrowserRouter>
             <Routes>
                 <Route path='/' element={<Landing/>}/> 
-                <Route path ='/registro/profissional' element={<ProfessionalRegistration/>}/> 
+                <Route path ='/registro/professional/about' element={<Personal/>}/>
+                <Route path ='/registro/professional/' element={<Professional/>}/>
+               
                 <Route path="*" element={<Navigate to="/"/>}/>
                 
                 
