@@ -17,7 +17,7 @@ function Professional() {
 
       {/* steper 2 */}
 
-      <Container className={`${styles.min_height} bg-light card`}>
+      <Container className={`${styles.content} bg-light card`}>
         
  
         <Form>

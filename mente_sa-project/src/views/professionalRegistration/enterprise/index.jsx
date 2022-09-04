@@ -16,7 +16,7 @@ function Enterprise() {
 
       {/* steper 3 */}
 
-      <Container className={`${styles.min_height} bg-light card`}>
+      <Container className={`${styles.content} bg-light card`}>
       <Form>
         <Form.Group className="mb-5" >
         <h3>Dados Empresa</h3>

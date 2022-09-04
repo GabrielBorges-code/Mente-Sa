@@ -7,7 +7,7 @@ function InputSelect({label, value, setValue, type, typeForm}) {
         <div className="col-md-3">
             <label  className="form-label">{label}</label>
             <select className="form-select form-select">
-                <option >Escolha</option>
+                <option disabled>Escolha</option>
                 <option value="Solteiro">Solteiro</option>
                 <option value="Casado">Casado</option>
                 <option value="Separado">Separado</option>

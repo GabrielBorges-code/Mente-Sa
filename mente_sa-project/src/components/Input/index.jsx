@@ -1,7 +1,7 @@
 import Form from "react-bootstrap/Form";
 import styles from "./index.module.css";
 
-function Input({label, value, setValue, type, typeForm}) {
+function Input({label, value, setValue, type, typeForm, placeHolder}) {
 
     return (   
         <div className="col">
@@ -10,6 +10,7 @@ function Input({label, value, setValue, type, typeForm}) {
             type={type}
             onChange={e => setValue(e.target.value)}
             className={ `${typeForm} ${styles.bgInput}`  }
+            placeholder={placeHolder}
             value={value}/>
         </div>    
     )
