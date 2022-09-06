@@ -8,3 +8,16 @@
 span{
     padding-top: 1rem !important;
 }
+
+.bar{
+    width: 100%;
+}
+
+.progressB{
+    height: 1px;
+}
+
+.bar Button{
+    width: 2rem;
+    height: 2rem;
+}
