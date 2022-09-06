@@ -1,100 +1,128 @@
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
 import Container from "react-bootstrap/Container";
+import { Link, Navigate, useNavigate } from "react-router-dom";
 
 import Input from "../../../components/Input";
 import InputSelect from "../../../components/Input/inputSelect";
 
 import Footer from "../../../components/Footer";
 import Header from "../../../components/Header";
+import Stepper from "../../../components/Stepper";
 
 import styles from "./index.module.css";
+import { useState } from "react";
 
-function RegisterPersonal() {
+function Personal() {
+  let navigate = useNavigate();
+  const [] = useState();
+
+  function save() {
+    //PREPARE TO SAVE
+    navigate("/registro/usuario/escolha-profissional");
+  }
+
   return (
     <>
-      <Header mensage={"Olá paciente, queremos te conhecer!"} />
+      <Header message={"Olá paciente, queremos te conhecer!"} linkBack={"/"} />
+      {/* steper */}
+      <Stepper
+        icon={true}
+        state1={"primary"}
+        state2={"secondary"}
+        state3={"secondary"}
+      />
 
-      {/* steper 1*/}
-
-      <Container className={`${styles.content} bg-light card`}>
+      <Container className={`${styles.min_height} bg-light card`}>
         <Form>
-          <Form.Group className="mb-12">
+          <Form.Group className="mb-5">
             <h3>Dados Pessoais</h3>
             <div className="row">
               <Input
                 type={"text"}
                 typeForm={"form-control"}
                 label={"Nome Completo"}
-                placeHolder={"Allan Turing"}
               />
             </div>
 
             <div className="row">
               <Input
-                className="mb-7"
                 type={"email"}
                 typeForm={"form-control"}
+                setClassCol={"col-sm"}
                 label={"Email"}
-                placeHolder={"email@gmail.com"}
               />
               <Input
-                className="mb-3"
                 type={"text"}
                 typeForm={"form-control"}
+                setClassCol={"col-sm"}
                 label={"Telefone"}
-                placeHolder={"(61) 9 5555-7777"}
               />
             </div>
-
             <div className="row">
               <Input
                 type={"date"}
                 typeForm={"form-control"}
+                setClassCol={"col-sm"}
                 label={"Data Nascimento"}
               />
-
-              <InputSelect label={"Estado Civil"} />
-
-              <div className="col-md-3">
-                <label className="form-label">Sexo</label>
-                <select className="form-select form-select">
-                  <option disabled>Escolha</option>
-                  <option value="Masculino">Masculino</option>
-                  <option value="Feminino">Feminino</option>
-                </select>
-              </div>
+              <InputSelect
+                label={"Estado Civil"}
+                options={["Solteiro", "Casado", "Divorciado", "Viúvo"]}
+              />
+              <InputSelect label={"Sexo"} options={["Masculino", "Feminino"]} />
             </div>
             {/* <br/><br/><br/> */}
           </Form.Group>
-
           <Form.Group className="mb-5">
             <h3>Endereço</h3>
             <div className="row">
               <Input
                 type={"text"}
                 typeForm={"form-control"}
+                setClassCol={"col-sm-7"}
                 label={"Logradouro"}
               />
-              <Input type={"text"} typeForm={"form-control"} label={"Número"} />
               <Input
                 type={"text"}
                 typeForm={"form-control"}
+                setClassCol={"col-sm"}
+                label={"Número"}
+              />
+              <Input
+                type={"text"}
+                typeForm={"form-control"}
+                setClassCol={"col-sm"}
                 label={"Complemento"}
               />
             </div>
 
-            <div className="row">
-              <Input type={"text"} typeForm={"form-control"} label={"Bairro"} />
-              <Input type={"text"} typeForm={"form-control"} label={"Estado"} />
-              <Input type={"text"} typeForm={"form-control"} label={"Cidade"} />
+            <div className="row g-3">
+              <Input
+                type={"text"}
+                typeForm={"form-control"}
+                setClassCol={"col-sm-7"}
+                label={"Bairro"}
+              />
+              <Input
+                type={"text"}
+                typeForm={"form-control"}
+                setClassCol={"col-sm"}
+                label={"Estado"}
+              />
+              <Input
+                type={"text"}
+                typeForm={"form-control col-sm"}
+                setClassCol={"col-sm"}
+                label={"Cidade"}
+              />
             </div>
           </Form.Group>
 
           <div className="row d-flex justify-content-center">
-            <Button className="btn btn-lg col-md-3" type="submit">
+            <button onClick={save} className="btn btn-lg col-md-3 btn-primary">
               Avançar
-            </Button>
+            </button>
           </div>
         </Form>
       </Container>
@@ -104,4 +132,4 @@ function RegisterPersonal() {
   );
 }
 
-export default RegisterPersonal;
+export default Personal;

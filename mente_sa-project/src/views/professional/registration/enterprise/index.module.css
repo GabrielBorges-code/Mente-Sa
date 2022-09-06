@@ -1,12 +1,8 @@
-/* .content {
-    min-height: 40rem;
-    margin-top: 3em;
-    padding: 3%;
 
-} */
 .min_height {
     min-height: 40rem;
     margin-top: 3em;
+
 }
 
 span{
@@ -14,7 +10,7 @@ span{
 }
 
 .bar{
-    width: 0%;
+    width: 100%;
 }
 
 .progressB{
