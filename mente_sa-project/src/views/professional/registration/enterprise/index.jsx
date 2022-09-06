@@ -28,7 +28,7 @@ function Enterprise() {
       <Header message={'finalizando!'} linkBack={'/registro/profissional/sobre'}/>
 
       {/* steper 3 */}
-      <Stepper state1={'success'} state2={'success'} state3={'primary'} />
+      <Stepper step={'100%'} state1={'success'} state2={'success'} state3={'primary'} />
       
 
       <Container className={`${styles.min_height} bg-light card`}>
