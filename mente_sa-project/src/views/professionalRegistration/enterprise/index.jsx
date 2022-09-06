@@ -13,13 +13,15 @@ import { useNavigate } from "react-router-dom";
 
 function Enterprise() {
   let navigate = useNavigate
-  //PREPARANDO PARA SALVAR AS INFORMAÇÕES
+  
+  //METHOD TO SAVE
   function save(){
-    navigate('/registro/profissional/empresa')
+    
+    navigate('/registro/profissional/empresa') //NEXT BUTTON
   }
   return (
     <>
-      <Header message={'finalizando!'}/>
+      <Header message={'finalizando!'} linkBack={'/registro/profissional/sobre'}/>
 
       {/* steper 3 */}
 

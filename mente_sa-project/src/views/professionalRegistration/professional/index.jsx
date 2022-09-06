@@ -23,7 +23,7 @@ function Professional() {
 
   return (
     <>
-      <Header message={'só mais um pouquinho...'}/>
+      <Header message={'só mais um pouquinho...'} linkBack={'/registro/profissional/'}/>
 
       {/* steper 2 */}
 

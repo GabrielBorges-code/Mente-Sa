@@ -23,7 +23,7 @@ function Personal() {
   
   return (
     <>
-      <Header message={'Olá profissional, queremos te conhecer!'}/>
+      <Header message={'Olá profissional, queremos te conhecer!'} linkBack={'/'}/>
       {/* steper */}
       <Container className={`${styles.min_height} bg-light card`}>
         <Form>

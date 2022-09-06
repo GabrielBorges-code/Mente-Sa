@@ -3,10 +3,20 @@ body, html{
 }
 
 .height {
-    height: 10rem;
+    height: 8rem;
+    background-color: #5086C1;    
+}
+
+.title {
+    display: flex;
     justify-content: center;
+}
+
+.buttonBack{
+    font-size: 3rem;
+    color: white;
     background-color: #5086C1;
-    
+    border: 0;
 }
 
 
