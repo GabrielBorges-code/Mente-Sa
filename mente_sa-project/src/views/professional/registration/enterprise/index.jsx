@@ -14,8 +14,8 @@ import { useNavigate } from "react-router-dom";
 function Enterprise() {
   let navigate = useNavigate
   
-  //METHOD TO SAVE
-  function save(){
+  
+  function save(){ //METHOD TO SAVE
     
     navigate('/registro/profissional/empresa') //NEXT BUTTON
   }

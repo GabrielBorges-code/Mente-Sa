@@ -16,8 +16,8 @@ function Personal() {
   let navigate = useNavigate()
   const [] = useState()
 
-  //PREPARANDO PARA SALVAR AS INFORMAÇÕES
-  function save(){
+  
+  function save(){ //PREPARE TO SAVE
     navigate('/registro/profissional/sobre')
   }
   
