@@ -13,7 +13,7 @@ import { useNavigate } from "react-router-dom";
 import styles from "./index.module.css";
 
 function Professional() {
-  let navigate = useNavigate
+  let navigate = useNavigate()
   //PREPARANDO PARA SALVAR AS INFORMAÇÕES
   function save(){
     navigate('/registro/profissional/empresa')
@@ -36,26 +36,26 @@ function Professional() {
             
 
             <div className="row">
-                <Input type={'text'} typeForm={'form-control'} label={'Faculdade/Univesidade'}/>
-                <Input type={'text'} typeForm={'form-control'} label={'Ano de Conclusão'}/>
+                <Input type={'text'} typeForm={'form-control'} setClassCol={'col-sm'} label={'Faculdade/Univesidade'}/>
+                <Input type={'text'} typeForm={'form-control'} setClassCol={'col-sm'} label={'Ano de Conclusão'}/>
                 
             </div>
             <div className="row">
-                <Input type={'text'} typeForm={'form-control'} label={'Especialização'}/>
-                <Input type={'text'} typeForm={'form-control'} label={'CRM / CRP'}/>
+                <Input type={'text'} typeForm={'form-control'} setClassCol={'col-sm'} label={'Especialização'}/>
+                <Input type={'text'} typeForm={'form-control'} setClassCol={'col-sm'} label={'CRM / CRP'}/>
             </div>
             <div className="row">
-                <Input type={'text'} typeForm={'form-control'} label={'Pós-Graduação'}/>
-                <Input type={'date'} typeForm={'form-control'} label={'Ano de Conclusão'}/>
+                <Input type={'text'} typeForm={'form-control'} setClassCol={'col-sm'} label={'Pós-Graduação'}/>
+                <Input type={'date'} typeForm={'form-control'} setClassCol={'col-sm'} label={'Ano de Conclusão'}/>
             </div>
             <div className="row">
-                <Input type={'text'} typeForm={'form-control'} label={'Mestrado'}/>
-                <Input type={'date'} typeForm={'form-control'} label={'Ano de Conclusão'}/>
+                <Input type={'text'} typeForm={'form-control'} setClassCol={'col-sm'} label={'Mestrado'}/>
+                <Input type={'date'} typeForm={'form-control'} setClassCol={'col-sm'} label={'Ano de Conclusão'}/>
                 
             </div>
             <div className="row">
-                <Input type={'text'} typeForm={'form-control'} label={'Doutorado'}/>
-                <Input type={'date'} typeForm={'form-control'} label={'Ano de Conclusão'}/>
+                <Input type={'text'} typeForm={'form-control'} setClassCol={'col-sm'} label={'Doutorado'}/>
+                <Input type={'date'} typeForm={'form-control'} setClassCol={'col-sm'} label={'Ano de Conclusão'}/>
             </div>
                         
           </Form.Group>          

@@ -19,7 +19,7 @@ function Enterprise() {
   }
   return (
     <>
-      <Header mensage={'finalizando!'}/>
+      <Header message={'finalizando!'}/>
 
       {/* steper 3 */}
 
@@ -30,23 +30,23 @@ function Enterprise() {
             
 
             <div className="row">
-                <Input type={'text'} typeForm={'form-control'} label={'Logradouro'}/>
-                <Input type={'date'} typeForm={'form-control'} label={'Número'}/>
-                <Input type={'date'} typeForm={'form-control'} label={'Complemento'}/>
+                <Input type={'text'} typeForm={'form-control'} setClassCol={'col-sm-7'} label={'Logradouro'}/>
+                <Input type={'number'} typeForm={'form-control'} setClassCol={'col-sm'} label={'Número'}/>
+                <Input type={'text'} typeForm={'form-control'} setClassCol={'col-sm'} label={'Complemento'}/>
             </div>
             <div className="row">
-                <Input type={'text'} typeForm={'form-control'} label={'Bairro'}/>
-                <Input type={'text'} typeForm={'form-control'} label={'Estado'}/>
-                <Input type={'text'} typeForm={'form-control'} label={'Cidade'}/>
+                <Input type={'text'} typeForm={'form-control'} setClassCol={'col-sm'} label={'Bairro'}/>
+                <Input type={'text'} typeForm={'form-control'} setClassCol={'col-sm'} label={'Estado'}/>
+                <Input type={'text'} typeForm={'form-control'} setClassCol={'col-sm'} label={'Cidade'}/>
             </div>
             <div className="row">
-                <Input type={'text'} typeForm={'form-control'} label={'Email da Empresa'}/>
-                <Input type={'date'} typeForm={'form-control'} label={'Telefone'}/>
+                <Input type={'text'} typeForm={'form-control'} setClassCol={'col-sm'} label={'Email da Empresa'}/>
+                <Input type={'text'}  typeForm={'form-control'} setClassCol={'col-sm'} label={'Telefone'}/>
             </div>
             <div className="row">
-                <Input type={'text'} typeForm={'form-control'}  label={'Valor da Sessão'}/>
-                <Input type={'date'} typeForm={'form-control'} label={'Duração da Sessão'}/>
-                <Input type={'date'} typeForm={'form-control'} label={'Tipo de Atendimento '}/>
+                <Input type={'number'} typeForm={'form-control'} setClassCol={'col-sm'} label={'Valor da Sessão'}/>
+                <Input type={'number'} typeForm={'form-control'} setClassCol={'col-sm'} label={'Duração da Sessão'}/>
+                <InputSelect label={'Tipo de Atendimento'} options={['ONLINE','PRESENCIAL', 'ONLINE E PRESENCIAL']} />
             </div>
                         
           </Form.Group>          
