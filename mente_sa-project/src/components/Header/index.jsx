@@ -1,12 +1,20 @@
 import Navbar from "react-bootstrap/Navbar";
+import { HiArrowLeft } from "react-icons/hi"
 
 import styles from "./Index.module.css";
 
-function Header({mensage}) {
+function Header({message}) {
   return (
     <>
       <Navbar className={styles.height}  expand="lg">
-        <h2 className="text-light">{mensage}</h2>
+        <div className="main">
+          <div>
+            <div><i><HiArrowLeft/></i></div>
+          </div>
+          <div>
+            <h2 className="text-light">{message}</h2>
+          </div>
+        </div>
       </Navbar>
     </>
   );

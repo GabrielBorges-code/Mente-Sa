@@ -7,13 +7,17 @@ import InputSelect from "../../../components/Input/inputSelect";
 
 import Footer from "../../../components/Footer";
 import Header from "../../../components/Header";
+import {Link, Navigate } from 'react-router-dom';
 
 import styles from "./index.module.css";
 
 function Professional() {
+
+  
+
   return (
     <>
-      <Header mensage={'só mais um pouquinho...'}/>
+      <Header message={'só mais um pouquinho...'}/>
 
       {/* steper 2 */}
 
@@ -51,9 +55,11 @@ function Professional() {
           </Form.Group>          
 
           <div className="row d-flex justify-content-center">
-            <Button className="btn btn-lg col-md-3"  type="submit">
+            <Link to="/registro/profissional/empresa" >
+            <Button  className="btn btn-lg col-md-3"  type="submit">
               Avançar
             </Button>
+            </Link>
           </div>
         </Form>
       </Container>

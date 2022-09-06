@@ -9,7 +9,7 @@ function Input({label, value, setClassCol, setValue, type, typeForm}) {
             <input
             type={type}
             onChange={e => setValue(e.target.value)}
-            className={ `${typeForm} ${styles.bgInput}`  }
+            className={ `${typeForm} ${styles.bgInput}`}
             value={value}/>
         </div>    
     )

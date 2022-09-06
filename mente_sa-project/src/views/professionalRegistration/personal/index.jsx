@@ -1,7 +1,7 @@
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
 import Container from "react-bootstrap/Container";
-import { Link } from "react-router-dom";
+import { Link, Navigate } from "react-router-dom";
 
 import Input from "../../../components/Input";
 import InputSelect from "../../../components/Input/inputSelect";
@@ -14,7 +14,7 @@ import styles from "./index.module.css";
 function Personal() {
   return (
     <>
-      <Header mensage={'Olá profissional, queremos te conhecer!'}/>
+      <Header message={'Olá profissional, queremos te conhecer!'}/>
 
       {/* steper */}
 
@@ -35,17 +35,10 @@ function Personal() {
             </div>
             <div className="row">
               <Input type={'date'} typeForm={'form-control'} setClassCol={'col-sm'} label={'Data Nascimento'}/>
+              <InputSelect label={'Estado Civil'} options={['Solteiro','Casado','Divorciado','Viúvo']} />
+              <InputSelect label={'Sexo'} options={['Masculino','Feminino']} />
               
-              <InputSelect label={'Estado Civil'}/>
               
-              <div className="col-md-3">
-              <label  className="form-label">Sexo</label>
-                <select className="form-select form-select">
-                  <option >Escolha</option>
-                  <option value="Masculino">Masculino</option>
-                  <option value="Feminino">Feminino</option>
-                </select>
-              </div>
             </div>
           {/* <br/><br/><br/> */}
           </Form.Group>
@@ -69,9 +62,8 @@ function Personal() {
 
           
 
-          <div className="row d-flex justify-content-md-center row align-items-end col-md-3">
-            {/* <Link><Button className="btn btn-lg col-md-3"  type="submit">Avançar</Button></Link> */}
-            <Link to="/registro/profissional/sobre"><button type={'submit'} className='btn btn-lg btn-primary'> Avançar</button></Link>
+          <div className="row d-flex justify-content-center"> 
+              <button type={'submit'} className='btn btn-lg col-md-3 btn-primary'>Avançar</button>
           </div>
         </Form>
       </Container>
