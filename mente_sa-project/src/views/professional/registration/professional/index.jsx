@@ -7,6 +7,8 @@ import Header from "../../../../components/Header";
 import { useNavigate } from "react-router-dom";
 import { HiCheck } from "react-icons/hi";
 
+import Stepper from "../../../../components/Stepper";
+
 import styles from "./index.module.css";
 
 function Professional() {
@@ -21,17 +23,7 @@ function Professional() {
       <Header message={'só mais um pouquinho...'} linkBack={'/registro/profissional/'}/>
       {/* steper 2 */}
 
-      <Container className={`${styles.progressWrapper} `}>
-        <div className={`position-relative m-4`} >
-            <div className={`${styles.progressB} progress`} >
-                <div className={`${styles.bar} progress-bar`} role="progressbar" aria-label="Progress"  aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"></div>
-                <button type="button" className="position-absolute top-0 start-0 translate-middle btn btn-md btn-success rounded-pill" ><i><HiCheck/></i></button>
-                <button type="button" className="position-absolute top-0 start-50 translate-middle btn btn-md btn-primary rounded-pill" >  2  </button>
-                <button type="button" className="position-absolute top-0 start-100 translate-middle btn btn-md btn-secondary rounded-pill" >3</button>
-            </div>
-            
-        </div>
-        </Container>
+      <Stepper icon={true}state1={'success'} state2={'primary'} state3={'secondary'} />
 
       <Container className={`${styles.min_height} bg-light card`}>
 
