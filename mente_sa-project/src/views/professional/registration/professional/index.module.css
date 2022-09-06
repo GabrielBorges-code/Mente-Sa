@@ -20,3 +20,7 @@ span{
     width: 2rem;
     height: 2rem;
 }
+
+.progressWrapper{
+    padding-top: 1rem;
+}

@@ -2,7 +2,7 @@ import Navbar from "react-bootstrap/Navbar";
 import { HiArrowLeft,HiChevronLeft } from "react-icons/hi"
 import { useNavigate } from "react-router-dom";
 
-import styles from "./Index.module.css";
+import styles from "./index.module.css";
 
 function Header({message, linkBack}) {
   let navigate = useNavigate()
