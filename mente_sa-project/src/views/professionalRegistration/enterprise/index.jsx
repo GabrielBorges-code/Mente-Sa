@@ -9,8 +9,14 @@ import Footer from "../../../components/Footer";
 import Header from "../../../components/Header";
 
 import styles from "./index.module.css";
+import { useNavigate } from "react-router-dom";
 
 function Enterprise() {
+  let navigate = useNavigate
+  //PREPARANDO PARA SALVAR AS INFORMAÇÕES
+  function save(){
+    navigate('/registro/profissional/empresa')
+  }
   return (
     <>
       <Header mensage={'finalizando!'}/>
@@ -38,17 +44,15 @@ function Enterprise() {
                 <Input type={'date'} typeForm={'form-control'} label={'Telefone'}/>
             </div>
             <div className="row">
-                <Input type={'text'} typeForm={'form-control'} label={'Valor da Sessão'}/>
+                <Input type={'text'} typeForm={'form-control'}  label={'Valor da Sessão'}/>
                 <Input type={'date'} typeForm={'form-control'} label={'Duração da Sessão'}/>
                 <Input type={'date'} typeForm={'form-control'} label={'Tipo de Atendimento '}/>
             </div>
                         
           </Form.Group>          
 
-          <div className="row d-flex justify-content-center">
-            <Button className="btn btn-lg col-md-3"  type="submit">
-              Finalizar
-            </Button>
+          <div className="row d-flex justify-content-center"> 
+              <button onClick={save}  className='btn btn-lg col-md-3 btn-primary'>Avançar</button>
           </div>
         </Form>
 
