@@ -37,11 +37,13 @@ function Personal() {
         <Form>
           <Form.Group className="mb-5">
             <h3>Dados Pessoais</h3>
+
             <div className="row">
-              <Input
+            <Input
                 type={"text"}
                 typeForm={"form-control"}
-                label={"Nome Completo"}
+                setClassCol={"col-sm"}
+                label={"Nome"}
               />
             </div>
 
@@ -49,59 +51,68 @@ function Personal() {
               <Input
                 type={"email"}
                 typeForm={"form-control"}
-                setClassCol={"col-sm"}
+                setClassCol={"col-sm-8"}
                 label={"Email"}
               />
               <Input
-                type={"text"}
+                type={"number"}
                 typeForm={"form-control"}
                 setClassCol={"col-sm"}
                 label={"Telefone"}
               />
             </div>
+
             <div className="row">
               <Input
-                type={"date"}
+                type={"text"}
                 typeForm={"form-control"}
                 setClassCol={"col-sm"}
                 label={"Data Nascimento"}
               />
+                
               <InputSelect
                 label={"Estado Civil"}
-                options={["Solteiro", "Casado", "Divorciado", "Viúvo"]}
+                options={["Solteiro", "Casado", "Separado", "Divorciado", "Viúvo"]}
               />
-              <InputSelect label={"Sexo"} options={["Masculino", "Feminino"]} />
+
+              <InputSelect
+                label={"Sexo"}
+                options={["Masculino", "Feminino"]}
+              />
+              
             </div>
-            {/* <br/><br/><br/> */}
-          </Form.Group>
-          <Form.Group className="mb-5">
+
             <h3>Endereço</h3>
+
             <div className="row">
+
               <Input
                 type={"text"}
                 typeForm={"form-control"}
-                setClassCol={"col-sm-7"}
+                setClassCol={"col-sm-8"}
                 label={"Logradouro"}
               />
               <Input
-                type={"text"}
+                type={"number"}
                 typeForm={"form-control"}
                 setClassCol={"col-sm"}
                 label={"Número"}
               />
+
               <Input
                 type={"text"}
                 typeForm={"form-control"}
                 setClassCol={"col-sm"}
                 label={"Complemento"}
               />
+              
             </div>
 
-            <div className="row g-3">
+            <div className="row">
               <Input
                 type={"text"}
                 typeForm={"form-control"}
-                setClassCol={"col-sm-7"}
+                setClassCol={"col-sm"}
                 label={"Bairro"}
               />
               <Input
@@ -110,13 +121,16 @@ function Personal() {
                 setClassCol={"col-sm"}
                 label={"Estado"}
               />
+
               <Input
                 type={"text"}
-                typeForm={"form-control col-sm"}
+                typeForm={"form-control"}
                 setClassCol={"col-sm"}
                 label={"Cidade"}
               />
+            
             </div>
+
           </Form.Group>
 
           <div className="row d-flex justify-content-center">
@@ -124,6 +138,7 @@ function Personal() {
               Avançar
             </button>
           </div>
+          
         </Form>
       </Container>
 

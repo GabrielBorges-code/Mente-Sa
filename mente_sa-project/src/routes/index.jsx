@@ -8,9 +8,9 @@ import Professional from '../views/professional/registration/professional';
 import Enterprise from '../views/professional/registration/enterprise';
 import ProfileProfessional from '../views/professional/profile';
 
-import PersonalUser from '../views/personalRegistration/personal';
-import ChooseProfessional from '../views/personalRegistration/chooseProfessional';
-import Scheduling from '../views/personalRegistration/scheduling';
+import PersonalUser from '../views/personal/personal';
+import ChooseProfessional from '../views/personal/chooseProfessional';
+import Scheduling from '../views/personal/scheduling';
 
 export default function Routers() {
     return (
