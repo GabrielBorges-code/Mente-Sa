@@ -3,11 +3,11 @@ import Form from "react-bootstrap/Form";
 import Container from "react-bootstrap/Container";
 import { Link, Navigate, useNavigate } from "react-router-dom";
 
-import Input from "../../../components/Input";
-import InputSelect from "../../../components/Input/inputSelect";
+import Input from "../../../../components/Input";
+import InputSelect from "../../../../components/Input/inputSelect";
 
-import Footer from "../../../components/Footer";
-import Header from "../../../components/Header";
+import Footer from "../../../../components/Footer";
+import Header from "../../../../components/Header";
 
 import styles from "./index.module.css";
 import { useState } from "react";

@@ -3,9 +3,9 @@ import {BrowserRouter, Routes, Route, Navigate} from 'react-router-dom';
 
 import Home from '../views/home';
 import Landing from '../views/landing'
-import Personal from '../views/professionalRegistration/personal'
-import Professional from '../views/professionalRegistration/professional';
-import Enterprise from '../views/professionalRegistration/enterprise';
+import Personal from '../views/professional/registration/personal'
+import Professional from '../views/professional/registration/professional';
+import Enterprise from '../views/professional/registration/enterprise';
 
 
 export default function Routers() {
