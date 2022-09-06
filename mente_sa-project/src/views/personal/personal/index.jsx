@@ -1,7 +1,6 @@
-import Button from "react-bootstrap/Button";
-import Form from "react-bootstrap/Form";
 import Container from "react-bootstrap/Container";
-import { Link, Navigate, useNavigate } from "react-router-dom";
+import Form from "react-bootstrap/Form";
+import { useNavigate } from "react-router-dom";
 
 import Input from "../../../components/Input";
 import InputSelect from "../../../components/Input/inputSelect";
@@ -10,8 +9,8 @@ import Footer from "../../../components/Footer";
 import Header from "../../../components/Header";
 import Stepper from "../../../components/Stepper";
 
-import styles from "./index.module.css";
 import { useState } from "react";
+import styles from "./index.module.css";
 
 function Personal() {
   let navigate = useNavigate();
@@ -27,13 +26,14 @@ function Personal() {
       <Header message={"Olá paciente, queremos te conhecer!"} linkBack={"/"} />
       {/* steper */}
       <Stepper
+        step={'0'}
         icon={true}
         state1={"primary"}
         state2={"secondary"}
         state3={"secondary"}
       />
 
-      <Container className={`${styles.min_height} bg-light card`}>
+      <Container className={`${styles.content} bg-light card`}>
         <Form>
           <Form.Group className="mb-5">
             <h3>Dados Pessoais</h3>
