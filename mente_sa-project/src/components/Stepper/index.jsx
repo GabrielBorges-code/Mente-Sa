@@ -1,20 +1,13 @@
-import Navbar from "react-bootstrap/Navbar";
-import { HiArrowLeft,HiChevronLeft } from "react-icons/hi"
-import { useNavigate } from "react-router-dom";
 import Container from "react-bootstrap/Container";
 import styles from "./index.module.css";
 import { HiCheck } from "react-icons/hi";
-import { useState } from "react";
+
 
 function Stepper({step, state1, state2, state3}) {
-    // const [icon, setIcon] = useState(false)
     
-  
-  
-
   return (
     <>
-      {/* <Navbar className={styles.height}  expand="lg"> */}
+     
       <Container className={`${styles.progressWrapper} `}>
         <div className="position-relative m-4">
             <div style={{width: step }} className={`${styles.progressB} progress  `} >
