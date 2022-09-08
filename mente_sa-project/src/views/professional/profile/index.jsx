@@ -49,16 +49,17 @@ function ProfileProfessional() {
                       </div>
                     </div>
                     
+                    
                     <Container>
                     <div className="p-4 text-black" >
                       <div className="d-flex justify-content-end text-center py-1">
                         <div>
                           
-                          <button onClick={() => setCurrentView('home')} className="btn btn-primary rounded-pill"><i><HiUserCircle/></i> Meu Perfil</button>
+                          <button onClick={() => setCurrentView('home')} className={currentView == 'home' ? 'btn btn-secondary rounded-pill clicked': 'btn btn-primary rounded-pill'}><i><HiUserCircle/></i> Meu Perfil</button>
                         </div>
                         <div className="px-3">
                           
-                          <button onClick={() => setCurrentView('session')} className="btn btn-primary rounded-pill"><i><HiChatAlt/></i> Atendimento</button>
+                          <button onClick={() => setCurrentView('session')} className={currentView == 'session' ? 'btn btn-secondary rounded-pill clicked': 'btn btn-primary rounded-pill'}><i><HiChatAlt/></i> Atendimento</button>
                         </div>
                         
                       </div>
@@ -69,19 +70,21 @@ function ProfileProfessional() {
           </section>
           
         
-       
+         
         { currentView ==='home' ?
-        <Container className={`${styles.min_height} bg-light card`}>
+              <Container className={`${styles.min_height} bg-light card`}>
+                <div className="d-flex justify-content-end">
+                <button className="mt-2 btn btn-primary"><i><HiOutlinePencilAlt/></i>Editar Perfil</button>
+                </div>
+                <h1>Home</h1>
+        
+              </Container>
+              :
+              <Container className={`${styles.min_height} bg-light card`}>
 
-          <h1>Home</h1>
-   
-        </Container>
-        :
-        <Container className={`${styles.min_height} bg-light card`}>
-
-          <h1>sessão</h1>
-   
-        </Container>
+                <h1>Session</h1>
+        
+              </Container>
         }
   
         <Footer />
