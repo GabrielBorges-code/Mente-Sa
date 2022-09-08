@@ -1,26 +1,31 @@
 
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
-import Container from "react-bootstrap/Container";
+import Container from "react-bootstrap/Container"
 
-import Input from "../../../components/Input";
-import InputSelect from "../../../components/Input/inputSelect";
+import Input from "../../../components/Input"
+import InputSelect from "../../../components/Input/inputSelect"
 
-import Footer from "../../../components/Footer";
-import Header from "../../../components/Header";
+import Footer from "../../../components/Footer"
+import Header from "../../../components/Header"
 
-import styles from "./index.module.css";
-import { useNavigate } from "react-router-dom";
+import styles from "./index.module.css"
+import { useNavigate } from "react-router-dom"
 import { HiOutlinePencilAlt, HiUserCircle, HiChatAlt } from "react-icons/hi"
 
 import Image from "../../../assets/logo-mente-sa.png"
+import { useState } from "react"
 
 function ProfileProfessional() {
     let navigate = useNavigate()
+    const [currentView, setCurrentView] = useState('home')
+    
     
     function save(){ //PREPARE TO SAVE
       navigate('/registro/profissional/empresa')
     }
+
+    
     
     return (
       <>
@@ -49,11 +54,11 @@ function ProfileProfessional() {
                       <div className="d-flex justify-content-end text-center py-1">
                         <div>
                           
-                          <button className="btn btn-primary rounded-pill"><i><HiUserCircle/></i> Meu Perfil</button>
+                          <button onClick={() => setCurrentView('home')} className="btn btn-primary rounded-pill"><i><HiUserCircle/></i> Meu Perfil</button>
                         </div>
                         <div className="px-3">
                           
-                          <button className="btn btn-primary rounded-pill"><i><HiChatAlt/></i> Atendimento</button>
+                          <button onClick={() => setCurrentView('session')} className="btn btn-primary rounded-pill"><i><HiChatAlt/></i> Atendimento</button>
                         </div>
                         
                       </div>
@@ -65,14 +70,19 @@ function ProfileProfessional() {
           
         
        
-        
+        { currentView ==='home' ?
         <Container className={`${styles.min_height} bg-light card`}>
 
-          <section>
-            <input/>
-          </section>
+          <h1>Home</h1>
    
         </Container>
+        :
+        <Container className={`${styles.min_height} bg-light card`}>
+
+          <h1>sessão</h1>
+   
+        </Container>
+        }
   
         <Footer />
       </>
