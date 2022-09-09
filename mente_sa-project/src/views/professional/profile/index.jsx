@@ -67,17 +67,25 @@ function ProfileProfessional() {
                     </Container>
                   </div>
                
-          </section>
+        </section>
           
         
          
         { currentView ==='home' ?
               <Container className={`${styles.min_height} bg-light card`}>
                 <div className="d-flex justify-content-end">
-                <button className="mt-2 btn btn-primary"><i><HiOutlinePencilAlt/></i>Editar Perfil</button>
+                    <button className="mt-2 btn btn-primary"><i><HiOutlinePencilAlt/></i>Editar Perfil</button>
                 </div>
-                <h1>Home</h1>
-        
+                  <Form>
+                    <Form.Group className="mb-5" >
+                      <div className="row">
+                        <Input type={'text'} typeForm={'form-control'} setClassCol={'col-sm-7'} label={'Logradouro'}/>
+                        <Input type={'number'} typeForm={'form-control'} setClassCol={'col-sm'} label={'Número'}/>
+                        <Input type={'text'} typeForm={'form-control'} setClassCol={'col-sm'} label={'Complemento'}/>
+                      </div>
+                    </Form.Group>
+                  </Form>
+
               </Container>
               :
               <Container className={`${styles.min_height} bg-light card`}>
