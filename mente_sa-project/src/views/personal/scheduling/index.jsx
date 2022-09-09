@@ -18,7 +18,7 @@ function Scheduling() {
 
   function save() {
     //PREPARE TO SAVE
-    navigate("/registro/usuario/#");
+    navigate("/usuario/perfil");
   }
 
   return (
@@ -26,7 +26,7 @@ function Scheduling() {
       {/* step 2 */}
       <Header
         message={"Agora sim! Vamos concluir seu agendamento?"}
-        linkBack={"/registro/usuario/#"}
+        linkBack={"/usuario/perfil"}
       />
 
       <Stepper
@@ -38,7 +38,6 @@ function Scheduling() {
       />
 
       <Container className={`${styles.content} bg-light card`}>
-
         <Form>
           <Form.Group className="mb-5">
             <h3>Agendamento</h3>
@@ -66,7 +65,7 @@ function Scheduling() {
 
           <div className="row d-flex justify-content-center">
             <button onClick={save} className="btn btn-lg col-md-3 btn-primary">
-              Avançar
+              Concluir
             </button>
           </div>
         </Form>
