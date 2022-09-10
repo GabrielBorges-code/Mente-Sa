@@ -8,6 +8,10 @@ import Professional from '../views/professional/registration/professional';
 import Enterprise from '../views/professional/registration/enterprise';
 import ProfileProfessional from '../views/professional/profile';
 
+import ProfileUser from '../views/personal/profile';
+import PersonalUser from '../views/personal/personal';
+import ChooseProfessional from '../views/personal/chooseProfessional';
+import Scheduling from '../views/personal/scheduling';
 
 export default function Routers() {
     return (
@@ -19,10 +23,14 @@ export default function Routers() {
                 <Route path ='/registro/profissional/sobre' element={<Professional/>}/>
                 <Route path ='/registro/profissional/empresa' element={<Enterprise/>}/>
                 <Route path ='/profile' element={<ProfileProfessional/>}/>
+
+                <Route path ='/usuario/perfil' element={<ProfileUser/>}/>
+
+                <Route path ='/registro/usuario/' element={<PersonalUser/>}/>
+                <Route path ='/registro/usuario/escolha-profissional' element={<ChooseProfessional/>}/>
+                <Route path ='/registro/usuario/agendamento' element={<Scheduling/>}/>
                
                 <Route path="*" element={<Navigate to="/"/>}/>
-                
-                
                 
             </Routes>
 
