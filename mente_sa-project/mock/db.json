@@ -131,6 +131,8 @@
         "nameprofessional": "Maria Rosa",
         "namepatient": "Fulano da Silva",
         "date": "2022-09-10",
+        "tipo-atendimento":"online",
+        "status":"pendente",
         "id": 1
       },
       {
@@ -139,6 +141,8 @@
         "nameprofessional": "Maria Rosa",
         "namepatient": "Fulano da Silva",
         "date": "2022-09-15",
+        "tipo-atendimento":"presencial",
+        "status":"concluido",
         "id": 2
       },
       {
@@ -164,6 +168,23 @@
         "namepatient": "Sicrano jjjj",
         "date": "2022-10-25",
         "id": 5
+      }
+    ],
+    "anamnesis": [
+      {
+        "idprofessional": 1,
+        "idpatient": 2,
+        "nameprofessional": "Maria Rosa",
+        "namepatient": "Fulano da Silva",
+        "date": "2022-09-10",
+        "tipo-atendimento":"online",
+        "queixaprincipal":"",
+        "evolucaoqueixa": "",
+        "repentinogradual":"",
+        "tranformacoes":"",
+        "sintomas":"",
+        "id": 1
+       
       }
     ]
   }
