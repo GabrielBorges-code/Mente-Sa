@@ -25,6 +25,36 @@ function ProfileProfessional() {
       navigate('/registro/profissional/empresa')
     }
 
+    function renderButton(){
+      if(currentView === 'home'){
+        return ( 
+            <Container className={`${styles.min_height} bg-light card`}>
+              <div className="d-flex justify-content-end">
+                  <button className="mt-2 btn btn-primary"><i><HiOutlinePencilAlt/></i>Editar Perfil</button>
+              </div>
+            </Container> 
+      )
+      }else if( currentView === 'session'){
+        return (
+              <Container className={`${styles.min_height} bg-light card`}>
+              <div className="d-flex justify-content-end">
+                  <button className="mt-2 btn btn-primary"><i><HiOutlinePencilAlt/></i>Session</button>
+              </div>
+            </Container>
+          )
+      }else {
+        return (
+            <Container className={`${styles.min_height} bg-light card`}>
+            <div className="d-flex justify-content-end">
+                <button className="mt-2 btn btn-primary"><i><HiOutlinePencilAlt/></i>Agenda</button>
+            </div>
+          </Container>
+
+        )
+      }
+      
+    }
+
     
     
     return (
@@ -61,6 +91,10 @@ function ProfileProfessional() {
                           
                           <button onClick={() => setCurrentView('session')} className={currentView == 'session' ? 'btn btn-secondary rounded-pill clicked': 'btn btn-primary rounded-pill'}><i><HiChatAlt/></i> Atendimento</button>
                         </div>
+                        <div className="px-3">
+                          
+                          <button onClick={() => setCurrentView('schedule')} className={currentView == 'schedule' ? 'btn btn-secondary rounded-pill clicked': 'btn btn-primary rounded-pill'}><i><HiChatAlt/></i> Agenda</button>
+                        </div>
                         
                       </div>
                     </div>
@@ -70,8 +104,8 @@ function ProfileProfessional() {
         </section>
           
         
-         
-        { currentView ==='home' ?
+         { renderButton()}
+        {/* { currentView ==='home' ?
               <Container className={`${styles.min_height} bg-light card`}>
                 <div className="d-flex justify-content-end">
                     <button className="mt-2 btn btn-primary"><i><HiOutlinePencilAlt/></i>Editar Perfil</button>
@@ -85,7 +119,6 @@ function ProfileProfessional() {
                       </div>
                     </Form.Group>
                   </Form>
-
               </Container>
               :
               <Container className={`${styles.min_height} bg-light card`}>
@@ -93,7 +126,7 @@ function ProfileProfessional() {
                 <h1>Session</h1>
         
               </Container>
-        }
+        } */}
   
         <Footer />
       </>
