@@ -23,7 +23,7 @@ function Professional() {
       <Header message={'só mais um pouquinho...'} linkBack={'/registro/profissional/'}/>
       {/* steper 2 */}
 
-      <Stepper icon={true}state1={'success'} state2={'primary'} state3={'secondary'} />
+      <Stepper step={'50%'} state1={'success'} state2={'primary'} state3={'secondary'} />
 
       <Container className={`${styles.min_height} bg-light card`}>
 

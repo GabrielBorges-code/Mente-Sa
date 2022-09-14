@@ -26,7 +26,7 @@ function Personal() {
     <>
       <Header message={'Olá profissional, queremos te conhecer!'} linkBack={'/'}/>
       {/* steper */}
-      <Stepper icon={true}state1={'primary'} state2={'secondary'} state3={'secondary'} />
+      <Stepper step={"0%"} state1={'primary'} state2={'secondary'} state3={'secondary'} />
 
       <Container className={`${styles.min_height} bg-light card`}>
         <Form>
@@ -45,9 +45,8 @@ function Personal() {
               <Input type={'date'} typeForm={'form-control'} setClassCol={'col-sm'} label={'Data Nascimento'}/>
               <InputSelect label={'Estado Civil'} options={['Solteiro','Casado','Divorciado','Viúvo']} />
               <InputSelect label={'Sexo'} options={['Masculino','Feminino']} />
-              
-              
             </div>
+
           {/* <br/><br/><br/> */}
           </Form.Group>
           <Form.Group className="mb-5" >
