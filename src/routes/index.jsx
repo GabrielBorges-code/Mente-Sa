@@ -8,6 +8,7 @@ import Professional from '../views/professional/registration/professional';
 import Enterprise from '../views/professional/registration/enterprise';
 import ProfileProfessional from '../views/professional/profile';
 
+import Login from '../views/login'
 import ProfileUser from '../views/personal/profile';
 import PersonalUser from '../views/personal/personal';
 import ChooseProfessional from '../views/personal/chooseProfessional';
@@ -24,6 +25,7 @@ export default function Routers() {
                 <Route path ='/registro/profissional/empresa' element={<Enterprise/>}/>
                 <Route path ='/profile' element={<ProfileProfessional/>}/>
 
+                <Route path ='/login' element={<Login/>}/>
                 <Route path ='/usuario/perfil' element={<ProfileUser/>}/>
 
                 <Route path ='/registro/usuario/' element={<PersonalUser/>}/>
