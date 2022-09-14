@@ -7,7 +7,7 @@ import InputSelect from "../../../components/Input/inputSelect";
 
 import Footer from "../../../components/Footer";
 import Header from "../../../components/Header";
-import Stepper from "../../../components/Stepper";
+import Stepper from "../../../components/OneStep";
 
 import { useState } from "react";
 import styles from "./index.module.css";
@@ -18,32 +18,34 @@ function Personal() {
 
   function save() {
     //PREPARE TO SAVE
-    navigate("/registro/usuario/escolha-profissional");
+    navigate("/usuario/perfil");
   }
 
   return (
     <>
-      <Header message={"Olá paciente, queremos te conhecer!"} linkBack={"/"} />
-      {/* steper */}
+      <Header message={"Olá paciente, queremos te conhecer!"} linkBack={"/login"} />
+{/*       
       <Stepper
         step={'0'}
         icon={true}
         state1={"primary"}
-        state2={"secondary"}
-        state3={"secondary"}
-      />
+        
+      /> */}
+
 
       <Container className={`${styles.content} bg-light card`}>
         <Form>
           <Form.Group className="mb-5">
             <h3>Dados Pessoais</h3>
-
+            
             <div className="row">
             <Input
                 type={"text"}
                 typeForm={"form-control"}
                 setClassCol={"col-sm"}
                 label={"Nome"}
+                required="required"
+
               />
             </div>
 
@@ -53,12 +55,16 @@ function Personal() {
                 typeForm={"form-control"}
                 setClassCol={"col-sm-8"}
                 label={"Email"}
+                required="required"
+
               />
               <Input
                 type={"number"}
                 typeForm={"form-control"}
                 setClassCol={"col-sm"}
                 label={"Telefone"}
+                required="required"
+
               />
             </div>
 
@@ -68,6 +74,8 @@ function Personal() {
                 typeForm={"form-control"}
                 setClassCol={"col-sm"}
                 label={"Data Nascimento"}
+                required="required"
+
               />
                 
               <InputSelect
@@ -120,6 +128,8 @@ function Personal() {
                 typeForm={"form-control"}
                 setClassCol={"col-sm"}
                 label={"Estado"}
+                required="required"
+
               />
 
               <Input
@@ -127,6 +137,8 @@ function Personal() {
                 typeForm={"form-control"}
                 setClassCol={"col-sm"}
                 label={"Cidade"}
+                required="required"
+
               />
             
             </div>

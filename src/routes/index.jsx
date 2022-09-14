@@ -26,11 +26,12 @@ export default function Routers() {
                 <Route path ='/profile' element={<ProfileProfessional/>}/>
 
                 <Route path ='/login' element={<Login/>}/>
-                <Route path ='/usuario/perfil' element={<ProfileUser/>}/>
 
+                <Route path ='/usuario/perfil' element={<ProfileUser/>}/>
+                <Route path ='/usuario/escolha-profissional' element={<ChooseProfessional/>}/>
+                <Route path ='/usuario/agendamento' element={<Scheduling/>}/>
+                
                 <Route path ='/registro/usuario/' element={<PersonalUser/>}/>
-                <Route path ='/registro/usuario/escolha-profissional' element={<ChooseProfessional/>}/>
-                <Route path ='/registro/usuario/agendamento' element={<Scheduling/>}/>
                
                 <Route path="*" element={<Navigate to="/"/>}/>
                 

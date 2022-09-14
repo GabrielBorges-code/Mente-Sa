@@ -34,6 +34,7 @@ function Login() {
                 typeForm={"form-control"}
                 setClassCol={"col-sm"}
                 label={"E-mail"}
+                required="required"
               />
             </div>
             
@@ -43,6 +44,7 @@ function Login() {
                 typeForm={"form-control"}
                 setClassCol={"col-sm"}
                 label={"Senha"}
+                required="required"
               />
              
             </div>
@@ -51,13 +53,13 @@ function Login() {
 
           <div className={`row  ${styles.divBtnAccess}`}>
             <Link to="#">Esqueceu a senha?</Link>
-            <button onClick={login} className="btn btn-lg col-md-3 btn-primary">
+            <button onSubmit={login} className="btn btn-lg col-md-3 btn-primary">
               Login
             </button>
           </div>
 
           <div className={`row ${styles.forget_pass}`}>
-            <p>Não tem conta? <Link to="#">Registre-se</Link></p>
+            <p>Não tem conta? <Link to="/registro/usuario/">Registre-se</Link></p>
 
           </div>
 
