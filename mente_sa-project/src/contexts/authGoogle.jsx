@@ -3,6 +3,7 @@ import { createContext } from "react"
 import {app}  from '../services/firebase'
 import {GoogleAuthProvider, getAuth, signInWithPopup, signInWithEmailAndPassword, createUserWithEmailAndPassword } from 'firebase/auth'
 import { useEffect, useState } from "react"
+import {doc, setDoc} from 'firebase/firestore'
 
 //EFETUAR O LOGIN
 //VERIFICAR O FIRESTORE E SE EXISTE UM USUÁRIO CADASTRADO
@@ -19,6 +20,15 @@ export const AuthGoogleProvider = ({children}) => {
     const [mail, setMail] = useState(null)
     const [pass, setPass] = useState(null)
 //douglas, gabriel fernando maria mariana dgfmm230922...
+
+
+    async function registerRole(email, status) {
+        console.log(email)
+        const info = await setDoc(doc(db, status, email),{
+            name: "Fernando",
+            Endereco: "power barcelona",
+        })
+    }
 
     useEffect(() => {
         
@@ -50,12 +60,15 @@ export const AuthGoogleProvider = ({children}) => {
         })
     }
 
-    const createWithEmailPasswordGoogle = (email, password) => {
+     const createWithEmailPasswordGoogle = (email, password) => {
         createUserWithEmailAndPassword(auth, email, password)
         .then((result) => {
             const credential = GoogleAuthProvider.credentialFromResult(result)
             const token = credential.accessToken
             const users = result.user
+            registerRole(email, 'admin')
+             
+
             setUser(users)
             console.log(user)
             return users

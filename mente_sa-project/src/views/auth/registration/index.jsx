@@ -16,7 +16,7 @@ import {doc, setDoc} from 'firebase/firestore'
 export default function Registration() {
 
         const navigate = useNavigate()
-        const {signInGoogle, createWithEmailPasswordGoogle} = useContext(AuthGoogleContext)
+        const {signInGoogle} = useContext(AuthGoogleContext)
         
         const [error, setError] = useState(false)
         const [email, setEmail] = useState("")
@@ -27,13 +27,36 @@ export default function Registration() {
             
             return; 
         }
+
+        async function registerRole(uid) {
+            const status = sessionStorage.getItem("@Land:status")
+            console.log(email, status)
+            const info = await setDoc(doc(db, "Users", uid),{
+                email: email,
+                professional: status,
+                
+            })
+        }
     
         async function handleRegistration(e){
             e.preventDefault()
             if(password != repeatPassword){
                 setError('As senhas não estão iguais')
             }else{
-                const register = await createWithEmailPasswordGoogle(email, password)    
+
+                // const register = await createWithEmailPasswordGoogle(email, password)
+                
+                createUserWithEmailAndPassword(auth, email, password)
+                .then((userCredential) => {
+                    const user = userCredential.user;
+                    registerRole(user.uid)
+                    navigate ('/login')
+                     
+                })
+                .catch((error) => {
+                    setError(true)
+            });
+
             }            
         }  
 
