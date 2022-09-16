@@ -20,14 +20,6 @@ export const AuthGoogleProvider = ({children}) => {
     const [pass, setPass] = useState(null)
 //douglas, gabriel fernando maria mariana dgfmm230922...
 
-    const signInData = (email, password) => {
-        console.log(mail)
-        console.log(email, password)
-        setMail(email)
-        console.log(mail)
-    }
-
-
     useEffect(() => {
         
         const loadStoreAuth = () => {
@@ -58,7 +50,7 @@ export const AuthGoogleProvider = ({children}) => {
         })
     }
 
-    const signInWithEmailPasswordGoogle = (email, password) => {
+    const createWithEmailPasswordGoogle = (email, password) => {
         createUserWithEmailAndPassword(auth, email, password)
         .then((result) => {
             const credential = GoogleAuthProvider.credentialFromResult(result)
@@ -66,6 +58,7 @@ export const AuthGoogleProvider = ({children}) => {
             const users = result.user
             setUser(users)
             console.log(user)
+            return users
             // sessionStorage.setItem("@AuthFirebase:token", token)
             // sessionStorage.setItem("@AuthFirebase:user", JSON.stringify(user))
 
@@ -80,7 +73,7 @@ export const AuthGoogleProvider = ({children}) => {
 
     return (
         <AuthGoogleContext.Provider
-        value={{ signInGoogle, signInData, signed: !!user }}>
+        value={{ signInGoogle, createWithEmailPasswordGoogle, signed: !!user }}>
             {children}
         </AuthGoogleContext.Provider>
     )

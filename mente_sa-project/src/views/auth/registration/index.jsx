@@ -3,16 +3,20 @@ import { AuthGoogleContext, AuthGoogleProvider } from "../../../contexts/authGoo
 import { SiGoogle } from "react-icons/si";
 import Footer from "../../../components/Footer";
 import { useState } from "react";
-import {Navigate, useNavigate} from 'react-router-dom'
+import {Link, Navigate, useNavigate} from 'react-router-dom'
 import Input from "../../../components/Input";
 import { db, auth } from "../../../services/firebase";
-import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword } from "firebase/auth";
+import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword,  } from "firebase/auth";
 import {doc, setDoc} from 'firebase/firestore'
 
 
+
+
+
 export default function Registration() {
+
         const navigate = useNavigate()
-        const {signInGoogle, signInData} = useContext(AuthGoogleContext)
+        const {signInGoogle, createWithEmailPasswordGoogle} = useContext(AuthGoogleContext)
         
         const [error, setError] = useState(false)
         const [email, setEmail] = useState("")
@@ -29,23 +33,8 @@ export default function Registration() {
             if(password != repeatPassword){
                 setError('As senhas não estão iguais')
             }else{
-                createUserWithEmailAndPassword(auth, email, password)
-                .then((userCredential) => {
-                    const user = userCredential.user;
-                    navigate ('/login')
-                     
-                })
-                .catch((error) => {
-                    setError(true)
-            });
-
-            }
-
-            
-            
-
-            
-            
+                const register = await createWithEmailPasswordGoogle(email, password)    
+            }            
         }  
 
         return (
@@ -89,7 +78,7 @@ export default function Registration() {
                             <div className="form-check mb-0">
                             <input className="form-check-input me-2" type="checkbox" value="" id="form2Example3" />
                             <label className="form-check-label" >
-                                Remember me
+                                Eu aceito o termo de uso 
                             </label>
                             </div>
                             <a href="#!" className="text-body">Forgot password?</a>
