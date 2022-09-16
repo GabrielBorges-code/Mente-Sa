@@ -18,9 +18,9 @@ export default function Login() {
 
         async function handleAddUserRole(){
             
-            await setDoc(doc(db, "Users", email),{
-                name: "Kevin Fraga",
-                role: "professional",
+            await setDoc(doc(db, "Profissionais", "fernando@gmail.com"),{
+                name: "Fernando",
+                Endereco: "Rua barcelona",
             })
         }
     
