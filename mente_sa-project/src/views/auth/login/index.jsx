@@ -18,29 +18,28 @@ export default function Login() {
         const [error, setError] = useState(false)
         const [email, setEmail] = useState("")
         const [password, setPassword] = useState("")
+        const [prof, setProf] = useState()
 
-        async function sendUrl(){
-            
-            let nextRoute=sessionStorage.getItem("@AuthFirebase:route")
-            navigate(nextRoute)
-            
-        }
+        
         
         //handle login and 
         async function handleLogin(e){
             e.preventDefault()
-            
-            const logIn = await signInGoogle(email, password)
+            const logIn = await signInGoogle(email, password)      
+        }
 
-            
-            console.log('teste login', role1)
-            
-            // await sendUrl()
-            
-        }  
+        function sendUrl(){
+            if(role1 === 'true'){
+                navigate('/registro/profissional/')
+            }else{
+                navigate('/registro/usuario/')
+            }
+        }
 
         useEffect(() => {
-            
+            if(role1!= null){
+                sendUrl()
+            }
         }, [role1])
 
         return (

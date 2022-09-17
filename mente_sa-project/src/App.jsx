@@ -6,7 +6,7 @@ import { AuthGoogleProvider } from './contexts/authGoogle';
 export const App = () => {
     return (
     <AuthGoogleProvider>
-    <AppRoute/>
+        <AppRoute/>
     </AuthGoogleProvider>
     
     )

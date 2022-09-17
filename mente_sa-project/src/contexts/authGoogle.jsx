@@ -53,6 +53,7 @@ export const AuthGoogleProvider = ({children}) => {
 
             if(sessionToken && sessionUser) {
                 setUser(sessionUser)
+                dispatch({type: "LOGIN", currentUser:user})
                 setRole(sessionRoleUser)
             }
         }
@@ -71,6 +72,7 @@ export const AuthGoogleProvider = ({children}) => {
                 const token = userCredential.user['stsTokenManager'].accessToken
                 const roles = await getRoleUser(user.uid)
                 dispatch({type: "LOGIN", RoleAttr:roles})
+                
                 console.log('log', state.role)
                 setUser(user)
                 setRole(roles)

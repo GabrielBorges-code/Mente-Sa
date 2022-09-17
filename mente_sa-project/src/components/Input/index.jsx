@@ -14,9 +14,9 @@ function Input({label, value, setClassCol, setValue, type, typeForm}) {
             className={ `${typeForm} ${styles.bgInput}`}
             value={value}/>
 
-            <div className='row'>
+            {/* <div className='row'>
                     <pre>{JSON.stringify({label, type, value, setValue})}</pre>
-            </div>
+            </div> */}
         </div> 
         
         
