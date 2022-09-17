@@ -22,7 +22,8 @@
     "react-icons": "^4.4.0",
     "react-router-dom": "^6.3.0",
     "recharts": "^2.1.13",
-    "styled-components": "^5.3.5"
+    "styled-components": "^5.3.5",
+    "yarn": "^1.22.19"
   },
   "devDependencies": {
     "@types/react": "^18.0.17",
