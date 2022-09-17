@@ -8,31 +8,40 @@ import { db, auth } from "../../../services/firebase";
 import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword } from "firebase/auth";
 import {doc, setDoc} from 'firebase/firestore'
 import { useNavigate } from "react-router-dom";
+import { useEffect } from "react";
 
 
 export default function Login() {
         let navigate = useNavigate()
-        const {signInGoogle} = useContext(AuthGoogleContext)
+        const {signInGoogle, role1, signed} = useContext(AuthGoogleContext)
         
         const [error, setError] = useState(false)
         const [email, setEmail] = useState("")
         const [password, setPassword] = useState("")
 
-        async function handleAddUserRole(){
+        async function sendUrl(){
             
-            await setDoc(doc(db, "Profissionais", "fernando@gmail.com"),{
-                name: "Fernando",
-                Endereco: "Rua barcelona",
-            })
+            let nextRoute=sessionStorage.getItem("@AuthFirebase:route")
+            navigate(nextRoute)
+            
         }
-    
+        
+        //handle login and 
         async function handleLogin(e){
             e.preventDefault()
+            
             const logIn = await signInGoogle(email, password)
-            .then()
-            .catch()
+
+            
+            console.log('teste login', role1)
+            
+            // await sendUrl()
             
         }  
+
+        useEffect(() => {
+            
+        }, [role1])
 
         return (
             <>

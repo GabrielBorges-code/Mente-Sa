@@ -16,6 +16,9 @@ function InputSelect({label, options}) {
                 }
                 
             </select>
+            <div className='row'>
+                    <pre>{JSON.stringify({label, options})}</pre>
+            </div>
         </div> 
 
 
