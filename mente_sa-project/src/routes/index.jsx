@@ -1,13 +1,15 @@
 import React from 'react';
 import {BrowserRouter, Routes, Route, Navigate} from 'react-router-dom';
 
+import Login from '../views/auth/login';
+
 import Home from '../views/home';
 import Landing from '../views/landing'
 import Personal from '../views/professional/registration/personal'
 import Professional from '../views/professional/registration/professional';
 import Enterprise from '../views/professional/registration/enterprise';
 import ProfileProfessional from '../views/professional/profile';
-
+import Registration from '../views/auth/registration';
 import ProfileUser from '../views/personal/profile';
 import PersonalUser from '../views/personal/personal';
 import ChooseProfessional from '../views/personal/chooseProfessional';
@@ -23,6 +25,8 @@ export default function Routers() {
                 <Route path ='/registro/profissional/sobre' element={<Professional/>}/>
                 <Route path ='/registro/profissional/empresa' element={<Enterprise/>}/>
                 <Route path ='/profile' element={<ProfileProfessional/>}/>
+                <Route path ='/login' element={<Login/>}/>
+                <Route path ='/registro' element={<Registration/>}/>
 
                 <Route path ='/usuario/perfil' element={<ProfileUser/>}/>
 
