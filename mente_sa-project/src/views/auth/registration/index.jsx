@@ -103,6 +103,7 @@ export default function Registration() {
                             <label className="form-check-label" >
                                 Eu aceito o termo de uso 
                             </label>
+                            <a href="#!" className="text-body">termo de uso</a>
                             </div>
                             <a href="#!" className="text-body">Forgot password?</a>
                         </div>

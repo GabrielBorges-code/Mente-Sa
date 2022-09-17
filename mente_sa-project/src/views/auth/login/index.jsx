@@ -7,10 +7,12 @@ import Input from "../../../components/Input";
 import { db, auth } from "../../../services/firebase";
 import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword } from "firebase/auth";
 import {doc, setDoc} from 'firebase/firestore'
+import { useNavigate } from "react-router-dom";
 
 
 export default function Login() {
-        const {signInGoogle, signInData} = useContext(AuthGoogleContext)
+        let navigate = useNavigate()
+        const {signInGoogle} = useContext(AuthGoogleContext)
         
         const [error, setError] = useState(false)
         const [email, setEmail] = useState("")
@@ -26,19 +28,9 @@ export default function Login() {
     
         async function handleLogin(e){
             e.preventDefault()
-            console.log(email, password)
-
-            
-            signInWithEmailAndPassword(auth, email, password)
-            .then((userCredential) => {
-                const user = userCredential.user;
-                console.log(user)
-            })
-            .catch((error) => {
-                setError(true)
-            });
-
-            
+            const logIn = await signInGoogle(email, password)
+            .then()
+            .catch()
             
         }  
 
@@ -54,18 +46,14 @@ export default function Login() {
                     <div className="col-md-8 col-lg-6 col-xl-4 offset-xl-1">
                         <form onSubmit={handleLogin}>
                         <div className="d-flex flex-row align-items-center justify-content-center justify-content-lg-start">
-                            <p className="lead fw-normal mb-0 me-3">Sign in with</p>
-                            <button onClick={()=>{signInGoogle()}} type="button" className="btn btn-danger btn-floating mx-1">
-                            <i><SiGoogle/> Entrar com Google</i>
-                            </button>
-
-                            <button onClick={()=>{handleAddUserRole()}} type="button" className="btn btn-danger btn-floating mx-1">
-                            <i><SiGoogle/> Test com Firestore</i>
-                            </button>
+                            <p className="lead fw-normal mb-0 me-3">Não sou cadastrado</p>
+                            <button onClick={()=>{signInGoogle()}} type="button" className="btn btn-primary btn-floating mx-1">
+                            <i> Cadastrar</i>
+                            </button>   
                         </div>
 
                         <div className="divider d-flex align-items-center my-4">
-                            <p className="text-center fw-bold mx-3 mb-0">Or</p>
+                            <p className="text-center fw-bold mx-3 mb-0">Ou</p>
                         </div>
 
                         {/* <!-- Email input --> */}
@@ -84,7 +72,7 @@ export default function Login() {
                                 Remember me
                             </label>
                             </div>
-                            <a href="#!" className="text-body">Forgot password?</a>
+                            <a href="#!" className="text-body">Esqueceu a senha?</a>
                         </div>
 
                         <div className="text-center text-lg-start mt-4 pt-2">
