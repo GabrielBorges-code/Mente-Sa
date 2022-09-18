@@ -7,8 +7,8 @@ import AuthReducer from "../reducers/AuthReducer"
 const provider = new GoogleAuthProvider()
 
 const INITIAL_STATE={
-    currentUser:null,
-    role:null,
+    currentUser:  null,
+    role:sessionStorage.getItem("@AuthFirebase:role") || null,
 }
 
 export const AuthGoogleContext = createContext({INITIAL_STATE})
@@ -49,19 +49,22 @@ export const AuthGoogleProvider = ({children}) => {
                 const sessionToken = sessionStorage.getItem("@AuthFirebase:token")
                 const sessionUser = sessionStorage.getItem("@AuthFirebase:user")
                 const sessionRoleUser = sessionStorage.getItem("@AuthFirebase:role")
-                console.log('estou sendo carregado')
+                console.log('estou sendo carregado',  sessionRoleUser)
 
-            if(sessionToken && sessionUser) {
+            if(sessionToken) {
                 setUser(sessionUser)
+                dispatch({type: "LOGIN", payload:sessionUser})
+                dispatch({type: "LOGIN", RoleAttr:sessionRoleUser})
+                
                 setRole(sessionRoleUser)
             }
         }
 
         // loadStoreAuth()
         
-        console.log('useef', state.role, role)
+        console.log('useef', state.role, state.currentUser)
         
-    },[state.role, role])
+    },[state.role, role, state.currentUser])
 
 
     const signInGoogle =  async (email, password) => {
@@ -71,13 +74,14 @@ export const AuthGoogleProvider = ({children}) => {
                 const token = userCredential.user['stsTokenManager'].accessToken
                 const roles = await getRoleUser(user.uid)
                 dispatch({type: "LOGIN", RoleAttr:roles})
+                
                 console.log('log', state.role)
                 setUser(user)
                 setRole(roles)
                 
                 sessionStorage.setItem("@AuthFirebase:token", token)
                 sessionStorage.setItem("@AuthFirebase:user", JSON.stringify(user))
-                sessionStorage.setItem("@AuthFirebase:role", JSON.stringify(role))
+                sessionStorage.setItem("@AuthFirebase:role", JSON.stringify(roles))
                 
                 
                 
@@ -93,7 +97,7 @@ export const AuthGoogleProvider = ({children}) => {
         <AuthGoogleContext.Provider
         value={{ signInGoogle, 
         currentUser: state.currentUser, 
-        signed: !!user, 
+        signed: state.currentUser, 
         role1: state.role, 
         dispatch  
         }}>
