@@ -12,7 +12,7 @@ import Stepper from "../../../../components/Stepper";
 import styles from "./index.module.css";
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
-import {doc, setDoc, addDoc} from 'firebase/firestore'
+import {doc, setDoc, addDoc, getDoc} from 'firebase/firestore'
 import { db, auth } from "../../../../services/firebase"; 
 import { useEffect } from "react";
 
@@ -36,10 +36,7 @@ function Enterprise() {
   
   async function handleSaveorEdit(e){ //PREPARE TO SAVE OR EDIT
     //TODO we have changing fiels: "data nascimento", "estado civil", "sexo"
-    let setOrAdd = 'setDoc'
-    if(edit){
-      setOrAdd = 'addDoc'
-    }
+    
 
     e.preventDefault()
       const info = await setDoc(doc(db, "Enterprise", users.uid),{
@@ -56,14 +53,26 @@ function Enterprise() {
     navigate('/profile') //NEXT BUTTON
   }
 
-  async function handleEdit(e){
-    e.preventDefault()
+  async function handleEdit(){
 
+      const docRef = doc(db, "Enterprise", users.uid);
+      const docSnap = await getDoc(docRef);
+      const {city, complement, district, emailEnterprise, logradouro, number, phoneEnterprise, state} = docSnap.data()
+      
+      setCity(city)
+      setComplement(complement)
+      setDistrict(district)
+      setEmailEnterprise(emailEnterprise)
+      setLogradouro(logradouro),
+      setNumber(number)
+      setPhoneEnterprise(phoneEnterprise)
+      setState(state)
   }
 
 
   useEffect(() => {
     console.log(users)
+    handleEdit()
     
   },[])
 

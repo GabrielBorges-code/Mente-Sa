@@ -24,7 +24,7 @@ function Session() {
                 show={showModal}
                 onHide={() => setShowModal(false)}
             />
-            
+
             <div>
                 <Table responsive="sm">
                     <thead>
@@ -47,10 +47,10 @@ function Session() {
                             <td>14:00</td>
                             <td>50min</td>
                             <td><Button className="mt-2 btn btn-primary" onClick={() => setShowModal(true)}><i><CgFileDocument /></i></Button></td>
-                            <td>Pendente</td>                            
+                            <td>Pendente</td>
                         </tr>
-                        
-                        <br/>
+
+
 
                         <tr>
                             <td><img src="https://files.tecnoblog.net/wp-content/uploads/2018/09/linus-torvalds-dedo-meio.jpg" alt="foto perfil" /></td>
@@ -61,9 +61,9 @@ function Session() {
                             <td><Button className="mt-2 btn btn-primary"><i><CgFileDocument /></i></Button></td>
                             <td>Pendente</td>
                         </tr>
-                        
+
                     </tbody>
-                </Table>                
+                </Table>
             </div>
         </>
     );

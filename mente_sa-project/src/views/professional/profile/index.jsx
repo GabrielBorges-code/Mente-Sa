@@ -57,8 +57,6 @@ function ProfileProfessional() {
       
     }
 
-    
-    
     return (
       <>
         
