@@ -9,6 +9,8 @@ import InputSelect from "../../../components/Input/inputSelect"
 import Footer from "../../../components/Footer"
 import Header from "../../../components/Header"
 
+import Session from "../session"
+
 import styles from "./index.module.css"
 import { useNavigate } from "react-router-dom"
 import { HiOutlinePencilAlt, HiUserCircle, HiChatAlt } from "react-icons/hi"
@@ -36,9 +38,9 @@ function ProfileProfessional() {
       )
       }else if( currentView === 'session'){
         return (
-              <Container className={`${styles.min_height} bg-light card`}>
-              <div className="d-flex justify-content-end">
-                  <button className="mt-2 btn btn-primary"><i><HiOutlinePencilAlt/></i>Session</button>
+            <Container className={`${styles.min_height} bg-light card`}>
+              <div >
+                <Session />
               </div>
             </Container>
           )
