@@ -41,7 +41,7 @@ function Personal() {
 
     //TODO we have changing fiels: "data nascimento", "estado civil", "sexo"
     e.preventDefault()
-      const info = await setDoc(doc(db, "Users", users.uid),{
+      const info = await setDoc(doc(db, "Professional", users.uid),{
           name: name,
           phone: phone,
           street: street,
