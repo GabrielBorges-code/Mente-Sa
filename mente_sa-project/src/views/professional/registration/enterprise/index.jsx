@@ -12,7 +12,7 @@ import Stepper from "../../../../components/Stepper";
 import styles from "./index.module.css";
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
-import {doc, setDoc} from 'firebase/firestore'
+import {doc, setDoc, addDoc} from 'firebase/firestore'
 import { db, auth } from "../../../../services/firebase"; 
 import { useEffect } from "react";
 
@@ -22,6 +22,7 @@ import { useEffect } from "react";
 function Enterprise() {
   let navigate = useNavigate()
   const [users, setUsers] = useState(JSON.parse(sessionStorage.getItem("@AuthFirebase:user")))
+  const [edit, setEdit] = useState(false)
   const [logradouro, setLogradouro] = useState('')
   const [number, setNumber] = useState('')
   const [complement, setComplement] = useState('')
@@ -33,9 +34,13 @@ function Enterprise() {
   
   
   
-  async function handleSave(e){ //PREPARE TO SAVE
-
+  async function handleSaveorEdit(e){ //PREPARE TO SAVE OR EDIT
     //TODO we have changing fiels: "data nascimento", "estado civil", "sexo"
+    let setOrAdd = 'setDoc'
+    if(edit){
+      setOrAdd = 'addDoc'
+    }
+
     e.preventDefault()
       const info = await setDoc(doc(db, "Enterprise", users.uid),{
           logradouro: logradouro,
@@ -51,6 +56,12 @@ function Enterprise() {
     navigate('/profile') //NEXT BUTTON
   }
 
+  async function handleEdit(e){
+    e.preventDefault()
+
+  }
+
+
   useEffect(() => {
     console.log(users)
     
@@ -65,7 +76,7 @@ function Enterprise() {
       
 
       <Container className={`${styles.min_height} bg-light card`}>
-      <Form onSubmit={handleSave}>
+      <Form onSubmit={handleSaveorEdit}>
         <Form.Group className="mb-5" >
         <h3>Dados Empresa</h3> 
             <div className="row">
