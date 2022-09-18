@@ -41,7 +41,7 @@ function Personal() {
 
     //TODO we have changing fiels: "data nascimento", "estado civil", "sexo"
     e.preventDefault()
-      const info = await setDoc(doc(db, "Professional", users.uid),{
+      const info = await setDoc(doc(db, "Personal", users.uid),{
           name: name,
           phone: phone,
           street: street,
@@ -55,10 +55,7 @@ function Personal() {
     navigate('/registro/profissional/sobre')
   }
 
-  function loadSessionUsers(){
-      const sessionUser = sessionStorage.getItem("@AuthFirebase:user")
-      return (JSON.parse(sessionUser))
-  }
+  
 
   useEffect(() => {
     console.log(users)

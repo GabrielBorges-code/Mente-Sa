@@ -66,6 +66,12 @@ export const AuthGoogleProvider = ({children}) => {
         
     },[state.role, role, state.currentUser])
 
+    const logout = () => {
+        const sessionToken = sessionStorage.removeItem("@AuthFirebase:token")
+        const sessionUser = sessionStorage.removeItem("@AuthFirebase:user")
+        const sessionRoleUser = sessionStorage.removeItem("@AuthFirebase:role")
+    }
+
 
     const signInGoogle =  async (email, password) => {
         signInWithEmailAndPassword(auth, email, password)
@@ -97,7 +103,7 @@ export const AuthGoogleProvider = ({children}) => {
         <AuthGoogleContext.Provider
         value={{ signInGoogle, 
         currentUser: state.currentUser, 
-        signed: state.currentUser, 
+        signed: !!user, 
         role1: state.role, 
         dispatch  
         }}>
