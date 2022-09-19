@@ -3,6 +3,8 @@ import {db, app}  from '../services/firebase'
 import {GoogleAuthProvider, getAuth,  signInWithEmailAndPassword } from 'firebase/auth'
 import {doc, setDoc, getDoc} from 'firebase/firestore'
 import AuthReducer from "../reducers/AuthReducer"
+import {toast} from "react-hot-toast";
+import VerifyErrorCode from "../errors/firebaseErrors" 
 
 const provider = new GoogleAuthProvider()
 
@@ -94,8 +96,18 @@ export const AuthGoogleProvider = ({children}) => {
             })
             .catch((error) => {
                 const errorCode = error.code;
-                const errorMessage = error.message;
-                console.log(errorMessage)
+                // const errorMessage = error.message;
+                
+                
+                let errorMessage = VerifyErrorCode(errorCode);
+                    if (errorMessage == null) {
+                        errorMessage = error.message;
+                        toast.error(errorCode,':',errorMessage)
+                    }
+                    
+                    console.log(errorMessage);
+                    toast.error(errorMessage)
+                
             });
 
     }

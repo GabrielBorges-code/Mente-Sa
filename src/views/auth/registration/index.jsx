@@ -9,6 +9,7 @@ import { db, auth } from "../../../services/firebase";
 import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword,  } from "firebase/auth";
 import {doc, setDoc} from 'firebase/firestore'
 import {toast} from "react-hot-toast";
+import VerifyErrorCode from "../../../errors/firebaseErrors" 
 
 
 
@@ -59,8 +60,18 @@ export default function Registration() {
                      
                 })
                 .catch((error) => {
-                    setError(true)
-                    toast.error(error.message)
+                    const errorCode = error.code;
+                // const errorMessage = error.message;
+                
+                
+                let errorMessage = VerifyErrorCode(errorCode);
+                    if (errorMessage == null) {
+                        errorMessage = error.message;
+                        toast.error(errorCode,':',errorMessage)
+                    }
+                    
+                    
+                    toast.error(errorMessage)
             });
 
             }            

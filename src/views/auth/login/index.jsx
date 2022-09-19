@@ -9,6 +9,7 @@ import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword } f
 import {doc, setDoc} from 'firebase/firestore'
 import { useNavigate } from "react-router-dom";
 import { useEffect } from "react";
+import {toast} from "react-hot-toast";
 
 
 export default function Login() {
@@ -25,7 +26,9 @@ export default function Login() {
         //handle login and 
         async function handleLogin(e){
             e.preventDefault()
-            const logIn = await signInGoogle(email, password)      
+            const logIn = await signInGoogle(email, password)
+            
+          
         }
 
         function sendUrl(){
