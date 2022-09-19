@@ -1,18 +1,22 @@
-import firebase from 'firebase/app'
-import "firebase/auth"
+import { initializeApp} from "firebase/app";
+import { getAuth } from "firebase/auth"
 // import {getAnalytics} from 'firebase/analytics'
+import { getFirestore } from "firebase/firestore";
 
 const firebaseConfig = {
-    apiKey: "AIzaSyD6Lpe5uS-6nBC9rne3ovFDmzhmONIEEVI",
-    authDomain: "mente-sa-4d262.firebaseapp.com",
-    projectId: "mente-sa-4d262",
-    storageBucket: "mente-sa-4d262.appspot.com",
-    messagingSenderId: "513237194524",
-    appId: "1:513237194524:web:4bc704533c0f0d986f0cd9",
-    measurementId: "G-BKV1P9XVMV"
+    apiKey: import.meta.env.VITE_FIREBASE_KEY,
+    authDomain: import.meta.env.VITE_APP_FIREBASE_AUTH_DOMAIN,
+    projectId: import.meta.env.VITE_APP_FIREBASE_PROJECT_ID,
+    storageBucket: import.meta.env.VITE_APP_FIREBASE_STORAGE_BUCKET,
+    messagingSenderId: import.meta.env.VITE_APP_FIREBASE_MESSAGING_SENDER_ID,
+    appId: import.meta.env.VITE_APP_FIREBASE_APP_ID,
+    measurementId: import.meta.env.VITE_APP_FIREBASE_MEASUREMENT_ID
 }
 
-const app = firebase.initializeApp(firebaseConfig)
-const auth = firebase.auth()
+console.log()
+export const app = initializeApp(firebaseConfig)
+export const db = getFirestore(app)
+export const auth = getAuth()
 
-export {firebase, auth, app }
+
+  

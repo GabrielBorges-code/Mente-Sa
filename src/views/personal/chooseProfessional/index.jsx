@@ -66,7 +66,7 @@ function Scheduling() {
                 </td>
               </tr>
               
-              <br/>
+              
 
               <tr>
                 <td><img src="https://files.tecnoblog.net/wp-content/uploads/2018/09/linus-torvalds-dedo-meio.jpg" alt="foto perfil" /></td>
@@ -79,9 +79,6 @@ function Scheduling() {
                   <Button>Selecionar</Button>
                 </td>
               </tr>
-              
-              <br/>
-
               <tr>
                 <td><img src="https://files.tecnoblog.net/wp-content/uploads/2018/09/linus-torvalds-dedo-meio.jpg" alt="foto perfil" /></td>
                 <td>Camila Fellix</td>

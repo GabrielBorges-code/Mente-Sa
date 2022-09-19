@@ -2,7 +2,7 @@ import Form from "react-bootstrap/Form";
 import styles from "./index.module.css";
 
 function InputSelect({label, options}) {
-
+    
 
     return (  
         <div className="col-md-3 ">
@@ -16,6 +16,9 @@ function InputSelect({label, options}) {
                 }
                 
             </select>
+            {/* <div className='row'>
+                    <pre>{JSON.stringify({label, options})}</pre>
+            </div> */}
         </div> 
 
 
