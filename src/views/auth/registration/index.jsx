@@ -15,16 +15,15 @@ import VerifyErrorCode from "../../../errors/firebaseErrors"
 
 
 
-export default function Registration() {
+export default function Registration({edit}) {
 
         const navigate = useNavigate()
         const {signInGoogle} = useContext(AuthGoogleContext)
-        
         const [error, setError] = useState(false)
         const [email, setEmail] = useState("")
         const [password, setPassword] = useState("")
         const [repeatPassword, setRepeatPassword] = useState("")
-        
+
 
         async function handleAddUserRole(){
             
@@ -37,6 +36,7 @@ export default function Registration() {
             const info = await setDoc(doc(db, "Users", uid),{
                 email: email,
                 professional: status,
+                formCompleted:false,
                 
             })
         }

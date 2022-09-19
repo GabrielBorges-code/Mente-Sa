@@ -21,15 +21,16 @@ export const AuthGoogleProvider = ({children}) => {
     const auth = getAuth(app)
     const [user, setUser] = useState(null)
     const [role, setRole] = useState()
+    const [formCompleted, setFormCompleted] = useState()
     let roleProfessional
 
 
     async function getRoleUser(uid){
         const docRef = doc(db, "Users", uid);
         const docSnap = await getDoc(docRef);
-        const {professional} = docSnap.data()
+        const {professional, formCompleted} = docSnap.data()
         roleProfessional = professional
-        
+        setFormCompleted(formCompleted)
         console.log('teste', roleProfessional)
         return professional
     }
@@ -116,7 +117,8 @@ export const AuthGoogleProvider = ({children}) => {
         value={{ signInGoogle, 
         currentUser: state.currentUser, 
         signed: !!user, 
-        role1: state.role, 
+        role1: state.role,
+        formComplete: formCompleted,
         dispatch  
         }}>
 

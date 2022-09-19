@@ -71,10 +71,10 @@ function Enterprise() {
   }
 
   async function changeStatusCompleted() {
-    const request = await addDoc(collection(db, "Users", users.uid),{
-      formCompleted: true
+    const usersRef = doc(db, 'Users', users.uid)
+    console.log(usersRef)
+    const request = await updateDoc(usersRef,{formCompleted: true})
 
-  })
   navigate('/profile') //NEXT BUTTON
 
   }
@@ -88,7 +88,7 @@ function Enterprise() {
 
   return (
     <>
-      <Header message={'finalizando!'} linkBack={'/registro/profissional/sobre'}/>
+      <Header message={'finalizando!'} linkBack={'/registro/profissional/sobre'} edit/>
 
       {/* steper 3 */}
       <Stepper step={'100%'} state1={'success'} state2={'success'} state3={'primary'} />
