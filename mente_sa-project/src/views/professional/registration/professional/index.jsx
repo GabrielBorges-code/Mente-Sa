@@ -12,7 +12,7 @@ import Stepper from "../../../../components/Stepper";
 
 import styles from "./index.module.css";
 import { useEffect } from "react";
-import {doc, setDoc} from 'firebase/firestore'
+import {doc, setDoc, getDoc} from 'firebase/firestore'
 import { db, auth } from "../../../../services/firebase"; 
 
 function Professional() {
@@ -20,15 +20,15 @@ function Professional() {
   const [users, setUsers] = useState(JSON.parse(sessionStorage.getItem("@AuthFirebase:user")))
   
   const [college, setCollege] = useState('')
-  const [dateFinishCollege, setDateFinishCollege] = useState('')
+  const [dateFinishCollege, setDateFinishCollege] = useState()
   const [specializationName, setSpecializationName] = useState('')
   const [regionalCouncilNumber, setRegionalCouncilNumber] = useState('')
   const [postGraduate, setPostGraduate] = useState('')
-  const [dateFinishPostGraduate, setDateFinishPostGraduate] = useState('')
+  const [dateFinishPostGraduate, setDateFinishPostGraduate] = useState()
   const [masterDegree, setMasterDegree] = useState('')
-  const [dateMasterDegree, setDateMasterDegree] = useState('')
+  const [dateMasterDegree, setDateMasterDegree] = useState()
   const [doctorateDegree, setDoctorateDegree] = useState('')
-  const [dateDoctorateDegree, setDateDoctorateDegree] = useState('')
+  const [dateDoctorateDegree, setDateDoctorateDegree] = useState()
 
   
   async function handleSave(e){ //PREPARE TO SAVE
@@ -52,8 +52,27 @@ function Professional() {
     navigate('/registro/profissional/empresa')
   }
 
+  async function handleEdit(){
+
+    const docRef = doc(db, "Professional", users.uid);
+    const docSnap = await getDoc(docRef);
+    const {college, dateFinishCollege, specializationName, regionalCouncilNumber, postGraduate, dateFinishPostGraduate, masterDegree, dateMasterDegree, doctorateDegree, dateDoctorateDegree} = docSnap.data()
+    
+    setCollege(college)
+    setDateFinishCollege(dateFinishCollege)
+    setSpecializationName(specializationName)
+    setRegionalCouncilNumber(regionalCouncilNumber)
+    setPostGraduate(postGraduate)
+    setDateFinishPostGraduate(dateFinishPostGraduate)
+    setMasterDegree(masterDegree)
+    setDateMasterDegree(dateMasterDegree)
+    setDoctorateDegree(doctorateDegree)
+    setDateDoctorateDegree(dateDoctorateDegree)
+}
+
   useEffect(() => {
     console.log(users)
+    handleEdit()
     
   },[])
   

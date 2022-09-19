@@ -14,7 +14,7 @@ import styles from "./index.module.css";
 import { useState } from "react";
 
 //credentials of firebase
-import {doc, setDoc} from 'firebase/firestore'
+import {doc, setDoc, getDoc} from 'firebase/firestore'
 import { db, auth } from "../../../../services/firebase"; 
 import { useEffect } from "react";
 
@@ -22,9 +22,9 @@ function Personal() {
   let navigate = useNavigate()
   const [users, setUsers] = useState(JSON.parse(sessionStorage.getItem("@AuthFirebase:user")))
   const [name, setName] = useState('')
-  const [email, setEmail] = useState('')
+  
   const [phone, setPhone] = useState('')
-  const [dateBorn, setDateBorn] = useState('')
+  const [dateBorn, setDateBorn] = useState()
   const [civilState, setCivilState] = useState('')
   const [genre, setGenre] = useState('')
   const [street, setStreet] = useState('')
@@ -55,10 +55,27 @@ function Personal() {
     navigate('/registro/profissional/sobre')
   }
 
+  async function handleEdit(){
+
+    const docRef = doc(db, "Personal", users.uid);
+    const docSnap = await getDoc(docRef);
+    const {name, phone, street, numberHouse, complement, district, state, city} = docSnap.data()
+    setName(name)
+    
+    setPhone(phone)
+    setStreet(street)
+    setNumberHouse(numberHouse)
+    setComplement(complement)
+    setDistrict(district)
+    setState(state)
+    setCity(city)
+}
+
   
 
   useEffect(() => {
     console.log(users)
+    handleEdit()
     
   },[])
   
