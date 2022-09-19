@@ -21,18 +21,18 @@ import { useEffect } from "react";
 function Personal() {
   let navigate = useNavigate()
   const [users, setUsers] = useState(JSON.parse(sessionStorage.getItem("@AuthFirebase:user")))
-  const [name, setName] = useState('')
+  const [name, setName] = useState(null)
   
-  const [phone, setPhone] = useState('')
-  const [dateBorn, setDateBorn] = useState()
-  const [civilState, setCivilState] = useState('')
-  const [genre, setGenre] = useState('')
-  const [street, setStreet] = useState('')
-  const [numberHouse, setNumberHouse] = useState('')
-  const [complement, setComplement] = useState('')
-  const [district, setDistrict] = useState('')
-  const [state, setState] = useState('')
-  const [city, setCity] = useState('')
+  const [phone, setPhone] = useState(null)
+  const [dateBorn, setDateBorn] = useState(null)
+  const [civilState, setCivilState] = useState(null)
+  const [genre, setGenre] = useState(null)
+  const [street, setStreet] = useState(null)
+  const [numberHouse, setNumberHouse] = useState(null)
+  const [complement, setComplement] = useState(null)
+  const [district, setDistrict] = useState(null)
+  const [state, setState] = useState(null)
+  const [city, setCity] = useState(null)
 
   
 
@@ -44,6 +44,9 @@ function Personal() {
       const info = await setDoc(doc(db, "Personal", users.uid),{
           name: name,
           phone: phone,
+          dateBorn:dateBorn,
+          civilState: civilState,
+          genre:genre,
           street: street,
           numberHouse: numberHouse,
           complement: complement,
@@ -59,9 +62,10 @@ function Personal() {
 
     const docRef = doc(db, "Personal", users.uid);
     const docSnap = await getDoc(docRef);
-    const {name, phone, street, numberHouse, complement, district, state, city} = docSnap.data()
+    const {name, phone, dateBorn, street, numberHouse, complement, district, state, city} = docSnap.data()
     setName(name)
     setPhone(phone)
+    setDateBorn(dateBorn)
     setStreet(street)
     setNumberHouse(numberHouse)
     setComplement(complement)
