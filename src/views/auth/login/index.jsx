@@ -15,7 +15,6 @@ import {toast} from "react-hot-toast";
 export default function Login() {
         let navigate = useNavigate()
         const {signInGoogle, role1, signed} = useContext(AuthGoogleContext)
-        
         const [error, setError] = useState(false)
         const [email, setEmail] = useState("")
         const [password, setPassword] = useState("")
@@ -27,8 +26,6 @@ export default function Login() {
         async function handleLogin(e){
             e.preventDefault()
             const logIn = await signInGoogle(email, password)
-            
-          
         }
 
         function sendUrl(){
