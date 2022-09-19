@@ -48,7 +48,7 @@ function Personal() {
           city: city,
       })
   
-    navigate('/registro/profissional/sobre')
+    navigate('/usuario/perfil')
   }
 
   return (
@@ -74,21 +74,20 @@ function Personal() {
                 typeForm={"form-control"}
                 setClassCol={"col-sm"}
                 label={"Nome"}
+                value={name} 
+                setValue={setName}
               />
             </div>
 
-            <div className="row">
-              <Input
-                type={"email"}
-                typeForm={"form-control"}
-                setClassCol={"col-sm-8"}
-                label={"Email"}
-              />
+             <div className="row">
+             
               <Input
                 type={"number"}
                 typeForm={"form-control"}
                 setClassCol={"col-sm"}
                 label={"Telefone"}
+                value={phone} 
+                setValue={setPhone}
               />
             </div>
 
@@ -98,15 +97,21 @@ function Personal() {
                 typeForm={"form-control"}
                 setClassCol={"col-sm"}
                 label={"Data Nascimento"}
+                value={dateBorn} 
+                setValue={setDateBorn}
               />
                 
               <InputSelect
                 label={"Estado Civil"}
+                value={civilState} 
+                setValue={setCivilState}
                 options={["Solteiro", "Casado", "Separado", "Divorciado", "Viúvo"]}
               />
 
               <InputSelect
                 label={"Sexo"}
+                value={genre} 
+                setValue={setGenre}
                 options={["Masculino", "Feminino"]}
               />
               
@@ -121,12 +126,16 @@ function Personal() {
                 typeForm={"form-control"}
                 setClassCol={"col-sm-8"}
                 label={"Logradouro"}
+                value={street} 
+                setValue={setStreet}
               />
               <Input
                 type={"number"}
                 typeForm={"form-control"}
                 setClassCol={"col-sm"}
                 label={"Número"}
+                value={numberHouse}
+                setValue={setNumberHouse}
               />
 
               <Input
@@ -134,6 +143,8 @@ function Personal() {
                 typeForm={"form-control"}
                 setClassCol={"col-sm"}
                 label={"Complemento"}
+                value={complement} 
+                setValue={setComplement}
               />
               
             </div>
@@ -144,12 +155,16 @@ function Personal() {
                 typeForm={"form-control"}
                 setClassCol={"col-sm"}
                 label={"Bairro"}
+                value={district}
+                setValue={setDistrict}
               />
               <Input
                 type={"text"}
                 typeForm={"form-control"}
                 setClassCol={"col-sm"}
                 label={"Estado"}
+                value={state} 
+                setValue={setState}
               />
 
               <Input
@@ -157,6 +172,8 @@ function Personal() {
                 typeForm={"form-control"}
                 setClassCol={"col-sm"}
                 label={"Cidade"}
+                value={city} 
+                setValue={setCity}
               />
             
             </div>
