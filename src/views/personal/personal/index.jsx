@@ -12,13 +12,43 @@ import Stepper from "../../../components/Stepper";
 import { useState } from "react";
 import styles from "./index.module.css";
 
+import {doc, setDoc, getDoc} from 'firebase/firestore'
+import { db, auth } from "../../../services/firebase"; 
+import { useEffect } from "react";
+
 function Personal() {
   let navigate = useNavigate();
-  const [] = useState();
+  const [users, setUsers] = useState(JSON.parse(sessionStorage.getItem("@AuthFirebase:user")))
 
-  function save() {
-    //PREPARE TO SAVE
-    navigate("/registro/usuario/escolha-profissional");
+  const [name, setName] = useState('')
+  
+  const [phone, setPhone] = useState('')
+  const [dateBorn, setDateBorn] = useState()
+  const [civilState, setCivilState] = useState('')
+  const [genre, setGenre] = useState('')
+  const [street, setStreet] = useState('')
+  const [numberHouse, setNumberHouse] = useState('')
+  const [complement, setComplement] = useState('')
+  const [district, setDistrict] = useState('')
+  const [state, setState] = useState('')
+  const [city, setCity] = useState('')
+
+  async function handleSave(e){ //PREPARE TO SAVE
+
+    //TODO we have changing fiels: "data nascimento", "estado civil", "sexo"
+    e.preventDefault()
+      const info = await setDoc(doc(db, "PatientePersonal", users.uid),{
+          name: name,
+          phone: phone,
+          street: street,
+          numberHouse: numberHouse,
+          complement: complement,
+          district: district,
+          state: state,
+          city: city,
+      })
+  
+    navigate('/usuario/perfil')
   }
 
   return (
@@ -34,7 +64,7 @@ function Personal() {
       />
 
       <Container className={`${styles.content} bg-light card`}>
-        <Form>
+        <Form onSubmit={handleSave}>
           <Form.Group className="mb-5">
             <h3>Dados Pessoais</h3>
 
@@ -44,21 +74,20 @@ function Personal() {
                 typeForm={"form-control"}
                 setClassCol={"col-sm"}
                 label={"Nome"}
+                value={name} 
+                setValue={setName}
               />
             </div>
 
-            <div className="row">
-              <Input
-                type={"email"}
-                typeForm={"form-control"}
-                setClassCol={"col-sm-8"}
-                label={"Email"}
-              />
+             <div className="row">
+             
               <Input
                 type={"number"}
                 typeForm={"form-control"}
                 setClassCol={"col-sm"}
                 label={"Telefone"}
+                value={phone} 
+                setValue={setPhone}
               />
             </div>
 
@@ -68,15 +97,21 @@ function Personal() {
                 typeForm={"form-control"}
                 setClassCol={"col-sm"}
                 label={"Data Nascimento"}
+                value={dateBorn} 
+                setValue={setDateBorn}
               />
                 
               <InputSelect
                 label={"Estado Civil"}
+                value={civilState} 
+                setValue={setCivilState}
                 options={["Solteiro", "Casado", "Separado", "Divorciado", "Viúvo"]}
               />
 
               <InputSelect
                 label={"Sexo"}
+                value={genre} 
+                setValue={setGenre}
                 options={["Masculino", "Feminino"]}
               />
               
@@ -91,12 +126,16 @@ function Personal() {
                 typeForm={"form-control"}
                 setClassCol={"col-sm-8"}
                 label={"Logradouro"}
+                value={street} 
+                setValue={setStreet}
               />
               <Input
                 type={"number"}
                 typeForm={"form-control"}
                 setClassCol={"col-sm"}
                 label={"Número"}
+                value={numberHouse}
+                setValue={setNumberHouse}
               />
 
               <Input
@@ -104,6 +143,8 @@ function Personal() {
                 typeForm={"form-control"}
                 setClassCol={"col-sm"}
                 label={"Complemento"}
+                value={complement} 
+                setValue={setComplement}
               />
               
             </div>
@@ -114,12 +155,16 @@ function Personal() {
                 typeForm={"form-control"}
                 setClassCol={"col-sm"}
                 label={"Bairro"}
+                value={district}
+                setValue={setDistrict}
               />
               <Input
                 type={"text"}
                 typeForm={"form-control"}
                 setClassCol={"col-sm"}
                 label={"Estado"}
+                value={state} 
+                setValue={setState}
               />
 
               <Input
@@ -127,6 +172,8 @@ function Personal() {
                 typeForm={"form-control"}
                 setClassCol={"col-sm"}
                 label={"Cidade"}
+                value={city} 
+                setValue={setCity}
               />
             
             </div>
@@ -134,7 +181,7 @@ function Personal() {
           </Form.Group>
 
           <div className="row d-flex justify-content-center">
-            <button onClick={save} className="btn btn-lg col-md-3 btn-primary">
+            <button type="submit" className="btn btn-lg col-md-3 btn-primary">
               Avançar
             </button>
           </div>
