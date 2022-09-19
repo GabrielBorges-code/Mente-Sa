@@ -8,6 +8,7 @@ import Input from "../../../components/Input";
 import { db, auth } from "../../../services/firebase";
 import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword,  } from "firebase/auth";
 import {doc, setDoc} from 'firebase/firestore'
+import {toast} from "react-hot-toast";
 
 
 
@@ -42,19 +43,24 @@ export default function Registration() {
             e.preventDefault()
             if(password != repeatPassword){
                 setError('As senhas não estão iguais')
+                console.log('oiadfs')
+                toast.error('As senhas não estão iguais')
             }else{
 
                 // const register = await createWithEmailPasswordGoogle(email, password)
                 
                 createUserWithEmailAndPassword(auth, email, password)
-                .then((userCredential) => {
+                .then(async (userCredential) => {
                     const user = userCredential.user;
                     registerRole(user.uid)
+                    toast.success('Usuário registrado com sucesso')
                     navigate ('/login')
+                    
                      
                 })
                 .catch((error) => {
                     setError(true)
+                    toast.error(error.message)
             });
 
             }            
