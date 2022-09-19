@@ -40,7 +40,6 @@ function Personal() {
   async function handleSave(e){ //PREPARE TO SAVE
 
     //TODO we have changing fiels: "data nascimento", "estado civil", "sexo"
-    e.preventDefault()
       const info = await setDoc(doc(db, "Personal", users.uid),{
           name: name,
           phone: phone,
@@ -77,6 +76,20 @@ function Personal() {
     handleEdit()
     
   },[])
+
+  const [validated, setValidated] = useState(false);
+
+  const handleSubmit = (event) => {
+    const form = event.currentTarget;
+    event.preventDefault();
+
+    if (form.checkValidity() === false) {
+      event.stopPropagation();
+     return setValidated(true);
+    }
+    setValidated(true);
+    handleSave()
+  };
   
   return (
         
@@ -86,20 +99,20 @@ function Personal() {
       <Stepper step={"0%"} state1={'primary'} state2={'secondary'} state3={'secondary'} />
 
       <Container className={`${styles.min_height} bg-light card`}>
-        <Form onSubmit={handleSave}>
+        <Form noValidate validated={validated} onSubmit={handleSubmit}>
         <Form.Group className="mb-5" >
         <h3>Dados Pessoais</h3>
-            <div className="row">
-            <Input type={'text'} typeForm={'form-control'} value={name} setValue={setName} label={'Nome Completo'}/>
+            <div className="row">     
+            <Input type={'text'} typeForm={'form-control'} value={name} setValue={setName} label={'Nome Completo'}required={true}/>
             </div>
 
             <div className="row">
             
-            <Input type={'text'} typeForm={'form-control'} value={phone} setValue={setPhone} setClassCol={'col-sm'} label={'Telefone'}/>
+            <Input type={'text'} typeForm={'form-control'} value={phone} setValue={setPhone} setClassCol={'col-sm'} label={'Telefone'} required={true}/>
             
             </div>
             <div className="row">
-              <Input type={'date'} typeForm={'form-control'} value={dateBorn} setValue={setDateBorn} setClassCol={'col-sm'} label={'Data Nascimento'}/>
+              <Input type={'date'} typeForm={'form-control'} value={dateBorn} setValue={setDateBorn} setClassCol={'col-sm'} label={'Data Nascimento'} />
               <InputSelect label={'Estado Civil'} value={civilState} setValue={setCivilState} options={['Solteiro','Casado','Divorciado','Viúvo']} />
               <InputSelect label={'Sexo'} value={genre} setValue={setGenre} options={['Masculino','Feminino', 'Prefiro não responder']} />
             </div>
@@ -110,7 +123,7 @@ function Personal() {
           
           <h3>Endereço</h3>
           <div className="row">
-            <Input type={'text'} typeForm={'form-control'} value={street} setValue={setStreet} setClassCol={'col-sm-7'} label={'Logradouro'}/>
+            <Input type={'text'} typeForm={'form-control'} value={street} setValue={setStreet} setClassCol={'col-sm-7'} label={'Logradouro'} />
             <Input type={'text'} typeForm={'form-control'} value={numberHouse} setValue={setNumberHouse} setClassCol={'col-sm'} label={'Número'}/>
             <Input type={'text'} typeForm={'form-control'} value={complement} setValue={setComplement} setClassCol={'col-sm'} label={'Complemento'}/>
             </div>

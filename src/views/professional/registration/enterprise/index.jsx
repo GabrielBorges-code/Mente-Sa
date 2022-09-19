@@ -12,7 +12,7 @@ import Stepper from "../../../../components/Stepper";
 import styles from "./index.module.css";
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
-import {doc, setDoc, addDoc, getDoc, collection} from 'firebase/firestore'
+import {doc, setDoc, addDoc, getDoc, collection, updateDoc} from 'firebase/firestore'
 import { db, auth } from "../../../../services/firebase"; 
 import { useEffect } from "react";
 
@@ -32,13 +32,23 @@ function Enterprise() {
   const [emailEnterprise, setEmailEnterprise] = useState('')
   const [phoneEnterprise, setPhoneEnterprise] = useState('')
   
-  
+  const [validated, setValidated] = useState(false);
+
+  const handleSubmit = (event) => {
+    const form = event.currentTarget;
+    event.preventDefault();
+
+    if (form.checkValidity() === false) {
+      event.stopPropagation();
+     return setValidated(true);
+    }
+    setValidated(true);
+    handleSaveorEdit()
+  };
   
   async function handleSaveorEdit(e){ //PREPARE TO SAVE OR EDIT
     //TODO we have changing fiels: "data nascimento", "estado civil", "sexo"
     
-
-    e.preventDefault()
       const info = await setDoc(doc(db, "Enterprise", users.uid),{
           logradouro: logradouro,
           number: number,
@@ -95,12 +105,12 @@ function Enterprise() {
       
 
       <Container className={`${styles.min_height} bg-light card`}>
-      <Form onSubmit={handleSaveorEdit}>
+      <Form noValidate validated={validated} onSubmit={handleSubmit}>
         <Form.Group className="mb-5" >
         <h3>Dados Empresa</h3> 
             <div className="row">
-                <Input type={'text'} value={logradouro} setValue={setLogradouro} typeForm={'form-control'} setClassCol={'col-sm-7'} label={'Logradouro'}/>
-                <Input type={'number'} value={number} setValue={setNumber} typeForm={'form-control'} setClassCol={'col-sm'} label={'Número'}/>
+                <Input type={'text'} value={logradouro} setValue={setLogradouro} typeForm={'form-control'} setClassCol={'col-sm-7'} label={'Logradouro'}required={true}/>
+                <Input type={'number'} value={number} setValue={setNumber} typeForm={'form-control'} setClassCol={'col-sm'} label={'Número'}required={true} />
                 <Input type={'text'} value={complement} setValue={setComplement} typeForm={'form-control'} setClassCol={'col-sm'} label={'Complemento'}/>
             </div>
             <div className="row">
