@@ -1,0 +1,23 @@
+.content {
+    min-height: 40rem;
+    margin-top: 3em;
+    padding: 3%;
+
+}
+
+.color_td tr td {
+    background-color: #B2DAFA;
+    vertical-align: middle;
+    
+}
+
+.color_td tr td img {
+    vertical-align: middle;
+    border-radius: 50%;
+    height: 100px;
+    width: 100px;
+}
+
+h3 {
+    padding-top: 30px;
+}
