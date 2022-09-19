@@ -1,11 +1,10 @@
 import Table from "react-bootstrap/Table";
 import Button from "react-bootstrap/Button";
 
-import ModalSession from "../../../components/ModalSession";
+import ModalCadastroAnamnese from "../../../components/ModalSession/ModalCadastroAnamnese";
 
 import { CgFileDocument } from "react-icons/cg"
 import { useNavigate } from "react-router-dom";
-
 
 import styles from "./index.module.css";
 import { useState } from "react";
@@ -13,14 +12,15 @@ import { useState } from "react";
 function Session() {
     let navigate = useNavigate();
 
-    const [showModal, setShowModal] = useState(false);
+    const [showModal, setShowModal] = useState(false);   
+    
 
     return (
         <>
             <h3>Sessoes</h3>
             <hr></hr>
 
-            <ModalSession
+            <ModalCadastroAnamnese
                 show={showModal}
                 onHide={() => setShowModal(false)}
             />

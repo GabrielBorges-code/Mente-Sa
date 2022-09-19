@@ -12,7 +12,7 @@ import Stepper from "../../../../components/Stepper";
 import styles from "./index.module.css";
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
-import {doc, setDoc, addDoc, getDoc, collection} from 'firebase/firestore'
+import {doc, setDoc, addDoc, getDoc, collection, updateDoc} from 'firebase/firestore'
 import { db, auth } from "../../../../services/firebase"; 
 import { useEffect } from "react";
 
