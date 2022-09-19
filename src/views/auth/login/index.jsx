@@ -38,6 +38,7 @@ export default function Login() {
 
         useEffect(() => {
             if(role1!= null){
+                console.log(formCompleted)
                 sendUrl()
             }
         }, [role1, formCompleted])
