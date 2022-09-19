@@ -26,13 +26,17 @@ function ProfileProfessional() {
     function save(){ //PREPARE TO SAVE
       navigate('/registro/profissional/empresa')
     }
+    function handleEditProfile(){
+      navigate('/registro/profissional')
+
+    }
 
     function renderButton(){
       if(currentView === 'home'){
         return ( 
             <Container className={`${styles.min_height} bg-light card`}>
               <div className="d-flex justify-content-end">
-                  <button className="mt-2 btn btn-primary"><i><HiOutlinePencilAlt/></i>Editar Perfil</button>
+                  <button onClick={handleEditProfile} className="mt-2 btn btn-primary"><i><HiOutlinePencilAlt/></i>Editar Perfil</button>
               </div>
             </Container> 
       )

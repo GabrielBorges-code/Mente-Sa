@@ -61,7 +61,6 @@ function Personal() {
     const docSnap = await getDoc(docRef);
     const {name, phone, street, numberHouse, complement, district, state, city} = docSnap.data()
     setName(name)
-    
     setPhone(phone)
     setStreet(street)
     setNumberHouse(numberHouse)
