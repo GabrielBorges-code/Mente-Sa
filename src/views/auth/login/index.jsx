@@ -14,8 +14,7 @@ import {toast} from "react-hot-toast";
 
 export default function Login() {
         let navigate = useNavigate()
-        const {signInGoogle, role1, signed} = useContext(AuthGoogleContext)
-        
+        const {signInGoogle, role1, signed, formCompleted} = useContext(AuthGoogleContext)
         const [error, setError] = useState(false)
         const [email, setEmail] = useState("")
         const [password, setPassword] = useState("")
@@ -27,8 +26,6 @@ export default function Login() {
         async function handleLogin(e){
             e.preventDefault()
             const logIn = await signInGoogle(email, password)
-            
-          
         }
 
         function sendUrl(){
@@ -41,9 +38,10 @@ export default function Login() {
 
         useEffect(() => {
             if(role1!= null){
+                console.log(formCompleted)
                 sendUrl()
             }
-        }, [role1])
+        }, [role1, formCompleted])
 
         return (
             <>

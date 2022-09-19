@@ -12,15 +12,22 @@ import {toast} from "react-hot-toast";
 import VerifyErrorCode from "../../../errors/firebaseErrors" 
 
 
+<<<<<<< HEAD
 export default function Registration() {
+=======
+
+
+
+export default function Registration({edit}) {
+>>>>>>> b590782ee08209fc70da30931c29ea76599dde14
 
         const navigate = useNavigate()
         const {signInGoogle} = useContext(AuthGoogleContext)
-        
         const [error, setError] = useState(false)
         const [email, setEmail] = useState("")
         const [password, setPassword] = useState("")
         const [repeatPassword, setRepeatPassword] = useState("")
+
 
         async function handleAddUserRole(){
             
@@ -33,6 +40,7 @@ export default function Registration() {
             const info = await setDoc(doc(db, "Users", uid),{
                 email: email,
                 professional: status,
+                formCompleted:false,
                 
             })
         }
