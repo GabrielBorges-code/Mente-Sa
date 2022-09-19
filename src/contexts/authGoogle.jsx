@@ -21,16 +21,18 @@ export const AuthGoogleProvider = ({children}) => {
     const auth = getAuth(app)
     const [user, setUser] = useState(null)
     const [role, setRole] = useState()
+    const [formCompleted, setFormCompleted] = useState()
     let roleProfessional
 
 
     async function getRoleUser(uid){
         const docRef = doc(db, "Users", uid);
         const docSnap = await getDoc(docRef);
-        const {professional} = docSnap.data()
+        const {professional, formCompleted} = docSnap.data()
         roleProfessional = professional
+        setFormCompleted(formCompleted)
         
-        console.log('teste', roleProfessional)
+        console.log('formC', formCompleted)
         return professional
     }
     function loadStore(){
@@ -60,13 +62,14 @@ export const AuthGoogleProvider = ({children}) => {
                 
                 setRole(sessionRoleUser)
             }
+            loadStoreAuth()
         }
 
         // loadStoreAuth()
         
         console.log('useef', state.role, state.currentUser)
         
-    },[state.role, role, state.currentUser])
+    },[state.role, role, state.currentUser, formCompleted])
 
     const logout = () => {
         const sessionToken = sessionStorage.removeItem("@AuthFirebase:token")
@@ -116,7 +119,8 @@ export const AuthGoogleProvider = ({children}) => {
         value={{ signInGoogle, 
         currentUser: state.currentUser, 
         signed: !!user, 
-        role1: state.role, 
+        role1: state.role,
+        formComplete: state.formCompleted,
         dispatch  
         }}>
 
