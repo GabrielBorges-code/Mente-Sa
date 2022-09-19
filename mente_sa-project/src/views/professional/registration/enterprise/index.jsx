@@ -15,6 +15,7 @@ import { useNavigate } from "react-router-dom";
 function Enterprise() {
   let navigate = useNavigate()  
   
+  
   function save(){ //METHOD TO SAVE
     
     navigate('/profile') //NEXT BUTTON
