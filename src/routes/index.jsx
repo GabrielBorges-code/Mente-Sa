@@ -66,7 +66,12 @@ export default function Routers() {
                 <Route path ='/forbidden' element={<Forbidden/>}/>
                 
                 {/* PACIENT PRIVATE ROUTE */}
-                <Route path ='/usuario/perfil' element={<RequireAuthPersonal/>}>
+                <Route path ='/registro/usuario/' element={<PersonalUser/>}/>
+                <Route path='/usuario/perfil' element={<ProfileUser /> } />
+                <Route path ='/registro/usuario/escolha-profissional' element={<ChooseProfessional/>}/>
+                <Route path ='/registro/usuario/agendamento' element={<Scheduling/>}/>
+
+                {/* <Route path ='/usuario/perfil' element={<RequireAuthPersonal/>}>
                     <Route path='/usuario/perfil' element={<ProfileUser /> } />
                 </Route>
                 
@@ -80,7 +85,7 @@ export default function Routers() {
 
                 <Route path ='/registro/usuario/agendamento' element={<RequireAuthPersonal/>}>
                     <Route path ='/registro/usuario/agendamento' element={<Scheduling/>}/>
-                </Route>
+                </Route> */}
                 
                
                 {/* <Route path="*" element={<Navigate to="/"/>}/> */}

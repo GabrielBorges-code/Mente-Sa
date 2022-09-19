@@ -12,7 +12,7 @@ import Stepper from "../../../../components/Stepper";
 import styles from "./index.module.css";
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
-import {doc, setDoc, addDoc, getDoc} from 'firebase/firestore'
+import {doc, setDoc, addDoc, getDoc, collection} from 'firebase/firestore'
 import { db, auth } from "../../../../services/firebase"; 
 import { useEffect } from "react";
 
@@ -50,7 +50,8 @@ function Enterprise() {
           phoneEnterprise: phoneEnterprise,
 
       })
-    navigate('/profile') //NEXT BUTTON
+      changeStatusCompleted()
+    
   }
 
   async function handleEdit(){
@@ -67,6 +68,15 @@ function Enterprise() {
       setNumber(number)
       setPhoneEnterprise(phoneEnterprise)
       setState(state)
+  }
+
+  async function changeStatusCompleted() {
+    const request = await addDoc(collection(db, "Users", users.uid),{
+      formCompleted: true
+
+  })
+  navigate('/profile') //NEXT BUTTON
+
   }
 
 
