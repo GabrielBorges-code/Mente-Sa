@@ -1,8 +1,21 @@
+import { useContext } from "react";
+
 import Button from "react-bootstrap/Button";
 import Modal from 'react-bootstrap/Modal';
 import Form from "react-bootstrap/Form";
 
+
+import { AuthGoogleContext, AuthGoogleProvider } from "../../contexts/authGoogle";
+import ModalShowProfile from "./ModalShowProfile";
+import ModalCadastroAnamnese from "./ModalCadastroAnamnese";
+
 function ModalSession (props) {
+    //const {role1} = useContext(AuthGoogleContext);
+
+    let modal = (
+        <ModalCadastroAnamnese></ModalCadastroAnamnese>
+    );
+
     return (
         <>
             <Modal
@@ -17,12 +30,7 @@ function ModalSession (props) {
                     </Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
-                    <h4>Centered Modal</h4>
-                    <p>
-                    Cras mattis consectetur purus sit amet fermentum. Cras justo odio,
-                    dapibus ac facilisis in, egestas eget quam. Morbi leo risus, porta ac
-                    consectetur ac, vestibulum at eros.
-                    </p>
+                    {modal}
                 </Modal.Body>
                 <Modal.Footer>
                     <Button onClick={props.onHide}>Close</Button>

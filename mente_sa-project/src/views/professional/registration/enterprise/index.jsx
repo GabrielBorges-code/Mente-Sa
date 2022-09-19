@@ -12,12 +12,8 @@ import Stepper from "../../../../components/Stepper";
 import styles from "./index.module.css";
 import { useNavigate } from "react-router-dom";
 
-
-
-
 function Enterprise() {
-  let navigate = useNavigate()
-  
+  let navigate = useNavigate()  
   
   function save(){ //METHOD TO SAVE
     
@@ -34,8 +30,7 @@ function Enterprise() {
       <Container className={`${styles.min_height} bg-light card`}>
       <Form>
         <Form.Group className="mb-5" >
-        <h3>Dados Empresa</h3>
-            
+        <h3>Dados Empresa</h3>            
 
             <div className="row">
                 <Input type={'text'} typeForm={'form-control'} setClassCol={'col-sm-7'} label={'Logradouro'}/>
@@ -63,7 +58,6 @@ function Enterprise() {
               <button onClick={save}  className='btn btn-lg col-md-3 btn-primary'>Avançar</button>
           </div>
         </Form>
-
         
       </Container>
 

@@ -10,9 +10,6 @@ import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword,  }
 import {doc, setDoc} from 'firebase/firestore'
 
 
-
-
-
 export default function Registration() {
 
         const navigate = useNavigate()
