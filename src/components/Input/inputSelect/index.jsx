@@ -2,7 +2,7 @@ import Form from "react-bootstrap/Form";
 import styles from "./index.module.css";
 
 function InputSelect({label, options}) {
-
+    
 
     return (  
         <div className="col-md-3 ">
