@@ -112,8 +112,13 @@ function Professional() {
 
             <div className="row">
   
+<<<<<<< HEAD
                 <Input type={'text'} typeForm={'form-control'} setClassCol={'col-sm'}  value={specializationName} setValue={setSpecializationName} label={'Especialização'}/>
                 <Input type={'text'} typeForm={'form-control'} setClassCol={'col-sm'}  value={regionalCouncilNumber} setValue={setRegionalCouncilNumber} label={'CRM / CRP'} required={true}/>
+=======
+                <Input type={'text'} typeForm={'form-control'} setClassCol={'col-sm'}  value={specializationName} setValue={setSpecializationName} label={'Título/ Especialização'}/>
+                <Input type={'text'} typeForm={'form-control'} setClassCol={'col-sm'}  value={regionalCouncilNumber} setValue={setRegionalCouncilNumber} label={'CRM / CRP'}/>
+>>>>>>> alice
             </div>
 
             <div className="row">
