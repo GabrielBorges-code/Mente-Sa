@@ -60,16 +60,16 @@ function Personal() {
     const docSnap = await getDoc(docRef);
     const {
       city,
-      civilState,
       complement,
-      dateBorn,
       district,
-      genre,
       name,
       numberHouse,
       phone,
       state,
-      street      
+      street,      
+      civilState,
+      dateBorn,
+      genre,
     } = docSnap.data();
       setCity(city)
       setCivilState(civilState)
@@ -154,18 +154,8 @@ function Personal() {
                 setValue={setDateBorn}
               />
 
-              <InputSelect
-                label={"Estado Civil"}
-                value={civilState}
-                setValue={setCivilState}
-                options={[
-                  "Solteiro",
-                  "Casado",
-                  "Separado",
-                  "Divorciado",
-                  "Viúvo",
-                ]}
-              />
+              <InputSelect label={'Estado Civil'} value={civilState} setValue={setCivilState} options={['Solteiro','Casado','Divorciado','Viúvo']} />
+
 
               <InputSelect
                 label={"Sexo"}
