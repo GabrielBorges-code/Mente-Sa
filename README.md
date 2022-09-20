@@ -11,9 +11,9 @@ a uma ficha de anamnese (histórico clínico) onde ficarão os registros dos enc
 Sessões: (Nome do paciente, Profissional, local (presencial/on-line), Status do
 atendimento, assunto abordado na sessão)
 
-Link da aplicação: [Mente Sã](https://wonderful-cascaron-48fa71.netlify.app/)
+Link da aplicação: [Mente Sã](https://dazzling-sundae-cf6238.netlify.app/)
 
-[![Netlify Status](https://api.netlify.com/api/v1/badges/2e6027ec-7fa5-4dd5-ab94-bcc0af3674ae/deploy-status)](https://app.netlify.com/sites/wonderful-cascaron-48fa71/deploys)
+[![Netlify Status](https://api.netlify.com/api/v1/badges/444c5237-669e-4c0a-925c-2eaed4106030/deploy-status)](https://app.netlify.com/sites/dazzling-sundae-cf6238/deploys)
 
 ## 🎨 Layout
 
