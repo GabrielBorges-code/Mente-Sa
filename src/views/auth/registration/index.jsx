@@ -12,10 +12,7 @@ import {toast} from "react-hot-toast";
 import VerifyErrorCode from "../../../errors/firebaseErrors" 
 
 
-
-
-
-export default function Registration({edit}) {
+export default function Registration() {
 
         const navigate = useNavigate()
         const {signInGoogle} = useContext(AuthGoogleContext)

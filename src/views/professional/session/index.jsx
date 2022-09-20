@@ -1,28 +1,54 @@
 import Table from "react-bootstrap/Table";
 import Button from "react-bootstrap/Button";
 
-import ModalSession from "../../../components/ModalSession";
+import ModalCadastroAnamnese from "../../../components/ModalSession/ModalCadastroAnamnese";
 
 import { CgFileDocument } from "react-icons/cg"
 import { useNavigate } from "react-router-dom";
 
+import {doc, setDoc, addDoc, getDoc, collection, updateDoc} from 'firebase/firestore'
+import { db, auth } from "../../../services/firebase"; 
+import { useEffect } from "react";
+import { useRef } from "react";
 
 import styles from "./index.module.css";
 import { useState } from "react";
 
 function Session() {
     let navigate = useNavigate();
+    //const [users, setUsers] = useState(JSON.parse(sessionStorage.getItem("@AuthFirebase:user")))
 
-    const [showModal, setShowModal] = useState(false);
+    const [showModal, setShowModal] = useState(false);  
+    
+    const formRef = useRef();
+    
+    const handleSave = () => { //PREPARE TO SAVE
+        const data = formRef.current.getData();
+        console.log(data);
+        
+        // e.preventDefault()
+        //   const info = await setDoc(doc(db, "Anamnese", users.uid),{
+        //       dateService: dateService,
+        //       price: price,
+        //       typeService: typeService,
+        //       complaint: complaint,
+        //       evolutionComplaint: evolutionComplaint,
+        //       typeComplaint: typeComplaint,
+        //       transformationComplaint: transformationComplaint,
+        //       symptoms: symptoms,
+        // })
+    };
 
     return (
         <>
             <h3>Sessoes</h3>
             <hr></hr>
 
-            <ModalSession
+            <ModalCadastroAnamnese
                 show={showModal}
                 onHide={() => setShowModal(false)}
+                outerRef = {formRef}
+                onOpen = {() => handleSave()}
             />
 
             <div>
@@ -49,7 +75,6 @@ function Session() {
                             <td><Button className="mt-2 btn btn-primary" onClick={() => setShowModal(true)}><i><CgFileDocument /></i></Button></td>
                             <td>Pendente</td>
                         </tr>
-
 
 
                         <tr>
