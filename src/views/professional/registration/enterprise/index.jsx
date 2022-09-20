@@ -65,7 +65,7 @@ function Enterprise() {
   }
 
   async function handleEdit(){
-
+      
       const docRef = doc(db, "Enterprise", users.uid);
       const docSnap = await getDoc(docRef);
       const {city, complement, district, emailEnterprise, logradouro, number, phoneEnterprise, state} = docSnap.data()

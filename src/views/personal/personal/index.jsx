@@ -19,9 +19,7 @@ import { useEffect } from "react";
 function Personal() {
   let navigate = useNavigate();
   const [users, setUsers] = useState(JSON.parse(sessionStorage.getItem("@AuthFirebase:user")))
-
   const [name, setName] = useState('')
-  
   const [phone, setPhone] = useState('')
   const [dateBorn, setDateBorn] = useState()
   const [civilState, setCivilState] = useState('')

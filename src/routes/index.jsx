@@ -26,8 +26,6 @@ export default function Routers() {
     let value = sessionStorage.getItem("@AuthFirebase:role")
     //const [flag, setFlag] = useState(sessionStorage.getItem("@AuthFirebase:role"))
     const RequireAuthProfessional = () => {
-        
-        
         if(role1){
             return <Outlet />
         }else{

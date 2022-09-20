@@ -8,6 +8,7 @@ import InputSelect from "../../../components/Input/inputSelect"
 
 import Footer from "../../../components/Footer"
 import Header from "../../../components/Header"
+import Schedule from "../../../components/Schedule";
 
 import Session from "../session"
 
@@ -20,8 +21,12 @@ import { useState } from "react"
 
 function ProfileProfessional() {
     let navigate = useNavigate()
+    //controll screen
     const [currentView, setCurrentView] = useState('home')
-    
+
+    const [name, setName] = useState(null) //Personal
+    const [regionalCouncilNumber, setRegionalCouncilNumber] = useState('') //enterprise
+    const [specializationName, setSpecializationName] = useState('') //enterprise
     
     function save(){ //PREPARE TO SAVE
       navigate('/registro/profissional/empresa')
@@ -50,11 +55,7 @@ function ProfileProfessional() {
           )
       }else {
         return (
-            <Container className={`${styles.min_height} bg-light card`}>
-            <div className="d-flex justify-content-end">
-                <button className="mt-2 btn btn-primary"><i><HiOutlinePencilAlt/></i>Agenda</button>
-            </div>
-          </Container>
+            <Schedule />
 
         )
       }

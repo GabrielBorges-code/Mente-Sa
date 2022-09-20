@@ -21,6 +21,7 @@ function Professional() {
   
   const [college, setCollege] = useState('')
   const [dateFinishCollege, setDateFinishCollege] = useState()
+  //const [formationDegree, setFormationDegree] = useState()
   const [specializationName, setSpecializationName] = useState('')
   const [regionalCouncilNumber, setRegionalCouncilNumber] = useState('')
   const [postGraduate, setPostGraduate] = useState('')
