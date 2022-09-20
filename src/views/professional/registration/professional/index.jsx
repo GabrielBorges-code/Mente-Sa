@@ -30,6 +30,7 @@ function Professional() {
   const [dateMasterDegree, setDateMasterDegree] = useState()
   const [doctorateDegree, setDoctorateDegree] = useState('')
   const [dateDoctorateDegree, setDateDoctorateDegree] = useState()
+  const [professionalDescription, setProfessionalDescription] = useState ('')
 
   const [validated, setValidated] = useState(false);
 
@@ -59,7 +60,8 @@ function Professional() {
         masterDegree: masterDegree || null,
         dateMasterDegree: dateMasterDegree || null,
         doctorateDegree: doctorateDegree || null,
-        dateDoctorateDegree: dateDoctorateDegree ||null 
+        dateDoctorateDegree: dateDoctorateDegree ||null, 
+        professionalDescription: professionalDescription ||null
       })
       console.log(info)
   
@@ -70,7 +72,7 @@ function Professional() {
 
     const docRef = doc(db, "Professional", users.uid);
     const docSnap = await getDoc(docRef);
-    const {college, dateFinishCollege, specializationName, regionalCouncilNumber, postGraduate, dateFinishPostGraduate, masterDegree, dateMasterDegree, doctorateDegree, dateDoctorateDegree} = docSnap.data()
+    const {college, dateFinishCollege, specializationName, regionalCouncilNumber, postGraduate, dateFinishPostGraduate, masterDegree, dateMasterDegree, doctorateDegree, dateDoctorateDegree, professionalDescription} = docSnap.data()
     
     setCollege(college)
     setDateFinishCollege(dateFinishCollege)
@@ -82,6 +84,7 @@ function Professional() {
     setDateMasterDegree(dateMasterDegree)
     setDoctorateDegree(doctorateDegree)
     setDateDoctorateDegree(dateDoctorateDegree)
+    setProfessionalDescription(professionalDescription)
 }
 
   useEffect(() => {
@@ -129,6 +132,11 @@ function Professional() {
             <div className="row">
                 <Input type={'text'} value={doctorateDegree} setValue={setDoctorateDegree} typeForm={'form-control'} setClassCol={'col-sm'} label={'Doutorado'}/>
                 <Input type={'month'} value={dateDoctorateDegree} setValue={setDateDoctorateDegree} typeForm={'form-control'} setClassCol={'col-sm'} label={'Quando Concluiu?'}/>
+            </div>
+
+            <div className="row">
+              <Input type={'textarea'} value={professionalDescription} setValue={setProfessionalDescription} typeForm ={'form-control'} setClassCol={'col-sm'} label={'Sobre'}/>
+            
             </div>
                         
           </Form.Group>          
