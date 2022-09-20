@@ -14,6 +14,7 @@ import styles from "./index.module.css";
 import { useEffect } from "react";
 import {doc, setDoc, getDoc} from 'firebase/firestore'
 import { db, auth } from "../../../../services/firebase"; 
+import toast from "react-hot-toast";
 
 function Professional() {
   let navigate = useNavigate()
@@ -61,7 +62,8 @@ function Professional() {
         dateDoctorateDegree: dateDoctorateDegree ||null 
       })
       console.log(info)
-  
+
+    toast.success('Dados Profissionais registrado com sucesso')
     navigate('/registro/profissional/empresa')
   }
 

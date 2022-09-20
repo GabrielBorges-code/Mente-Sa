@@ -15,7 +15,7 @@ import { useState } from "react";
 import {doc, setDoc, addDoc, getDoc, collection, updateDoc} from 'firebase/firestore'
 import { db, auth } from "../../../../services/firebase"; 
 import { useEffect } from "react";
-
+import {toast} from "react-hot-toast";
 
 
 
@@ -85,6 +85,7 @@ function Enterprise() {
     console.log(usersRef)
     const request = await updateDoc(usersRef,{formCompleted: true})
 
+  toast.success('Dados Empresa registrado com sucesso')
   navigate('/profile') //NEXT BUTTON
 
   }
