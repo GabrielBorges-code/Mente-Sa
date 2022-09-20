@@ -70,8 +70,8 @@ function Scheduling() {
                   <Button>Selecionar</Button>
                 </td>
               </tr>
-
-              <br />
+              
+              
 
               <tr>
                 <td>
@@ -89,9 +89,6 @@ function Scheduling() {
                   <Button>Selecionar</Button>
                 </td>
               </tr>
-
-              <br />
-
               <tr>
                 <td>
                   <img

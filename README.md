@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # Mente Sã
 
 A ONG Mente SÃ está construindo uma nova plataforma e precisa de um sistema
@@ -9,3 +10,6 @@ Sessões: (Nome do paciente, Profissional, local (presencial/on-line), Status do
 atendimento, assunto abordado na sessão).
 
 Link: https://wonderful-cascaron-48fa71.netlify.app
+=======
+https://gist.github.com/qoomon/5dfcdf8eec66a051ecd85625518cfd13
+>>>>>>> develop
