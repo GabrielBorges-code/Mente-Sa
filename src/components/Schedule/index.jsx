@@ -10,125 +10,181 @@ import Calendar from 'react-calendar';
 import 'react-calendar/dist/Calendar.css';
 import { includes } from "lodash"
 import { useEffect } from "react"
-import {format} from 'date-fns'
+import { format } from 'date-fns'
 import { useId } from "react"
 
-import {doc, setDoc, addDoc, getDoc, collection, updateDoc} from 'firebase/firestore'
-import { db, auth } from "../../services/firebase"; 
+import { doc, setDoc, addDoc, getDoc, collection, updateDoc } from 'firebase/firestore'
+import { db, auth } from "../../services/firebase";
 import { query, where, getDocs } from "firebase/firestore";
 
 
 
-export default function Schedule (props) {
+export default function Schedule(props) {
     const [users, setUsers] = useState(JSON.parse(sessionStorage.getItem("@AuthFirebase:user")))
     const [validated, setValidated] = useState(false)
     const [buttonValue, setButtonValue] = useState()
-    const [hours, setHours] = useState([])
+    const [hours, setHours] = useState({})
+    const [newArrayObj, setNewArrayObj] = useState({})
     const [date, setDate] = useState(new Date())
     const [dateFormat, setDateFormat] = useState() //format(new Date, 'yyyy-MM-dd')
-    const [day, setDay]= useState(new Date())
+    const [day, setDay] = useState(new Date())
+    let objectKeys = []
 
 
     const timers = [
-        '07:00',
-        '08:00',
-        '09:00',
-        '10:00',
-        '11:00',
-        '12:00',
-        '13:00',
-        '14:00',
-        '15:00',
-        '16:00',
-        '17:00',
-        '18:00',
-        '19:00',
-        '20:00',
-        '21:00',
-        '22:00',
-        '23:00',
+        '07',
+        '08',
+        '09',
+        '10',
+        '11',
+        '12',
+        '13',
+        '14',
+        '15',
+        '16',
+        '17',
+        '18',
+        '19',
+        '20',
+        '21',
+        '22',
+        '23',
 
-     
+
     ]
 
     const docData = {
-        uidProfessional: users.uid, 
-        dateSchedule: format(date, 'yyyy-MM-dd'),
-        
-        
-        hoursAvailable: {
-            "08": true,
-            "09": true,
-            "10": true,
-            "11": true,
+        uidProfessional: users.uid,
+        dateSchedule: format(day, 'yyyy-MM-dd'),
+    }
+
+    let hoursAvailable = {} // "08": true,
+    let newArrayObject = {} 
+
+
+    async function saveDate(e) {
+        e.preventDefault()
+        console.log(day)
+        console.log('testeSaveDate', newArrayObject)
+
+        const q = query(collection(db, "Schedulers"), where("uidProfessional", "==", users.uid));
+        const querySnapshot = await getDocs(q)
+
+        if (querySnapshot.empty === true) {
+            console.log("tamnho zero");
+            
+        } else {
+            querySnapshot.forEach(async (file) => {
+                const dateSchedule = file.data().dateSchedule
+                const dFormated = format(date, 'yyyy-MM-dd')
+                console.log('dateSchedule', dateSchedule, 'dFormated', dFormated)
+                const test = [dateSchedule].includes(dFormated)
+
+                if (test) {
+                    console.log("O dado retornou => ", test);
+                    console.log(file.id)
+
+                } else {
+                    console.log("O dado retornou => ", test);
+                    
+                }
+            })
+        }
+
+    }
+
+
+
+
+    async function changeDate() {
+        setDate(day)
+        const q = query(collection(db, "Schedulers"), where("uidProfessional", "==", users.uid));
+        //const q = query(collection(db, "Schedulers"), where("uidProfessional", "==", "users.uid"), where("dateSchedule", "==", date));
+        //const q2 = query(collection(db, "Schedulers"), where('dateSchedule', '==', date))
+
+        const querySnapshot = await getDocs(q)
+
+        if (querySnapshot.empty === true) {
+            console.log("tamnho zero");
+            const info = await addDoc(collection(db, "Schedulers"), docData)
+        } else {
+            querySnapshot.forEach(async (file) => {
+                const dateSchedule = file.data().dateSchedule
+                const dFormated = format(date, 'yyyy-MM-dd')
+                console.log('dateSchedule', dateSchedule, 'dFormated', dFormated)
+                const test = [dateSchedule].includes(dFormated)
+
+                if (test) {
+                    console.log("O dado retornou => ", test);
+                    console.log(file.id)
+
+                    const info = await updateDoc(doc(db, "Schedulers", file.id), docData)
+
+                } else {
+                    console.log("O dado retornou => ", test);
+                    const newSchedulerRef = doc(collection(db, "Schedulers"));
+                    const infoS = await setDoc(newSchedulerRef, docData);
+                    //const info = await setDoc(doc(collection((db, "Schedulers"), docData)))
+                }
+            })
         }
     }
 
-    
-      async function changeDate(date) {
-        setDate(date)
-        const q = query(collection(db, "Schedulers"), where("dateSchedule", "==", format(date,'yyyy-MM-dd')));
-        
-        const querySnapshot = await getDocs(q)
-        if(querySnapshot){
-            console.log(querySnapshot)
-        }
-
-        querySnapshot.forEach(async (doc) => {
-            console.log(doc.id, ' => ', doc.data())
-            const info = await updateDoc(collection(db, "Schedulers", doc.id), docData)
-        })
-
-        //const info = await addDoc(collection(db, "Schedulers"), docData)
-          
-        
-        
-        //setDateFormat(format(day, 'yyyy-MM-dd'))
-        
-        
-        hours.push(day)
-      }
-
-      function changeButtonValue(e, value){
+    function changeButtonValue(e, value) {
         e.preventDefault()
         
-        if(!hours.includes(value)){
-            hours.push(value) 
-            
-            console.log('dentro do change', day, hours)
-        }
-      }
+        //hoursAvailable.push({'oi': true})
 
-useEffect(() => {
-    console.log('day', format(day, 'yyyy-MM-dd'))
-    
+        hoursAvailable[value] = true
+        console.log(hoursAvailable)
+        newArrayObject = { ...docData, "hoursAvailable": { ...hoursAvailable } }
+        console.log('estou no new ', newArrayObject)
+        //setNewArrayObj(newArrayObject)
 
 
-}, [hours, dateFormat])
+    }
 
-return (
+    useEffect(() => {
+        // console.log('day', format(day, 'yyyy-MM-dd'))
+        // console.log('estou no docData', Object.keys(docData))
+
+        // Object.keys(docData).forEach(key => {
+        //     let value = docData[key]
+        //     console.log(`${key}: ${value}`)
+        //     objectKeys.push(value)
+        // })
+        // console.log("objkeys",objectKeys)
+        console.log('sou o newArray', newArrayObj)
+
+
+
+
+    }, [day, hours, dateFormat, newArrayObj])
+
+    return (
 
         <Container className={`${styles.min_height} bg-light card d-flex`}>
             <div className="d-flex justify-content-center mt-5 flex-wrap">
                 <div className="">
-                    <Calendar onChange={changeDate} onClickDay={((value, event)=>  setDay(value))} value={date} />
+                    <Calendar onChange={((value, event) => setDate(value))} onClickDay={((value, event) => setDay(value))} value={date} />
                 </div>
-                
-                <Form className="d-flex flex-wrap m-2 w-25">
-                {timers.map((type) => (
-                    <div key={type} style={{height:"1rem"}} className=" g-3  ">
 
-                        <button  onClick={(e) => changeButtonValue(e, type)}  className={`${hours.includes(type) ?  "btn btn-success": "btn btn-primary" }`}>{type}</button>
-                    </div>
+                <Form onSubmit={saveDate} className="d-flex flex-wrap m-2 w-25">
+                    {timers.map((type) => (
+                        <div key={type} style={{ height: "1rem" }} className=" g-3  ">
+
+                            <button onClick={(e) => changeButtonValue(e, type)} className="btn btn-primary" >{type}:00</button>
+                        </div>
                     ))}
                     <div className=" ">
                         <button type="submit" className="btn btn-danger ">Salvar</button>
                     </div>
-                    </Form>
-                </div>
-            
-                
+                </Form>
+            </div>
 
-            
+
+
+
         </Container>
-)}
+    )
+}
