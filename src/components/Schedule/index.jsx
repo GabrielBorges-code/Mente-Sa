@@ -64,6 +64,8 @@ export default function Schedule(props) {
 
     async function saveDate(e) {
         e.preventDefault()
+        let flag=null
+        let fileId = null
         console.log(day)
         console.log('testeSaveDate', newArrayObject)
 
@@ -79,25 +81,45 @@ export default function Schedule(props) {
         } else {
             querySnapshot.forEach(async (file) => {
                 const dateSchedule = file.data().dateSchedule
-                const dFormated = format(date, 'yyyy-MM-dd')
+                const dFormated = format(day, 'yyyy-MM-dd')
                 console.log('dateSchedule', dateSchedule, 'dFormated', dFormated)
                 const test = [dateSchedule].includes(dFormated)
+                
+
+                
 
                 if (test) {
                     console.log("O dado retornou => ", test)
                     console.log(file.id)
-                    const info = await updateDoc(doc(db, "Schedulers", file.id), newArrayObject)
+
+                    flag = true
+                    fileId =file.id
+                    //const info = await updateDoc(doc(db, "Schedulers", file.id), newArrayObject)
 
                 } 
                 if(test === false) {
+                    
                     console.log("O dado retornou => ", test)
-                    const newSchedulerRef = doc(collection(db, "Schedulers"))
-                    const infoS = await setDoc(newSchedulerRef, newArrayObject)
+                    
+                    // const newSchedulerRef = doc(collection(db, "Schedulers"))
+                    // const infoS = await setDoc(newSchedulerRef, newArrayObject)
                     
                 }
             })
+            
+        }
+        if(flag===true){
+            console.log('lets update => ', fileId)
+            const info = await updateDoc(doc(db, "Schedulers", fileId), newArrayObject)
+            
+        }else{
+            console.log('lets create')
+            const newSchedulerRef = doc(collection(db, "Schedulers"))
+            const infoS = await setDoc(newSchedulerRef, newArrayObject)
         }
 
+
+        
     }
 
 
