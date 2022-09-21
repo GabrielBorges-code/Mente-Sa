@@ -47,7 +47,7 @@ function Enterprise() {
   };
   
   async function handleSaveorEdit(e){ //PREPARE TO SAVE OR EDIT
-    //TODO we have changing fiels: "data nascimento", "estado civil", "sexo"
+    //TODO we have changing fields: "data nascimento", "estado civil", "sexo"
     
       const info = await setDoc(doc(db, "Enterprise", users.uid),{
           logradouro: logradouro,
