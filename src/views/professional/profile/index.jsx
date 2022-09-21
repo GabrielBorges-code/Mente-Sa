@@ -103,10 +103,10 @@ function ProfileProfessional() {
                           
                       </div>
                       <div className="ms-4" style={{marginTop: "100px"}}>
-                            <p className="  fs-5 fw-bold  text-center">Dra {name}</p>
+                            <p className="  fs-5 fw-bold  text-center">Dr/Dra {name}</p>
                             <p className="text-wrap text-center lh-1 ">{specializationName}</p>
                             <p className="text-wrap text-center lh-1 ">CRP {regionalCouncilNumber}</p>
-                      </div>
+                      </div> 
                     </div>
                     
                     
