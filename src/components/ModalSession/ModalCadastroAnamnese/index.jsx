@@ -8,20 +8,26 @@ import TextArea from "../../TextArea";
 import { useState } from "react";
 
 function ModalCadastroAnamnese (props) {
-    const [fsymptoms, setSymptoms] = useState('')
+    const [fdateService, setDateService] = useState('')
+    const [fprice, setPrice] = useState('')
+    const [ftypeService, setTypeService] = useState('')
     const [fcomplaint, setComplaint] = useState('')
     const [fevolutionComplaint, setEvolutionComplaint] = useState('')
     const [ftypeComplaint, setTypeComplaint] = useState('')
     const [ftransformationComplaint, setTransformationComplaint] = useState('')
+    const [fsymptoms, setSymptoms] = useState('')
     //console.log(props);
 
     const getData = () => {
         return {
-            fsymptoms,
+            fdateService,
+            fprice,
+            ftypeService,
             fcomplaint,
             fevolutionComplaint,
             ftypeComplaint,
-            ftransformationComplaint
+            ftransformationComplaint,
+            fsymptoms,
         };
     }
 
@@ -47,11 +53,11 @@ function ModalCadastroAnamnese (props) {
                 <Modal.Body>
                     <Form>
                             {/* <!-- Anamnese input --> */}
-                            {/* <div className="row">
-                                <Input type={'date'} typeForm={'form-control'} value={dateService} setValue={setDateService} setClassCol={'col-sm'} label={'Data Atendimento'}/>
-                                <Input type={'text'} typeForm={'form-control'} value={price} setValue={setPrice} setClassCol={'col-sm'} label={'Valor'}/>
-                                <InputSelect label={'Tipo de Atendimento'} value={typeService} setValue={setTypeService} options={['Online','Presencial', 'Ambos']} />
-                            </div> */}
+                            <div className="row">
+                                <Input type={'date'} typeForm={'form-control'} value={fdateService} setValue={setDateService} setClassCol={'col-sm'} label={'Data Atendimento'}/>
+                                <Input type={'text'} typeForm={'form-control'} value={fprice} setValue={setPrice} setClassCol={'col-sm'} label={'Valor'}/>
+                                <InputSelect label={'Tipo de Atendimento'} value={ftypeService} setValue={setTypeService} options={['Online','Presencial', 'Ambos']} />
+                            </div>
                             <div className="row"> 
                                 <TextArea type={'text'} typeForm={'form-control'} setSizeRow={3} setClassCol={'col-sm'} name="fcomplaint" value={fcomplaint} setValue={setComplaint} label={'Queixa Principal'}/>
                             </div>
@@ -72,7 +78,6 @@ function ModalCadastroAnamnese (props) {
                 </Modal.Body>
                 <Modal.Footer>
                     <Button onClick={props.onHide}>Close</Button>
-                    <Button onClick={props.onOpen}>Open</Button>
                 </Modal.Footer>
             </Modal>
         </>
