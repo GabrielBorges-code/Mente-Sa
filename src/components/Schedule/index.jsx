@@ -68,10 +68,13 @@ export default function Schedule(props) {
         console.log('testeSaveDate', newArrayObject)
 
         const q = query(collection(db, "Schedulers"), where("uidProfessional", "==", users.uid));
+        //const q = query(collection(db, "Schedulers"), where("uidProfessional", "==", "users.uid"), where("dateSchedule", "==", date));
+        
         const querySnapshot = await getDocs(q)
 
         if (querySnapshot.empty === true) {
             console.log("tamnho zero");
+            const info = await addDoc(collection(db, "Schedulers"), newArrayObject)
             
         } else {
             querySnapshot.forEach(async (file) => {
@@ -81,11 +84,15 @@ export default function Schedule(props) {
                 const test = [dateSchedule].includes(dFormated)
 
                 if (test) {
-                    console.log("O dado retornou => ", test);
+                    console.log("O dado retornou => ", test)
                     console.log(file.id)
+                    const info = await updateDoc(doc(db, "Schedulers", file.id), newArrayObject)
 
-                } else {
-                    console.log("O dado retornou => ", test);
+                } 
+                if(test === false) {
+                    console.log("O dado retornou => ", test)
+                    const newSchedulerRef = doc(collection(db, "Schedulers"))
+                    const infoS = await setDoc(newSchedulerRef, newArrayObject)
                     
                 }
             })
