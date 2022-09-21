@@ -7,7 +7,7 @@ import InputSelect from "../../../components/Input/inputSelect";
 
 import Footer from "../../../components/Footer";
 import Header from "../../../components/Header";
-import Stepper from "../../../components/Stepper";
+import Stepper from "../../../components/TwoStep";
 
 import { useState } from "react";
 import styles from "./index.module.css";
@@ -26,16 +26,10 @@ function Scheduling() {
       {/* step 2 */}
       <Header
         message={"Agora sim! Vamos concluir seu agendamento?"}
-        linkBack={"/usuario/perfil"}
+        linkBack={"/usuario/escolha-profissional"}
       />
 
-      <Stepper
-        step={"100%"}
-        icon={true}
-        state1={"success"}
-        state2={"success"}
-        state3={"primary"}
-      />
+      <Stepper step={"100%"} icon={true} state1={"success"} state2={"primary"} />
 
       <Container className={`${styles.content} bg-light card`}>
         <Form>
