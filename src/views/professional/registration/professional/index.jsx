@@ -21,6 +21,7 @@ function Professional() {
   
   const [college, setCollege] = useState('')
   const [dateFinishCollege, setDateFinishCollege] = useState()
+  //const [formationDegree, setFormationDegree] = useState()
   const [specializationName, setSpecializationName] = useState('')
   const [regionalCouncilNumber, setRegionalCouncilNumber] = useState('')
   const [postGraduate, setPostGraduate] = useState('')
@@ -30,22 +31,35 @@ function Professional() {
   const [doctorateDegree, setDoctorateDegree] = useState('')
   const [dateDoctorateDegree, setDateDoctorateDegree] = useState()
 
-  
+  const [validated, setValidated] = useState(false);
+
+  const handleSubmit = (event) => {
+    const form = event.currentTarget;
+    event.preventDefault();
+
+    if (form.checkValidity() === false) {
+      event.stopPropagation();
+     return setValidated(true);
+    }
+    setValidated(true);
+    handleSave()
+  };
+
   async function handleSave(e){ //PREPARE TO SAVE
 
     //TODO we have changing fiels: "data nascimento", "estado civil", "sexo"
-    e.preventDefault()
+
       const info = await setDoc(doc(db, "Professional", users.uid),{
-          college: college,
-          dateFinishCollege: dateFinishCollege,
-          specializationName: specializationName,
-          regionalCouncilNumber: regionalCouncilNumber,
-          postGraduate: postGraduate,
-          dateFinishPostGraduate: dateFinishPostGraduate,
-          masterDegree: masterDegree,
-          dateMasterDegree: dateMasterDegree,
-          doctorateDegree: doctorateDegree,
-          dateDoctorateDegree: dateDoctorateDegree,
+        college: college,
+        dateFinishCollege: dateFinishCollege || null,
+        specializationName: specializationName || null,
+        regionalCouncilNumber: regionalCouncilNumber || null,
+        postGraduate: postGraduate || null,
+        dateFinishPostGraduate: dateFinishPostGraduate || null,
+        masterDegree: masterDegree || null,
+        dateMasterDegree: dateMasterDegree || null,
+        doctorateDegree: doctorateDegree || null,
+        dateDoctorateDegree: dateDoctorateDegree ||null 
       })
       console.log(info)
   
@@ -86,19 +100,19 @@ function Professional() {
 
       <Container className={`${styles.min_height} bg-light card`}>
 
-        <Form onSubmit={handleSave}>
+        <Form noValidate validated={validated} onSubmit={handleSubmit}>
         <Form.Group className="mb-5" >
         <h3>Dados Profissionais</h3>
         
           
             <div className="row">
-                <Input type={'text'} typeForm={'form-control'} setClassCol={'col-sm'} value={college} setValue={setCollege} label={'Faculdade/Univesidade'}/>
+                <Input type={'text'} typeForm={'form-control'} setClassCol={'col-sm'} value={college} setValue={setCollege} label={'Faculdade/Univesidade'} required={true}/>
                 <Input type={'month'} typeForm={'form-control'} setClassCol={'col-sm'}value={dateFinishCollege} setValue={setDateFinishCollege}  label={'Quando Concluiu?'}/>   
             </div>
 
             <div className="row">
   
-                <Input type={'text'} typeForm={'form-control'} setClassCol={'col-sm'}  value={specializationName} setValue={setSpecializationName} label={'Especialização'}/>
+                <Input type={'text'} typeForm={'form-control'} setClassCol={'col-sm'}  value={specializationName} setValue={setSpecializationName} label={'Título/ Especialização'}/>
                 <Input type={'text'} typeForm={'form-control'} setClassCol={'col-sm'}  value={regionalCouncilNumber} setValue={setRegionalCouncilNumber} label={'CRM / CRP'}/>
             </div>
 

@@ -22,9 +22,9 @@ export default function Registration() {
         const [repeatPassword, setRepeatPassword] = useState("")
 
 
-        async function handleAddUserRole(){
+        async function sendToLogin(){
             
-            return; 
+            navigate ('/login')
         }
 
         async function registerRole(uid) {
@@ -45,23 +45,15 @@ export default function Registration() {
                 console.log('oiadfs')
                 toast.error('As senhas não estão iguais')
             }else{
-
-                // const register = await createWithEmailPasswordGoogle(email, password)
-                
                 createUserWithEmailAndPassword(auth, email, password)
                 .then(async (userCredential) => {
                     const user = userCredential.user;
                     registerRole(user.uid)
                     toast.success('Usuário registrado com sucesso')
                     navigate ('/login')
-                    
-                     
                 })
                 .catch((error) => {
                     const errorCode = error.code;
-                // const errorMessage = error.message;
-                
-                
                 let errorMessage = VerifyErrorCode(errorCode);
                     if (errorMessage == null) {
                         errorMessage = error.message;
@@ -88,7 +80,7 @@ export default function Registration() {
                         <form onSubmit={handleRegistration}>
                         <div className="d-flex flex-row align-items-center justify-content-center justify-content-lg-start">
                             <p className="lead fw-normal mb-0 me-3">Já sou usuário </p>
-                            <button onClick={()=>{signInGoogle()}} type="button" className="btn btn-danger btn-floating mx-1">
+                            <button onClick={()=>{sendToLogin()}} type="button" className="btn btn-danger btn-floating mx-1">
                             <i>Login</i>
                             </button>
 

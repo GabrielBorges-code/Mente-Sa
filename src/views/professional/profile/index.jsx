@@ -8,6 +8,7 @@ import InputSelect from "../../../components/Input/inputSelect"
 
 import Footer from "../../../components/Footer"
 import Header from "../../../components/Header"
+import Schedule from "../../../components/Schedule";
 
 import Session from "../session"
 
@@ -16,11 +17,40 @@ import { useNavigate } from "react-router-dom"
 import { HiOutlinePencilAlt, HiUserCircle, HiChatAlt } from "react-icons/hi"
 
 import Image from "../../../assets/logo-mente-sa.png"
-import { useState } from "react"
+import { useState, useEffect } from "react"
+
+import {doc, setDoc, addDoc, getDoc, collection, updateDoc} from 'firebase/firestore'
+import { db, auth } from "../../../services/firebase"; 
 
 function ProfileProfessional() {
     let navigate = useNavigate()
+    //controll screen
     const [currentView, setCurrentView] = useState('home')
+    const [users, setUsers] = useState(JSON.parse(sessionStorage.getItem("@AuthFirebase:user")))
+    const [name, setName] = useState ('')
+    const [regionalCouncilNumber, setRegionalCouncilNumber] = useState ('')
+    const [specializationName, setSpecializationName] = useState ('')
+
+    async function handleEdit(){
+
+      const docPer = doc(db, "Personal", users.uid);
+      const docSnapPer = await getDoc(docPer);
+      const {name} = docSnapPer.data()
+
+      const docProf = doc(db, "Professional", users.uid);
+      const docSnapProf = await getDoc(docProf);
+      const {regionalCouncilNumber, specializationName} = docSnapProf.data()
+      
+      setName (name)
+      setRegionalCouncilNumber (regionalCouncilNumber)
+      setSpecializationName (specializationName)
+  }
+
+  useEffect(() => {
+    console.log("Olá", name, regionalCouncilNumber)
+    handleEdit()
+    
+  },[name, regionalCouncilNumber])
     
     
     function save(){ //PREPARE TO SAVE
@@ -50,11 +80,7 @@ function ProfileProfessional() {
           )
       }else {
         return (
-            <Container className={`${styles.min_height} bg-light card`}>
-            <div className="d-flex justify-content-end">
-                <button className="mt-2 btn btn-primary"><i><HiOutlinePencilAlt/></i>Agenda</button>
-            </div>
-          </Container>
+            <Schedule />
 
         )
       }
@@ -77,9 +103,9 @@ function ProfileProfessional() {
                           
                       </div>
                       <div className="ms-4" style={{marginTop: "100px"}}>
-                            <p className="  fs-5 fw-bold  text-center">Dra Amanda Piovanni</p>
-                            <p className="text-wrap text-center lh-1 ">Psicologo Comportamental</p>
-                            <p className="text-wrap text-center lh-1 ">CRP 06/156944</p>
+                            <p className="  fs-5 fw-bold  text-center">Dra {name}</p>
+                            <p className="text-wrap text-center lh-1 ">{specializationName}</p>
+                            <p className="text-wrap text-center lh-1 ">CRP {regionalCouncilNumber}</p>
                       </div>
                     </div>
                     

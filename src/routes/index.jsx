@@ -26,8 +26,6 @@ export default function Routers() {
     let value = sessionStorage.getItem("@AuthFirebase:role")
     //const [flag, setFlag] = useState(sessionStorage.getItem("@AuthFirebase:role"))
     const RequireAuthProfessional = () => {
-        
-        
         if(role1){
             return <Outlet />
         }else{
@@ -67,9 +65,9 @@ export default function Routers() {
                 
                 {/* PACIENT PRIVATE ROUTE */}
                 <Route path ='/registro/usuario/' element={<PersonalUser/>}/>
-                <Route path='/usuario/perfil' element={<ProfileUser /> } />
-                <Route path ='/registro/usuario/escolha-profissional' element={<ChooseProfessional/>}/>
-                <Route path ='/registro/usuario/agendamento' element={<Scheduling/>}/>
+                <Route path ='/usuario/perfil' element={<ProfileUser/>}/>
+                <Route path ='/usuario/escolha-profissional' element={<ChooseProfessional/>}/>
+                <Route path ='/usuario/agendamento' element={<Scheduling/>}/>
 
                 {/* <Route path ='/usuario/perfil' element={<RequireAuthPersonal/>}>
                     <Route path='/usuario/perfil' element={<ProfileUser /> } />

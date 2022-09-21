@@ -29,16 +29,23 @@ export default function Login() {
         }
 
         function sendUrl(){
+            
             if(role1 === 'true'){
+                if(formCompleted){
+                    navigate('profile')
+                }
                 navigate('/registro/profissional/')
             }else{
+                if(formCompleted){
+                    navigate('/usuario/perfil')
+                }
                 navigate('/registro/usuario/')
             }
         }
 
         useEffect(() => {
             if(role1!= null){
-                console.log(formCompleted)
+                console.log('login', formCompleted)
                 sendUrl()
             }
         }, [role1, formCompleted])

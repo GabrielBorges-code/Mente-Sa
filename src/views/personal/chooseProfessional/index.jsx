@@ -6,7 +6,7 @@ import { useNavigate } from "react-router-dom";
 
 import Footer from "../../../components/Footer";
 import Header from "../../../components/Header";
-import Stepper from "../../../components/Stepper";
+import Stepper from "../../../components/TwoStep";
 
 import { useState } from "react";
 import styles from "./index.module.css";
@@ -17,7 +17,7 @@ function Scheduling() {
 
   function save() {
     //PREPARE TO SAVE
-    navigate("/registro/usuario/agendamento");
+    navigate("/usuario/agendamento");
   }
 
   return (
@@ -29,9 +29,9 @@ function Scheduling() {
       />
 
       <Stepper
-        step={'50%'}
+        step={"0%"}
         icon={true}
-        state1={"success"}
+        state1={"primary"}
         state2={"primary"}
         state3={"secondary"}
       />
@@ -55,7 +55,12 @@ function Scheduling() {
 
             <tbody className={styles.color_td}>
               <tr>
-                <td><img src="https://files.tecnoblog.net/wp-content/uploads/2018/09/linus-torvalds-dedo-meio.jpg" alt="foto perfil" /></td>
+                <td>
+                  <img
+                    src="https://files.tecnoblog.net/wp-content/uploads/2018/09/linus-torvalds-dedo-meio.jpg"
+                    alt="foto perfil"
+                  />
+                </td>
                 <td>João Sousa</td>
                 <td>Psicólogo</td>
                 <td>08/65974</td>
@@ -65,11 +70,16 @@ function Scheduling() {
                   <Button>Selecionar</Button>
                 </td>
               </tr>
-              
-              
+
+              <br />
 
               <tr>
-                <td><img src="https://files.tecnoblog.net/wp-content/uploads/2018/09/linus-torvalds-dedo-meio.jpg" alt="foto perfil" /></td>
+                <td>
+                  <img
+                    src="https://files.tecnoblog.net/wp-content/uploads/2018/09/linus-torvalds-dedo-meio.jpg"
+                    alt="foto perfil"
+                  />
+                </td>
                 <td>Beatriz Brum</td>
                 <td>Psicólogo</td>
                 <td>06/97536</td>
@@ -79,8 +89,16 @@ function Scheduling() {
                   <Button>Selecionar</Button>
                 </td>
               </tr>
+
+              <br />
+
               <tr>
-                <td><img src="https://files.tecnoblog.net/wp-content/uploads/2018/09/linus-torvalds-dedo-meio.jpg" alt="foto perfil" /></td>
+                <td>
+                  <img
+                    src="https://files.tecnoblog.net/wp-content/uploads/2018/09/linus-torvalds-dedo-meio.jpg"
+                    alt="foto perfil"
+                  />
+                </td>
                 <td>Camila Fellix</td>
                 <td>Psicanalista</td>
                 <td>06/97536</td>
