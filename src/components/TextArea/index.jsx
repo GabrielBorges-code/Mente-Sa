@@ -2,7 +2,7 @@ import { useState } from "react";
 import Form from "react-bootstrap/Form";
 import styles from "./index.module.css";
 
-function TextArea({label, name, value, setClassCol, setValue, type, typeForm, setSizeRow}) {
+function TextArea({label, name, value, setClassCol, setValue, type, typeForm, setSizeRow, placeholder}) {
     
     return (   
         <div className={setClassCol}>
@@ -13,7 +13,8 @@ function TextArea({label, name, value, setClassCol, setValue, type, typeForm, se
             onChange={e => setValue(e.target.value)}
             className={ `${typeForm} ${styles.bgTextArea}`}
             value={value}
-            name={name}/>
+            name={name}
+            placeholder={placeholder}/>
 
         </div>           
     )
