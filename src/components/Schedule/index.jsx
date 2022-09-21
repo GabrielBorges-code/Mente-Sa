@@ -9,12 +9,24 @@ import { useState } from "react"
 import Calendar from 'react-calendar';
 import 'react-calendar/dist/Calendar.css';
 import { includes } from "lodash"
+import { useEffect } from "react"
+import {format} from 'date-fns'
+import { useId } from "react"
+
+import {doc, setDoc, addDoc, getDoc, collection, updateDoc} from 'firebase/firestore'
+import { db, auth } from "../../services/firebase"; 
+import { query, where, getDocs } from "firebase/firestore";
+
+
 
 export default function Schedule (props) {
+    const [users, setUsers] = useState(JSON.parse(sessionStorage.getItem("@AuthFirebase:user")))
     const [validated, setValidated] = useState(false)
     const [buttonValue, setButtonValue] = useState()
     const [hours, setHours] = useState([])
     const [date, setDate] = useState(new Date())
+    const [dateFormat, setDateFormat] = useState() //format(new Date, 'yyyy-MM-dd')
+    const [day, setDay]= useState(new Date())
 
 
     const timers = [
@@ -39,49 +51,74 @@ export default function Schedule (props) {
      
     ]
 
-    const handleSubmit = (event) => {
-        const form = event.currentTarget;
-        event.preventDefault();
-    
-        if (form.checkValidity() === false) {
-          event.stopPropagation();
-         return setValidated(true);
+    const docData = {
+        uidProfessional: users.uid, 
+        dateSchedule: format(date, 'yyyy-MM-dd'),
+        
+        
+        hoursAvailable: {
+            "08": true,
+            "09": true,
+            "10": true,
+            "11": true,
         }
-        setValidated(true);
-        handleSaveorEdit()
-      };
+    }
 
-      function changeDate(date) {
+    
+      async function changeDate(date) {
         setDate(date)
-        console.log(date)
+        const q = query(collection(db, "Schedulers"), where("dateSchedule", "==", format(date,'yyyy-MM-dd')));
+        
+        const querySnapshot = await getDocs(q)
+        if(querySnapshot){
+            console.log(querySnapshot)
+        }
 
+        querySnapshot.forEach(async (doc) => {
+            console.log(doc.id, ' => ', doc.data())
+            const info = await updateDoc(collection(db, "Schedulers", doc.id), docData)
+        })
+
+        //const info = await addDoc(collection(db, "Schedulers"), docData)
+          
+        
+        
+        //setDateFormat(format(day, 'yyyy-MM-dd'))
+        
+        
+        hours.push(day)
       }
 
       function changeButtonValue(e, value){
         e.preventDefault()
-        if(!hours.includes(value)){
-            hours.push(value)
-            console.log(date, hours)
-
-        }
         
+        if(!hours.includes(value)){
+            hours.push(value) 
+            
+            console.log('dentro do change', day, hours)
+        }
       }
 
+useEffect(() => {
+    console.log('day', format(day, 'yyyy-MM-dd'))
+    
 
+
+}, [hours, dateFormat])
 
 return (
 
         <Container className={`${styles.min_height} bg-light card d-flex`}>
             <div className="d-flex justify-content-center mt-5 flex-wrap">
                 <div className="">
-                    <Calendar onChange={changeDate} value={date} />
+                    <Calendar onChange={changeDate} onClickDay={((value, event)=>  setDay(value))} value={date} />
                 </div>
                 
                 <Form className="d-flex flex-wrap m-2 w-25">
                 {timers.map((type) => (
                     <div key={type} style={{height:"1rem"}} className=" g-3  ">
 
-                        <button  onClick={(e) => changeButtonValue(e, type)} className="hours.includes(type)? btn btn-primary : btn-default">{type}</button>
+                        <button  onClick={(e) => changeButtonValue(e, type)}  className={`${hours.includes(type) ?  "btn btn-success": "btn btn-primary" }`}>{type}</button>
                     </div>
                     ))}
                     <div className=" ">
