@@ -26,6 +26,11 @@ export default function Landing() {
         
     }
 
+
+    async function sendToLogin(){
+            
+        navigate ('/login')
+    }
     
     useEffect(() => {
         
@@ -76,7 +81,7 @@ export default function Landing() {
     
               </div>
               <div className="pt-4 d-grid gap-5 d-md-flex justify-content-md-center">
-                  <a href="/login/" className="link-access">Já sou cadastrado</a>
+              <a onClick={() => {sendToLogin()}} className="link-access">Já sou cadastrado</a>
                 </div>
             </div>
           </div>
