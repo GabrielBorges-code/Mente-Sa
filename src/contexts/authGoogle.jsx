@@ -78,6 +78,7 @@ export const AuthGoogleProvider = ({children}) => {
         const sessionToken = sessionStorage.removeItem("@AuthFirebase:token")
         const sessionUser = sessionStorage.removeItem("@AuthFirebase:user")
         const sessionRoleUser = sessionStorage.removeItem("@AuthFirebase:role")
+        const sessionStatus = sessionStorage.removeItem("@Land:status")
     }
 
 

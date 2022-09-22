@@ -15,6 +15,7 @@ import ProfileUser from '../views/personal/profile';
 import PersonalUser from '../views/personal/personal';
 import ChooseProfessional from '../views/personal/chooseProfessional';
 import Scheduling from '../views/personal/scheduling';
+import LogOutScreen from "../views/auth/logOutScreen";
 
 
 import Forbidden from "../views/forbidden";
@@ -24,22 +25,22 @@ export default function Routers() {
 
     const {signInGoogle, currentUser, role1, signed} = useContext(AuthGoogleContext)
     let value = sessionStorage.getItem("@AuthFirebase:role")
-    //const [flag, setFlag] = useState(sessionStorage.getItem("@AuthFirebase:role"))
-    const RequireAuthProfessional = () => {
-        if(role1){
-            return <Outlet />
-        }else{
-            return <Navigate to="/forbidden"/>
-        } 
-    }
+    // //const [flag, setFlag] = useState(sessionStorage.getItem("@AuthFirebase:role"))
+    // const RequireAuthProfessional = () => {
+    //     if(role1){
+    //         return <Outlet />
+    //     }else{
+    //         return <Navigate to="/forbidden"/>
+    //     } 
+    // }
 
-    const RequireAuthPersonal = () => {
-        if(role1===false){
-            return <Outlet />
-        }else{
-            return <Navigate to="/forbidden"/>
-        }  
-    }
+    // const RequireAuthPersonal = () => {
+    //     if(role1===false){
+    //         return <Outlet />
+    //     }else{
+    //         return <Navigate to="/forbidden"/>
+    //     }  
+    // }
 
     useEffect(() => {
         if(role1 != null){
@@ -60,6 +61,8 @@ export default function Routers() {
                 <Route path ='/registro' element={<Registration/>}/>
                 <Route path ='/login' element={<Login/>}/>
                 <Route path ='/forbidden' element={<Forbidden/>}/>
+                <Route path ='/logout' element={<LogOutScreen/>}/>
+
                 
                 {/* PACIENT PRIVATE ROUTE */}
                 <Route path ='/registro/usuario/' element={<PersonalUser/>}/>
@@ -87,7 +90,15 @@ export default function Routers() {
                 {/* <Route path="*" element={<Navigate to="/"/>}/> */}
                 
                 {/* PROFESSIONAL PRIVATE ROUTE */}
-                <Route path ='/registro/profissional/' element={<RequireAuthProfessional/>}>
+                <Route path='/registro/profissional/' element={<Personal /> } />
+                <Route path='/registro/profissional/sobre' element={<Professional /> } />
+                <Route path ='/registro/profissional/empresa' element={<Enterprise/>}/>
+                <Route path ='/profile' element={<ProfileProfessional/>}/>
+
+
+
+
+                {/* <Route path ='/registro/profissional/' element={<RequireAuthProfessional/>}>
                     <Route path='/registro/profissional/' element={<Personal /> } />
                 </Route>
                 <Route path ='/registro/profissional/sobre' element={<RequireAuthProfessional/>}>
@@ -98,7 +109,7 @@ export default function Routers() {
                 </Route>
                 <Route path ='/profile' element={<RequireAuthProfessional/>}>
                     <Route path ='/profile' element={<ProfileProfessional/>}/>
-                </Route>
+                </Route> */}
 
 
                 

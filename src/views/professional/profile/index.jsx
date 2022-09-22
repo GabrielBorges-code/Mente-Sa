@@ -64,6 +64,7 @@ function ProfileProfessional() {
     function logOut(){
       const request = logout()
       navigate('/login')
+      window.location.reload(true);
       
     }
     
@@ -157,7 +158,7 @@ function ProfileProfessional() {
 
                         <div>
                           
-                          <button onClick={() => logOut()} className={'btn btn-black rounded-pill'}><i><HiOutlineLogout/></i></button>
+                          <button onClick={() => logOut()} className={'btn btn-light rounded-pill'}><i><HiOutlineLogout/></i></button>
                         </div>
                         
                       </div>
