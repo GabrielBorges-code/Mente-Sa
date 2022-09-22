@@ -67,7 +67,6 @@ function ProfileProfessional() {
   const [currentView, setCurrentView] = useState("home");
 
   function toSchedule() {
-    //PREPARE TO SAVE
     navigate("/usuario/escolha-profissional");
   }
 
@@ -137,14 +136,7 @@ function ProfileProfessional() {
       return (
         <Container className={`${styles.content} bg-light card`}>
           <div>
-            {/* <button onClick={toSchedule} className="mt-2 btn btn-primary">
-              <i>
-                <HiOutlinePencilAlt />
-              </i>
-              Agenda
-            </button> */}
-            <ChooseProfessional />           
-
+            <ChooseProfessional />
           </div>
         </Container>
       );
@@ -153,8 +145,6 @@ function ProfileProfessional() {
 
   return (
     <>
-      {/* steper 2 */}
-
       <section className="h-100 gradient-custom-2">
         <div className="">
           <div
@@ -234,29 +224,6 @@ function ProfileProfessional() {
       </section>
 
       {renderButton()}
-      {/* { currentView ==='home' ?
-              <Container className={`${styles.content} bg-light card`}>
-                <div className="d-flex justify-content-end">
-                    <button className="mt-2 btn btn-primary"><i><HiOutlinePencilAlt/></i>Editar Perfil</button>
-                </div>
-                  <Form>
-                    <Form.Group className="mb-5" >
-                      <div className="row">
-                        <Input type={'text'} typeForm={'form-control'} setClassCol={'col-sm-7'} label={'Logradouro'}/>
-                        <Input type={'number'} typeForm={'form-control'} setClassCol={'col-sm'} label={'Número'}/>
-                        <Input type={'text'} typeForm={'form-control'} setClassCol={'col-sm'} label={'Complemento'}/>
-                      </div>
-                    </Form.Group>
-                  </Form>
-              </Container>
-              :
-              <Container className={`${styles.content} bg-light card`}>
-
-                <h1>Session</h1>
-        
-              </Container>
-        } */}
-
       <Footer />
     </>
   );
