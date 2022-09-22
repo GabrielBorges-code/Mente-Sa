@@ -22,29 +22,25 @@ export const AuthGoogleProvider = ({children}) => {
     const [user, setUser] = useState(null)
     const [role, setRole] = useState()
     const [formCompleted, setFormCompleted] = useState()
-    let roleProfessional
+    
+    let basicInformations = []
+    
 
 
     async function getRoleUser(uid){
         const docRef = doc(db, "Users", uid);
         const docSnap = await getDoc(docRef);
         const {professional, formCompleted} = docSnap.data()
-        roleProfessional = professional
+        //basicInformations.push(professional)
+        //basicInformations.push(formCompleted)
         setFormCompleted(formCompleted)
-        
-        console.log('formC', formCompleted)
+        const state = professional === 'true'
+        console.log('getRoleUser', state)
+        setRole(professional)
         return professional
+        
     }
-    function loadStore(){
-                const sessionToken = sessionStorage.getItem("@AuthFirebase:token")
-                const sessionUser = sessionStorage.getItem("@AuthFirebase:user")
-                const sessionRoleUser = sessionStorage.getItem("@AuthFirebase:role")
-
-            if(sessionToken && sessionUser) {
-                setUser(sessionUser)
-                setRole(sessionRoleUser)
-            }
-    }
+    
     
 
     
@@ -63,11 +59,18 @@ export const AuthGoogleProvider = ({children}) => {
                 setRole(sessionRoleUser)
             }
             loadStoreAuth()
+            if((formCompleted!= null) && (role != null)){
+                console.log('Role', role)
+                console.log('Form', formCompleted)
+                //sendUrl()
+            }
+
+            console.log('form', formCompleted, role)
         }
 
         // loadStoreAuth()
         
-        console.log('useef', state.role, state.currentUser)
+        
         
     },[state.role, role, state.currentUser, formCompleted])
 
@@ -86,13 +89,14 @@ export const AuthGoogleProvider = ({children}) => {
                 const roles = await getRoleUser(user.uid)
                 dispatch({type: "LOGIN", RoleAttr:roles})
                 
-                console.log('log', state.role)
-                setUser(user)
-                setRole(roles)
+                //console.log('InsideLog', roles)
+                //setUser(user)
+                //setRole(roles)
                 
                 sessionStorage.setItem("@AuthFirebase:token", token)
                 sessionStorage.setItem("@AuthFirebase:user", JSON.stringify(user))
                 sessionStorage.setItem("@AuthFirebase:role", JSON.stringify(roles))
+                //sessionStorage.setItem("@AuthFirebase:basic", JSON.stringify(basicInformations))
                 
                 
                 
@@ -119,8 +123,8 @@ export const AuthGoogleProvider = ({children}) => {
         value={{ signInGoogle, 
         currentUser: state.currentUser, 
         signed: !!user, 
-        role1: state.role,
-        formComplete: state.formCompleted,
+        role1: role,
+        formComplete: formCompleted,
         dispatch  
         }}>
 

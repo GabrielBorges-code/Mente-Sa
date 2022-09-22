@@ -6,7 +6,7 @@ import { useState } from "react";
 import Input from "../../../components/Input";
 import { db, auth } from "../../../services/firebase";
 import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword } from "firebase/auth";
-import {doc, setDoc} from 'firebase/firestore'
+import {doc, setDoc, getDoc} from 'firebase/firestore'
 import { useNavigate } from "react-router-dom";
 import { useEffect } from "react";
 import {toast} from "react-hot-toast";
@@ -14,12 +14,13 @@ import {toast} from "react-hot-toast";
 
 export default function Login() {
         let navigate = useNavigate()
-        const {signInGoogle, role1, signed, formCompleted} = useContext(AuthGoogleContext)
+        const [users, setUsers] = useState(JSON.parse(sessionStorage.getItem("@AuthFirebase:user")))
+        const {signInGoogle, role1, signed, formComplete} = useContext(AuthGoogleContext)
         const [error, setError] = useState(false)
         const [email, setEmail] = useState("")
         const [password, setPassword] = useState("")
-        const [prof, setProf] = useState()
-
+        
+        
         
         
         //handle login and 
@@ -31,24 +32,35 @@ export default function Login() {
         function sendUrl(){
             
             if(role1 === 'true'){
-                if(formCompleted){
-                    navigate('profile')
+                if(formComplete){
+                    console.log('role1 => ', role1)
+                    navigate('/profile')
+                }else{
+                    navigate('/registro/profissional/')
                 }
-                navigate('/registro/profissional/')
+                
             }else{
-                if(formCompleted){
+                if(formComplete){
+                    console.log('else -> if formComplete', typeof(role1), formComplete);
                     navigate('/usuario/perfil')
+                }else{
+                    console.log('else -> if formComplete', typeof(role1), formComplete);
+                    navigate('/registro/usuario/')
+
                 }
-                navigate('/registro/usuario/')
+                
+                
             }
         }
 
         useEffect(() => {
+            console.log('igm', role1)
             if(role1!= null){
-                console.log('login', formCompleted)
+                console.log('Role inside ', role1)
+                console.log('Form inside', formComplete)
                 sendUrl()
             }
-        }, [role1, formCompleted])
+        }, [ formComplete])
 
         return (
             <>
