@@ -102,13 +102,17 @@ export default function Schedule(props) {
             const infoS = await setDoc(newSchedulerRef, newArrayObject)
         }
     }
+    
 
     function changeButtonValue(e, value) {
         e.preventDefault()
         hoursToSchedule[value] = true
-        console.log(hoursToSchedule)
+        //console.log(hoursToSchedule)
         newArrayObject = { ...docData, "hoursAvailable": { ...hoursToSchedule } }
-        console.log('estou no new ', newArrayObject)
+        //setHours((prev) => [...prev, value])
+        console.log('ChangeButtonValue')
+        
+        
     }
 
     async function verifyData() { //fetch data to populate grid
@@ -118,7 +122,6 @@ export default function Schedule(props) {
 
 
         if (querySnapShot.empty === true) {
-            //console.log("tamanho zero");
             const info = await addDoc(collection(db, "Schedulers"), newArrayObject)
         } else {
             querySnapShot.forEach(async (file) => {
@@ -127,14 +130,15 @@ export default function Schedule(props) {
 
                 const test = [dateSchedule].includes(dFormated)
                 if (test) { //if exists a firestore element
-                    setFileId(file.id)
-                    setIsExist(true)
+
                     const docRef = doc(db, "Schedulers", file.id);
                     const docSnap = await getDoc(docRef);
+                    setFileId(file.id)
+                    setIsExist(true)
+                    console.log('Test->true -> hoursToSchedule', hoursToSchedule)
                     const { hoursAvailable } = docSnap.data()
                     hoursToButton = hoursAvailable
-                    console.log(typeof(hours))
-                    console.log(typeof(hoursToButton))
+                    console.log('Test->true -> VerifyData')
                 }
 
                 for (let x in hoursToButton) {
@@ -148,14 +152,12 @@ export default function Schedule(props) {
                 }
             })
         }
-
     }
 
     useEffect(() => {
-        console.log('sou o newArray', newArrayObj)
         verifyData()
         
-    }, [day, dateFormat, newArrayObj])
+    }, [day, dateFormat,  newArrayObj])
 
     return (
         <Container className={`${styles.min_height} bg-light card d-flex`}>

@@ -35,7 +35,7 @@ function ProfileProfessional() {
     const [professionalDescription, setProfessionalDescription] = useState ('')
     const [genre, setGenre] = useState('')
     const {logout} = useContext(AuthGoogleContext)
-    // const [pronoun, setPronoun] = useState ('')
+    //const [pronoun, setPronoun] = useState ('')
 
     async function handleEdit(){
 
@@ -52,7 +52,7 @@ function ProfileProfessional() {
       setSpecializationName (specializationName)
       setProfessionalDescription (professionalDescription)
       setGenre (genre)
-      setPronoun (pronoun)
+      //setPronoun (pronoun)
   }
 
   useEffect(() => {
