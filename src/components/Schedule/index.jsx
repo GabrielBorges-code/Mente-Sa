@@ -22,13 +22,14 @@ import { query, where, getDocs } from "firebase/firestore";
 export default function Schedule(props) {
     const [users, setUsers] = useState(JSON.parse(sessionStorage.getItem("@AuthFirebase:user")))
     const [validated, setValidated] = useState(false)
-    const [buttonValue, setButtonValue] = useState()
     const [hours, setHours] = useState({})
     const [newArrayObj, setNewArrayObj] = useState({})
     const [date, setDate] = useState(new Date())
     const [dateFormat, setDateFormat] = useState() //format(new Date, 'yyyy-MM-dd')
     const [day, setDay] = useState(new Date())
-    let objectKeys = []
+    const [fileId, setFileId] = useState('')
+    const [isExist, setIsExist] = useState(false)
+    
 
 
     const timers = [
@@ -59,8 +60,14 @@ export default function Schedule(props) {
     }
 
     let hoursAvailable = {} // "08": true,
-    let newArrayObject = {} 
+    let newArrayObject = {}
 
+    async function queryElements(Collection, fCondition, sCondiditon){
+        const q = query(collection(db, Collection), where(fCondition, "==", sCondiditon));
+        //const q = query(collection(db, "Schedulers"), where("uidProfessional", "==", "users.uid"), where("dateSchedule", "==", date));
+        const querySnapshot = await getDocs(q)
+        return (querySnapshot)
+    }
 
     async function saveDate(e) {
         e.preventDefault()
@@ -69,125 +76,86 @@ export default function Schedule(props) {
         console.log(day)
         console.log('testeSaveDate', newArrayObject)
 
-        const q = query(collection(db, "Schedulers"), where("uidProfessional", "==", users.uid));
-        //const q = query(collection(db, "Schedulers"), where("uidProfessional", "==", "users.uid"), where("dateSchedule", "==", date));
-        
-        const querySnapshot = await getDocs(q)
-
-        if (querySnapshot.empty === true) {
-            console.log("tamnho zero");
+        const querySnapShot = await queryElements("Schedulers", "uidProfessional", users.uid )
+        if (querySnapShot.empty === true) {
+            console.log("tamanho zero");
             const info = await addDoc(collection(db, "Schedulers"), newArrayObject)
-            
-        } else {
-            querySnapshot.forEach(async (file) => {
+        }else{
+            querySnapShot.forEach(async (file) => {
                 const dateSchedule = file.data().dateSchedule
                 const dFormated = format(day, 'yyyy-MM-dd')
                 console.log('dateSchedule', dateSchedule, 'dFormated', dFormated)
                 const test = [dateSchedule].includes(dFormated)
-                
-
-                
-
                 if (test) {
                     console.log("O dado retornou => ", test)
                     console.log(file.id)
-
                     flag = true
                     fileId =file.id
-                    //const info = await updateDoc(doc(db, "Schedulers", file.id), newArrayObject)
-
                 } 
                 if(test === false) {
-                    
                     console.log("O dado retornou => ", test)
-                    
-                    // const newSchedulerRef = doc(collection(db, "Schedulers"))
-                    // const infoS = await setDoc(newSchedulerRef, newArrayObject)
-                    
                 }
             })
-            
         }
         if(flag===true){
             console.log('lets update => ', fileId)
             const info = await updateDoc(doc(db, "Schedulers", fileId), newArrayObject)
-            
         }else{
             console.log('lets create')
             const newSchedulerRef = doc(collection(db, "Schedulers"))
             const infoS = await setDoc(newSchedulerRef, newArrayObject)
         }
-
-
-        
-    }
-
-
-
-
-    async function changeDate() {
-        setDate(day)
-        const q = query(collection(db, "Schedulers"), where("uidProfessional", "==", users.uid));
-        //const q = query(collection(db, "Schedulers"), where("uidProfessional", "==", "users.uid"), where("dateSchedule", "==", date));
-        //const q2 = query(collection(db, "Schedulers"), where('dateSchedule', '==', date))
-
-        const querySnapshot = await getDocs(q)
-
-        if (querySnapshot.empty === true) {
-            console.log("tamnho zero");
-            const info = await addDoc(collection(db, "Schedulers"), docData)
-        } else {
-            querySnapshot.forEach(async (file) => {
-                const dateSchedule = file.data().dateSchedule
-                const dFormated = format(date, 'yyyy-MM-dd')
-                console.log('dateSchedule', dateSchedule, 'dFormated', dFormated)
-                const test = [dateSchedule].includes(dFormated)
-
-                if (test) {
-                    console.log("O dado retornou => ", test);
-                    console.log(file.id)
-
-                    const info = await updateDoc(doc(db, "Schedulers", file.id), docData)
-
-                } else {
-                    console.log("O dado retornou => ", test);
-                    const newSchedulerRef = doc(collection(db, "Schedulers"));
-                    const infoS = await setDoc(newSchedulerRef, docData);
-                    //const info = await setDoc(doc(collection((db, "Schedulers"), docData)))
-                }
-            })
-        }
-    }
+    } 
 
     function changeButtonValue(e, value) {
         e.preventDefault()
-        
-        //hoursAvailable.push({'oi': true})
-
         hoursAvailable[value] = true
         console.log(hoursAvailable)
         newArrayObject = { ...docData, "hoursAvailable": { ...hoursAvailable } }
         console.log('estou no new ', newArrayObject)
-        //setNewArrayObj(newArrayObject)
+    }
 
+    async function verifyData(){ //fetch data to populate grid
+         //day
 
+         //fileId
+        const querySnapShot = await queryElements("Schedulers", "uidProfessional", users.uid )
+
+        
+        if (querySnapShot.empty === true) {
+            console.log("tamanho zero");
+            const info = await addDoc(collection(db, "Schedulers"), newArrayObject)
+        }else{
+            querySnapShot.forEach(async (file) => {
+                const dateSchedule = file.data().dateSchedule
+                const dFormated = format(day, 'yyyy-MM-dd')
+                //console.log('dateSchedule', dateSchedule, 'dFormated', dFormated)
+                const test = [dateSchedule].includes(dFormated)
+                if (test) {
+                    console.log("O dado retornou => ", test)
+                    
+                    setFileId(file.id)
+                    setIsExist(true)
+                } 
+                // if(test === false) {
+                //     console.log("O dado retornou => ", test)
+                // }
+            })
+        }
+        // if(flag===true){
+        //     console.log('lets update => ', fileId)
+        //     const info = await updateDoc(doc(db, "Schedulers", fileId), newArrayObject)
+        // }else{
+        //     console.log('lets create')
+        //     const newSchedulerRef = doc(collection(db, "Schedulers"))
+        //     const infoS = await setDoc(newSchedulerRef, newArrayObject)
+        // }
+        
     }
 
     useEffect(() => {
-        // console.log('day', format(day, 'yyyy-MM-dd'))
-        // console.log('estou no docData', Object.keys(docData))
-
-        // Object.keys(docData).forEach(key => {
-        //     let value = docData[key]
-        //     console.log(`${key}: ${value}`)
-        //     objectKeys.push(value)
-        // })
-        // console.log("objkeys",objectKeys)
         console.log('sou o newArray', newArrayObj)
-
-
-
-
+        verifyData()
     }, [day, hours, dateFormat, newArrayObj])
 
     return (
@@ -197,7 +165,6 @@ export default function Schedule(props) {
                 <div className="">
                     <Calendar onChange={((value, event) => setDate(value))} onClickDay={((value, event) => setDay(value))} value={date} />
                 </div>
-
                 <Form onSubmit={saveDate} className="d-flex flex-wrap m-2 w-25">
                     {timers.map((type) => (
                         <div key={type} style={{ height: "1rem" }} className=" g-3  ">
@@ -217,3 +184,54 @@ export default function Schedule(props) {
         </Container>
     )
 }
+
+
+
+
+
+
+ // async function changeDate() {
+    //     setDate(day)
+    //     const q = query(collection(db, "Schedulers"), where("uidProfessional", "==", users.uid));
+    //     //const q = query(collection(db, "Schedulers"), where("uidProfessional", "==", "users.uid"), where("dateSchedule", "==", date));
+    //     //const q2 = query(collection(db, "Schedulers"), where('dateSchedule', '==', date))
+
+    //     const querySnapshot = await getDocs(q)
+
+    //     if (querySnapshot.empty === true) {
+    //         console.log("tamnho zero");
+    //         const info = await addDoc(collection(db, "Schedulers"), docData)
+    //     } else {
+    //         querySnapshot.forEach(async (file) => {
+    //             const dateSchedule = file.data().dateSchedule
+    //             const dFormated = format(date, 'yyyy-MM-dd')
+    //             console.log('dateSchedule', dateSchedule, 'dFormated', dFormated)
+    //             const test = [dateSchedule].includes(dFormated)
+
+    //             if (test) {
+    //                 console.log("O dado retornou => ", test);
+    //                 console.log(file.id)
+
+    //                 const info = await updateDoc(doc(db, "Schedulers", file.id), docData)
+
+    //             } else {
+    //                 console.log("O dado retornou => ", test);
+    //                 const newSchedulerRef = doc(collection(db, "Schedulers"));
+    //                 const infoS = await setDoc(newSchedulerRef, docData);
+    //                 //const info = await setDoc(doc(collection((db, "Schedulers"), docData)))
+    //             }
+    //         })
+    //     }
+    // }
+
+
+
+    // console.log('day', format(day, 'yyyy-MM-dd'))
+        // console.log('estou no docData', Object.keys(docData))
+
+        // Object.keys(docData).forEach(key => {
+        //     let value = docData[key]
+        //     console.log(`${key}: ${value}`)
+        //     objectKeys.push(value)
+        // })
+// console.log("objkeys",objectKeys)
