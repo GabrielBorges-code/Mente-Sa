@@ -46,9 +46,7 @@ export default function Routers() {
             console.log('user', currentUser)
             console.log('role', role1)
             // let xBol = role1==='true' 
-            // console.log('test', xBol)
-            
-            
+            // console.log('test', xBol)            
         }
     })
 

@@ -1,0 +1,120 @@
+{
+    "acount":[
+    {
+        "id": 1,
+        "user": "gabriel-borges@gmail.com",
+        "password": 1234,
+        "professional": true     
+    },
+    {
+        "id": 2,
+        "user": "mariana_leite@gmail.com",
+        "password": 1234,
+        "professional": false     
+    }
+    ],
+    "users": [
+      {
+        "name": "Gabriel Borges",
+        "professional": true,
+        "type": "psicologo",
+        "document": "08/22928",
+        "email": "gabriel-borges@gmail.com",
+        "birthdate": "1998-02-23",
+        "phone": "40028922",
+        "sexo": "M",
+        "marital-status": "Solteiro(a)",
+        "logadouro": "Rua João Baptista Scalco",
+        "number": "232",
+        "complement": "B",
+        "state": "Rio de Janeiro",
+        "city": "Rio de Janeiro",
+        "id": 1
+      },
+      {
+        "name": "Mariana Leite",
+        "professional": false,
+        "type": "paciente",
+        "document": "15461614131",
+        "email": "mariana_leite@gmail.com",
+        "birthdate": "1998-02-23",
+        "phone": "40028922",
+        "sexo": "M",
+        "marital-status": "Casado(a)",
+        "logadouro": "Rua iahadha",
+        "number": "232",
+        "complement": "",
+        "state": "Pernambuco",
+        "city": "Recife",
+        "id": 2
+      }
+    ],
+    "infos-professional": [
+       {
+        "id":1,
+        "id-professional": 1,
+        "name": "Gabriel Borges",
+        "college":"Psicologia", 
+        "year-completion-college":"2010",
+        "specialization":"Psicologia Clinica",
+        "crm-crp": "08/22928",
+        "postgraduate-studies":"Psicologia Clinica",
+        "year-completion-post":"2015",
+        "master-degree":"Psicologia Clinica",
+        "year-completion-master":"2018",
+        "doctorate-degree":"Psicologia Clinica",
+        "year-completion-doctorate": "2020",   
+
+        "company-log":"Rua aahaha",
+        "number":"33",
+        "complement":"",
+        "district":"Boa Viagem",
+        "state":"Pernambuco" ,
+        "city":"Recife",
+        "email-company":"psicologo@gmail.com",
+        "telephone":"46778889",
+        "session-value":"50,00",
+        "session-duration":"50",
+        "service-type":"online"
+       } 
+    ],
+    "appointment": [
+      {
+        "id-professional": 1,
+        "id-patient": 2,
+        "name-professional": "Gabriel Borges",
+        "name-patient": "Mariana Leite",
+        "date": "2022-09-10",
+        "service-type":"online",
+        "status":"pendente",
+        "id": 1
+      },
+      {
+        "id-professional": 1,
+        "id-patient": 2,
+        "name-professional": "Gabriel Borges",
+        "name-patient": "Mariana Leite",
+        "date": "2022-09-15",
+        "service-type":"presencial",
+        "status":"concluido",
+        "id": 2
+      }
+    ],
+    "anamnesis": [
+      {
+        "id-professional": 1,
+        "id-patient": 2,
+        "name-professional": "Gabriel Borges",
+        "name-patient": "Fulano da Silva",
+        "date": "2022-09-10",
+        "service-type":"online",
+        "chief-complaint":"",
+        "complaint-evolution": "",
+        "repentinogradual":"",
+        "transformations":"",
+        "symptoms":"",
+        "id": 1
+       
+      }
+    ]
+  }

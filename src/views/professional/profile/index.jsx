@@ -24,30 +24,37 @@ import { db, auth } from "../../../services/firebase";
 
 function ProfileProfessional() {
     let navigate = useNavigate()
+    let pronoun = ''
     //controll screen
     const [currentView, setCurrentView] = useState('home')
     const [users, setUsers] = useState(JSON.parse(sessionStorage.getItem("@AuthFirebase:user")))
     const [name, setName] = useState ('')
     const [regionalCouncilNumber, setRegionalCouncilNumber] = useState ('')
     const [specializationName, setSpecializationName] = useState ('')
+    const [professionalDescription, setProfessionalDescription] = useState ('')
+    const [genre, setGenre] = useState('')
+    // const [pronoun, setPronoun] = useState ('')
 
     async function handleEdit(){
 
       const docPer = doc(db, "Personal", users.uid);
       const docSnapPer = await getDoc(docPer);
-      const {name} = docSnapPer.data()
+      const {name, genre} = docSnapPer.data()
 
       const docProf = doc(db, "Professional", users.uid);
       const docSnapProf = await getDoc(docProf);
-      const {regionalCouncilNumber, specializationName} = docSnapProf.data()
+      const {regionalCouncilNumber, specializationName, professionalDescription} = docSnapProf.data()
       
       setName (name)
       setRegionalCouncilNumber (regionalCouncilNumber)
       setSpecializationName (specializationName)
+      setProfessionalDescription (professionalDescription)
+      setGenre (genre)
+      setPronoun (pronoun)
   }
 
   useEffect(() => {
-    console.log("Olá", name, regionalCouncilNumber)
+    // console.log("Olá", name, regionalCouncilNumber)
     handleEdit()
     
   },[name, regionalCouncilNumber])
@@ -64,9 +71,14 @@ function ProfileProfessional() {
     function renderButton(){
       if(currentView === 'home'){
         return ( 
-            <Container className={`${styles.min_height} bg-light card`}>
+            <Container className={`${styles.min_height} bg-light card mt-1`}>
               <div className="d-flex justify-content-end">
-                  <button onClick={handleEditProfile} className="mt-2 btn btn-primary"><i><HiOutlinePencilAlt/></i>Editar Perfil</button>
+                  <button onClick={handleEditProfile} className="mt-2 btn btn-primary rounded-pill"><i className="m-2"><HiOutlinePencilAlt/></i>Editar Perfil</button>
+              </div>
+
+              <div className="row">
+                <h3>Sobre</h3>
+                <p>{professionalDescription}</p>
               </div>
             </Container> 
       )
@@ -87,6 +99,12 @@ function ProfileProfessional() {
       
     }
 
+    if (genre === 'Feminino') {
+      pronoun = 'Dra'
+    } else {
+      pronoun = 'Dr'
+     }
+
     return (
       <>
         
@@ -103,25 +121,25 @@ function ProfileProfessional() {
                           
                       </div>
                       <div className="ms-4" style={{marginTop: "100px"}}>
-                            <p className="  fs-5 fw-bold  text-center">Dra {name}</p>
+                            <p className="  fs-5 fw-bold  text-center">{pronoun} {name}</p>
                             <p className="text-wrap text-center lh-1 ">{specializationName}</p>
-                            <p className="text-wrap text-center lh-1 ">CRP {regionalCouncilNumber}</p>
-                      </div>
+                            <p className="text-wrap text-center lh-1 ">CRP/CRM {regionalCouncilNumber}</p>
+                      </div> 
                     </div>
                     
                     
                     <Container>
-                    <div className="p-4 text-black" >
+                    <div className="py-4 text-black" >
                       <div className="d-flex justify-content-end text-center py-1">
+
                         <div>
-                          
                           <button onClick={() => setCurrentView('home')} className={currentView == 'home' ? 'btn btn-secondary rounded-pill clicked': 'btn btn-primary rounded-pill'}><i><HiUserCircle/></i> Meu Perfil</button>
                         </div>
                         <div className="px-3">
                           
                           <button onClick={() => setCurrentView('session')} className={currentView == 'session' ? 'btn btn-secondary rounded-pill clicked': 'btn btn-primary rounded-pill'}><i><HiChatAlt/></i> Atendimento</button>
                         </div>
-                        <div className="px-3">
+                        <div>
                           
                           <button onClick={() => setCurrentView('schedule')} className={currentView == 'schedule' ? 'btn btn-secondary rounded-pill clicked': 'btn btn-primary rounded-pill'}><i><HiChatAlt/></i> Agenda</button>
                         </div>
