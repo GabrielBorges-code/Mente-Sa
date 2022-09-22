@@ -8,13 +8,9 @@ import { useState } from "react";
 import styles from "./index.module.css";
 
 function ChooseProfessional() {
-  let navigate = useNavigate();
-  const [] = useState();
-
-  function save() {
-    //PREPARE TO SAVE
-    navigate("/usuario/agendamento");
-  }
+  let navigate = useNavigate();  
+  
+  const [showModal, setShowModal] = useState(false);  
 
   return (
      <>

@@ -8,25 +8,16 @@ import Input from "../../Input";
 import InputSelect from "../../Input/inputSelect";
 
 import { useState } from "react";
-import styles from "./index.module.css";
 
-function ModalScheduling (props) {
+function ModalAgendamento (props) {
   let navigate = useNavigate();
   const [] = useState();
-
-  
-  const [showModal, setShowModal] = useState(false);  
-
-  function save() {
-    //PREPARE TO SAVE
-    navigate("/usuario/perfil");
-  }
 
   return (
     <>
         <Modal
             {...props}
-            size="md"
+            size="lg"
             aria-labelledby="contained-modal-title-vcenter"
             centered
             >
@@ -37,8 +28,6 @@ function ModalScheduling (props) {
             </Modal.Header>
             <Modal.Body>
                 <Form>
-                <Form.Group className="mb-5">
-
                     <div className="row">
                         <Input
                         type={"date"}
@@ -58,13 +47,12 @@ function ModalScheduling (props) {
                         options={["Atendimento A", "Atendimento B", "Atendimento C"]}
                         />
                     </div>
-                </Form.Group>
 
-                    <div className="row d-flex justify-content-center">
+                    {/* <div className="row d-flex justify-content-center">
                         <button onClick={save} className="btn btn-lg col-md-3 btn-primary">
                             Concluir
                         </button>
-                    </div>
+                    </div> */}
                 </Form>
       
             </Modal.Body>
@@ -76,4 +64,4 @@ function ModalScheduling (props) {
   );
 }
 
-export default ModalScheduling;
+export default ModalAgendamento;

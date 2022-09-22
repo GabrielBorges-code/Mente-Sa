@@ -1,7 +1,6 @@
 import Container from "react-bootstrap/Container";
 
 import Footer from "../../../components/Footer";
-import Scheduling from "../scheduling";
 import ChooseProfessional from "../chooseProfessional";
 
 import { HiChatAlt, HiOutlinePencilAlt, HiUserCircle } from "react-icons/hi";
