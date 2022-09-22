@@ -144,14 +144,20 @@ export default function Schedule(props) {
                     hoursToButton = hoursAvailable
                     console.log('hour', typeof(hoursToButton))
 
-                    console.log('oi')
+                    
+                } 
+                console.log('oi')
                     for(let x in hoursToButton){
                     console.log('heheeh', x, '=', hoursToButton[x])
                     {`${hoursToButton[x] ?  "btn btn-success": "btn btn-primary" }`}
+                    setHours((prev)=>[...prev,x])
+                   
+                    } 
+
+                    if(hoursToButton.length ===0){
+                        setHours([])
                     }
 
-                } 
-                
             })
         }
                
@@ -186,7 +192,7 @@ export default function Schedule(props) {
                     {timers.map((type) => (
                         <div key={type} style={{ height: "1rem" }} className=" g-3  ">
 
-                            <button onClick={(e) => changeButtonValue(e, type)} className={`${hoursToButton.find(x => x===type) ?  "btn btn-success": "btn btn-primary" }`} >{type}:00</button>
+                            <button onClick={(e) => changeButtonValue(e, type)} className={`${hours.includes(type) ?  "btn btn-success": "btn btn-primary" }`} >{type}:00</button>
                         </div>
                     ))}
                     <div className=" ">
