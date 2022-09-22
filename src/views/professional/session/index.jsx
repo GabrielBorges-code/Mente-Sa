@@ -20,7 +20,7 @@ function Session() {
 
     const [showModal, setShowModal] = useState(false);  
     const [sessionList, setSessionList] = useState([]);
-    const [anamnese, setAnamnese] = useState([]);
+    const [formAnamnese, setFormAnamnese] = useState({});
     // const [duration, setDuration] = useState('')
     // const [hourSession, setHourSession] = useState('')
     // const [namePatient, setNamePatient] = useState('')
@@ -44,9 +44,8 @@ function Session() {
         //console.log("LIST ", sessionList);
     }
     
-    async function handleSave () { //PREPARE TO SAVE
-        const data = formRef.current.getData();
-        console.log(data);        
+    async function handleSave () { 
+        console.log(formAnamnese);        
         
         
         // e.preventDefault()
@@ -76,7 +75,7 @@ function Session() {
             <ModalCadastroAnamnese
                 show={showModal}
                 onSave={() => handleSave()}
-                outerRef = {formRef}
+                setAnamnese = {setFormAnamnese}
                 onHide = {() => setShowModal(false)}
             />
 

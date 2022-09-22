@@ -17,12 +17,12 @@ function ModalAgendamento (props) {
   const [ftypeService, setTypeService] = useState('')
 
   useEffect(() => {
-    props.setForm({
+    props.setAgendamento({
         fdateScheduling,
         fhourScheduling,
         ftypeService
     });
-  }, [fdateScheduling, fhourScheduling, ftypeService, props.setForm]);
+  }, [fdateScheduling, fhourScheduling, ftypeService, props.setAgendamento]);
 
   return (
     <>

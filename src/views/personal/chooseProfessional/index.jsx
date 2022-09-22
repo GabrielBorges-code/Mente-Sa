@@ -11,15 +11,15 @@ function ChooseProfessional() {
   let navigate = useNavigate();  
   
   const [showModal, setShowModal] = useState(false);  
-  const [formData, setFormData] = useState({});
+  const [formAgendamento, setFormAgendamento] = useState({});
 
 
   async function handleSave () {
-    console.log(formData);   
+    console.log(formAgendamento);   
   }
 
   useEffect(() => {
-    
+
   },[])
 
   return (
@@ -31,7 +31,7 @@ function ChooseProfessional() {
           show={showModal}
           onSave={() => handleSave()}
           onHide={() => setShowModal(false)}
-          setForm={setFormData}
+          setAgendamento={setFormAgendamento}
         />
 
         <div>

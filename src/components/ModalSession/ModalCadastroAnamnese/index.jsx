@@ -5,7 +5,7 @@ import Input from "../../Input";
 import InputSelect from "../../Input/inputSelect";
 import TextArea from "../../TextArea";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 function ModalCadastroAnamnese (props) {
     const [fdateService, setDateService] = useState('')
@@ -18,8 +18,8 @@ function ModalCadastroAnamnese (props) {
     const [fsymptoms, setSymptoms] = useState('')
     //console.log(props);
 
-    const getData = () => {
-        return {
+    useEffect(() => {
+        props.setFormAnamnese({
             fdateService,
             fprice,
             ftypeService,
@@ -27,15 +27,12 @@ function ModalCadastroAnamnese (props) {
             fevolutionComplaint,
             ftypeComplaint,
             ftransformationComplaint,
-            fsymptoms,
-        };
-    }
+            fsymptoms
+        });
+    }, [fdateService, fprice, ftypeService, fcomplaint, fevolutionComplaint,
+        ftypeComplaint, ftransformationComplaint, fsymptoms,
+        props.setFormAnamnese]);
 
-    if (props.outerRef?.current) {
-        props.outerRef.current = {
-          getData          
-        };
-    }
 
     return (
         <>            
