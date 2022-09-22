@@ -14,16 +14,17 @@ import Session from "../session"
 
 import styles from "./index.module.css"
 import { useNavigate } from "react-router-dom"
-import { HiOutlinePencilAlt, HiUserCircle, HiChatAlt } from "react-icons/hi"
-
+import { HiOutlinePencilAlt, HiUserCircle, HiChatAlt, HiOutlineLogout } from "react-icons/hi"
+import { AuthGoogleContext,} from "../../../contexts/authGoogle"
 import Image from "../../../assets/logo-mente-sa.png"
-import { useState, useEffect } from "react"
+import { useState, useEffect, useContext } from "react"
 
 import {doc, setDoc, addDoc, getDoc, collection, updateDoc} from 'firebase/firestore'
 import { db, auth } from "../../../services/firebase"; 
 
 function ProfileProfessional() {
     let navigate = useNavigate()
+    const {signInGoogle,  role1, signed, formComplete} = useContext(AuthGoogleContext)
     let pronoun = ''
     //controll screen
     const [currentView, setCurrentView] = useState('home')
@@ -33,6 +34,7 @@ function ProfileProfessional() {
     const [specializationName, setSpecializationName] = useState ('')
     const [professionalDescription, setProfessionalDescription] = useState ('')
     const [genre, setGenre] = useState('')
+    const {logout} = useContext(AuthGoogleContext)
     // const [pronoun, setPronoun] = useState ('')
 
     async function handleEdit(){
@@ -58,6 +60,12 @@ function ProfileProfessional() {
     handleEdit()
     
   },[name, regionalCouncilNumber])
+
+    function logOut(){
+      const request = logout()
+      navigate('/login')
+      
+    }
     
     
     function save(){ //PREPARE TO SAVE
@@ -113,8 +121,11 @@ function ProfileProfessional() {
         <section className="h-100 gradient-custom-2">
             
                   <div className="">
+                  
                     <div className="text-white d-flex flex-row justify-content-center " style={{backgroundColor: "#5086C1", height: "200px"}} >
+                      
                       <div className="ms-4 mt-5 d-flex flex-column  " style={{width: "150px", zIndex: 1}}>
+                        
                         <img src={Image}
                           alt="Generic placeholder image" className="img-fluid img-thumbnail mt-5  mb-3"
                           style={{width: "150px", zIndex: 1}}/>
@@ -143,6 +154,11 @@ function ProfileProfessional() {
                           
                           <button onClick={() => setCurrentView('schedule')} className={currentView == 'schedule' ? 'btn btn-secondary rounded-pill clicked': 'btn btn-primary rounded-pill'}><i><HiChatAlt/></i> Agenda</button>
                         </div>
+
+                        <div>
+                          
+                          <button onClick={() => logOut()} className={'btn btn-black rounded-pill'}><i><HiOutlineLogout/></i></button>
+                        </div>
                         
                       </div>
                     </div>
@@ -153,29 +169,7 @@ function ProfileProfessional() {
           
         
          { renderButton()}
-        {/* { currentView ==='home' ?
-              <Container className={`${styles.min_height} bg-light card`}>
-                <div className="d-flex justify-content-end">
-                    <button className="mt-2 btn btn-primary"><i><HiOutlinePencilAlt/></i>Editar Perfil</button>
-                </div>
-                  <Form>
-                    <Form.Group className="mb-5" >
-                      <div className="row">
-                        <Input type={'text'} typeForm={'form-control'} setClassCol={'col-sm-7'} label={'Logradouro'}/>
-                        <Input type={'number'} typeForm={'form-control'} setClassCol={'col-sm'} label={'Número'}/>
-                        <Input type={'text'} typeForm={'form-control'} setClassCol={'col-sm'} label={'Complemento'}/>
-                      </div>
-                    </Form.Group>
-                  </Form>
-              </Container>
-              :
-              <Container className={`${styles.min_height} bg-light card`}>
-
-                <h1>Session</h1>
         
-              </Container>
-        } */}
-  
         <Footer />
       </>
     );

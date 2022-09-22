@@ -1,12 +1,8 @@
 import React, { useContext } from "react"
-import { AuthGoogleContext, AuthGoogleProvider } from "../../../contexts/authGoogle"
-import { SiGoogle } from "react-icons/si";
+import { AuthGoogleContext,} from "../../../contexts/authGoogle"
 import Footer from "../../../components/Footer";
 import { useState } from "react";
 import Input from "../../../components/Input";
-import { db, auth } from "../../../services/firebase";
-import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword } from "firebase/auth";
-import {doc, setDoc, getDoc} from 'firebase/firestore'
 import { useNavigate } from "react-router-dom";
 import { useEffect } from "react";
 import {toast} from "react-hot-toast";

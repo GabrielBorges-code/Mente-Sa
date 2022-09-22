@@ -120,7 +120,7 @@ export const AuthGoogleProvider = ({children}) => {
     }
     return (
         <AuthGoogleContext.Provider
-        value={{ signInGoogle, 
+        value={{ signInGoogle, logout,
         currentUser: state.currentUser, 
         signed: !!user, 
         role1: role,
