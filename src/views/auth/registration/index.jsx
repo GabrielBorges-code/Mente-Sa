@@ -42,7 +42,6 @@ export default function Registration() {
             e.preventDefault()
             if(password != repeatPassword){
                 setError('As senhas não estão iguais')
-                console.log('oiadfs')
                 toast.error('As senhas não estão iguais')
             }else{
                 createUserWithEmailAndPassword(auth, email, password)
@@ -59,8 +58,6 @@ export default function Registration() {
                         errorMessage = error.message;
                         toast.error(errorCode,':',errorMessage)
                     }
-                    
-                    
                     toast.error(errorMessage)
             });
 
