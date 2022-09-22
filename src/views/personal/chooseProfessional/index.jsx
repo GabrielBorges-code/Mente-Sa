@@ -4,13 +4,23 @@ import ModalAgendamento from "../../../components/ModalSession/ModalAgendamento"
 
 import { useNavigate } from "react-router-dom";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import styles from "./index.module.css";
 
 function ChooseProfessional() {
   let navigate = useNavigate();  
   
   const [showModal, setShowModal] = useState(false);  
+  const [formData, setFormData] = useState({});
+
+
+  async function handleSave () {
+    console.log(formData);   
+  }
+
+  useEffect(() => {
+    
+  },[])
 
   return (
      <>
@@ -19,7 +29,9 @@ function ChooseProfessional() {
 
         <ModalAgendamento 
           show={showModal}
+          onSave={() => handleSave()}
           onHide={() => setShowModal(false)}
+          setForm={setFormData}
         />
 
         <div>

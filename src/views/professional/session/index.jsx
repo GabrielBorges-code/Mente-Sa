@@ -45,8 +45,8 @@ function Session() {
     }
     
     async function handleSave () { //PREPARE TO SAVE
-        // const data = formRef.current.getData();
-        // console.log(data);        
+        const data = formRef.current.getData();
+        console.log(data);        
         
         
         // e.preventDefault()
@@ -64,7 +64,7 @@ function Session() {
 
     useEffect(() => {
         handleShowSessions();
-        
+        //handleSave();
       },[])
     
 
@@ -75,9 +75,9 @@ function Session() {
 
             <ModalCadastroAnamnese
                 show={showModal}
-                onHide={() => setShowModal(false)}
+                onSave={() => handleSave()}
                 outerRef = {formRef}
-                // onOpen = {() => setShowModal(true)}
+                onHide = {() => setShowModal(false)}
             />
 
             <div>
