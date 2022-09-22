@@ -3,6 +3,7 @@ import { useState } from "react";
 import Form from "react-bootstrap/Form";
 import Container from "react-bootstrap/Container";
 import Input from "../../../../components/Input";
+import TextArea from "../../../../components/TextArea";
 import Footer from "../../../../components/Footer";
 import Header from "../../../../components/Header";
 import { useNavigate } from "react-router-dom";
@@ -30,6 +31,7 @@ function Professional() {
   const [dateMasterDegree, setDateMasterDegree] = useState()
   const [doctorateDegree, setDoctorateDegree] = useState('')
   const [dateDoctorateDegree, setDateDoctorateDegree] = useState()
+  const [professionalDescription, setProfessionalDescription] = useState ('')
 
   const [validated, setValidated] = useState(false);
 
@@ -59,7 +61,8 @@ function Professional() {
         masterDegree: masterDegree || null,
         dateMasterDegree: dateMasterDegree || null,
         doctorateDegree: doctorateDegree || null,
-        dateDoctorateDegree: dateDoctorateDegree ||null 
+        dateDoctorateDegree: dateDoctorateDegree ||null, 
+        professionalDescription: professionalDescription ||null
       })
       console.log(info)
   
@@ -70,7 +73,7 @@ function Professional() {
 
     const docRef = doc(db, "Professional", users.uid);
     const docSnap = await getDoc(docRef);
-    const {college, dateFinishCollege, specializationName, regionalCouncilNumber, postGraduate, dateFinishPostGraduate, masterDegree, dateMasterDegree, doctorateDegree, dateDoctorateDegree} = docSnap.data()
+    const {college, dateFinishCollege, specializationName, regionalCouncilNumber, postGraduate, dateFinishPostGraduate, masterDegree, dateMasterDegree, doctorateDegree, dateDoctorateDegree, professionalDescription} = docSnap.data()
     
     setCollege(college)
     setDateFinishCollege(dateFinishCollege)
@@ -82,6 +85,7 @@ function Professional() {
     setDateMasterDegree(dateMasterDegree)
     setDoctorateDegree(doctorateDegree)
     setDateDoctorateDegree(dateDoctorateDegree)
+    setProfessionalDescription(professionalDescription)
 }
 
   useEffect(() => {
@@ -93,51 +97,140 @@ function Professional() {
   
   return (
     <>
-      <Header message={'só mais um pouquinho...'} linkBack={'/registro/profissional/'}/>
+      <Header
+        message={"só mais um pouquinho..."}
+        linkBack={"/registro/profissional/"}
+      />
       {/* steper 2 */}
 
-      <Stepper step={'50%'} state1={'success'} state2={'primary'} state3={'secondary'} />
+      <Stepper
+        step={"50%"}
+        state1={"success"}
+        state2={"primary"}
+        state3={"secondary"}
+      />
 
       <Container className={`${styles.min_height} bg-light card`}>
-
         <Form noValidate validated={validated} onSubmit={handleSubmit}>
-        <Form.Group className="mb-5" >
-        <h3>Dados Profissionais</h3>
-        
-          
+          <Form.Group className="mb-5">
+            <h3>Dados Profissionais</h3>
+
             <div className="row">
-                <Input type={'text'} typeForm={'form-control'} setClassCol={'col-sm'} value={college} setValue={setCollege} label={'Faculdade/Univesidade'} required={true}/>
-                <Input type={'month'} typeForm={'form-control'} setClassCol={'col-sm'}value={dateFinishCollege} setValue={setDateFinishCollege}  label={'Quando Concluiu?'}/>   
+              <Input
+                type={"text"}
+                typeForm={"form-control"}
+                setClassCol={"col-sm"}
+                value={college}
+                setValue={setCollege}
+                label={"Faculdade/Univesidade"}
+                required={true}
+              />
+              <Input
+                type={"month"}
+                typeForm={"form-control"}
+                setClassCol={"col-sm"}
+                value={dateFinishCollege}
+                setValue={setDateFinishCollege}
+                label={"Quando Concluiu?"}
+              />
             </div>
 
             <div className="row">
-  
-                <Input type={'text'} typeForm={'form-control'} setClassCol={'col-sm'}  value={specializationName} setValue={setSpecializationName} label={'Título/ Especialização'}/>
-                <Input type={'text'} typeForm={'form-control'} setClassCol={'col-sm'}  value={regionalCouncilNumber} setValue={setRegionalCouncilNumber} label={'CRM / CRP'}/>
+              <Input
+                type={"text"}
+                typeForm={"form-control"}
+                setClassCol={"col-sm"}
+                value={specializationName}
+                setValue={setSpecializationName}
+                label={"Título/ Especialização"}
+              />
+              <Input
+                type={"text"}
+                typeForm={"form-control"}
+                setClassCol={"col-sm"}
+                value={regionalCouncilNumber}
+                setValue={setRegionalCouncilNumber}
+                label={"CRM / CRP"}
+              />
             </div>
 
             <div className="row">
-                <Input type={'text'} value={postGraduate} setValue={setPostGraduate} typeForm={'form-control'} setClassCol={'col-sm'} label={'Pós-Graduação'}/>
-                <Input type={'month'} value={dateFinishPostGraduate} setValue={setDateFinishPostGraduate} typeForm={'form-control'} setClassCol={'col-sm'} label={'Quando Concluiu?'}/>
+              <Input
+                type={"text"}
+                value={postGraduate}
+                setValue={setPostGraduate}
+                typeForm={"form-control"}
+                setClassCol={"col-sm"}
+                label={"Pós-Graduação"}
+              />
+              <Input
+                type={"month"}
+                value={dateFinishPostGraduate}
+                setValue={setDateFinishPostGraduate}
+                typeForm={"form-control"}
+                setClassCol={"col-sm"}
+                label={"Quando Concluiu?"}
+              />
             </div>
 
             <div className="row">
-                <Input type={'text'} value={masterDegree} setValue={setMasterDegree} typeForm={'form-control'} setClassCol={'col-sm'} label={'Mestrado'}/>
-                <Input type={'month'} value={dateMasterDegree} setValue={setDateMasterDegree} typeForm={'form-control'} setClassCol={'col-sm'} label={'Quando Concluiu?'}/>
+              <Input
+                type={"text"}
+                value={masterDegree}
+                setValue={setMasterDegree}
+                typeForm={"form-control"}
+                setClassCol={"col-sm"}
+                label={"Mestrado"}
+              />
+              <Input
+                type={"month"}
+                value={dateMasterDegree}
+                setValue={setDateMasterDegree}
+                typeForm={"form-control"}
+                setClassCol={"col-sm"}
+                label={"Quando Concluiu?"}
+              />
             </div>
 
             <div className="row">
-                <Input type={'text'} value={doctorateDegree} setValue={setDoctorateDegree} typeForm={'form-control'} setClassCol={'col-sm'} label={'Doutorado'}/>
-                <Input type={'month'} value={dateDoctorateDegree} setValue={setDateDoctorateDegree} typeForm={'form-control'} setClassCol={'col-sm'} label={'Quando Concluiu?'}/>
+              <Input
+                type={"text"}
+                value={doctorateDegree}
+                setValue={setDoctorateDegree}
+                typeForm={"form-control"}
+                setClassCol={"col-sm"}
+                label={"Doutorado"}
+              />
+              <Input
+                type={"month"}
+                value={dateDoctorateDegree}
+                setValue={setDateDoctorateDegree}
+                typeForm={"form-control"}
+                setClassCol={"col-sm"}
+                label={"Quando Concluiu?"}
+              />
             </div>
-                        
-          </Form.Group>          
 
-          
-          <div className="row d-flex justify-content-center"> 
-              <button type="submit"  className='btn btn-lg col-md-3 btn-primary'>Avançar</button>
+            <div className="row">
+              <TextArea
+                type={"text"}
+                typeForm={"form-control"}
+                setSizeRow={4}
+                setClassCol={"col-sm"}
+                name="professionalDescription"
+                value={professionalDescription}
+                setValue={setProfessionalDescription}
+                label={"Sobre/Quem sou eu:"}
+                placeholder="Escreva aqui sobre seus anos de experiência, especializações e competências profissionais. Assim, seus pacientes saberão um pouco mais sobre você."
+              />
+            </div>
+          </Form.Group>
+
+          <div className="row d-flex justify-content-center">
+            <button type="submit" className="btn btn-lg col-md-3 btn-primary">
+              Avançar
+            </button>
           </div>
-          
         </Form>
       </Container>
 

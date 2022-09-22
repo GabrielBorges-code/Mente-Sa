@@ -26,6 +26,11 @@ export default function Landing() {
         
     }
 
+
+    async function sendToLogin(){
+            
+        navigate ('/login')
+    }
     
     useEffect(() => {
         
@@ -38,24 +43,49 @@ export default function Landing() {
 
     
     return (
-        <>
-        <div className='divAll'>
-            <div className='container-md  '>
-                <div className='row  align-items d-md-flex justify-content-md-center logo-div'>
-                    <img className='img-fluid logo' src={Logo} alt="" />
-                    <div className=' d-grid gap-5 d-md-flex justify-content-md-center'>
-                    <div className="row d-flex justify-content-center"> 
-                    <button onClick={() => setProfessional(false)} className='btn btn-lg btn-primary default'><i><AiOutlineCalendar/> </i> Agendar Sessão</button>
-                    </div>
-                    <div className="row d-flex justify-content-center"> 
-                    <button onClick={() => setProfessional(true)} className='btn btn-lg btn-primary dark '> <i><AiOutlineVideoCamera/> </i> Ofertar Sessão</button>
-                    </div>     
-                    {/* <Link to="/registro/usuario/"><button className='btn btn-lg btn-primary default'><i><AiOutlineCalendar/> </i> Agendar Sessão</button></Link> */}
-                    {/* <Link to="/registro/profissional/"><button className='btn btn-lg btn-primary dark '> <i><AiOutlineVideoCamera/> </i> Ofertar Sessão</button></Link> */}
-                    </div>  
+      <>
+        <div className="divAll">
+          <div className="container-md  ">
+            <div className="row  align-items d-md-flex justify-content-md-center logo-div">
+              <img className="img-fluid logo" src={Logo} alt="" />
+              <div className="description d-grid d-none gap-5 d-md-flex justify-content-md-center">
+                <p>
+                  Conecte-se com dezenas de profissionais da área de saúde
+                  mental
+                </p>
+              </div>
+              <div className=" d-grid gap-5 d-md-flex justify-content-md-center">
+                <div className="row d-flex justify-content-center">
+                  <button
+                    onClick={() => setProfessional(false)}
+                    className="btn btn-lg btn-primary default"
+                  >
+                    <i>
+                      <AiOutlineCalendar />{" "}
+                    </i>{" "}
+                    Agendar Sessão
+                  </button>
+                </div>
+                <div className="row d-flex justify-content-center">
+                  <button
+                    onClick={() => setProfessional(true)}
+                    className="btn btn-lg btn-primary dark "
+                  >
+                    {" "}
+                    <i>
+                      <AiOutlineVideoCamera />{" "}
+                    </i>{" "}
+                    Ofertar Sessão
+                  </button>
+                </div>
+    
+              </div>
+              <div className="pt-4 d-grid gap-5 d-md-flex justify-content-md-center">
+              <Link to="/login" ><a className="link-access">Já sou cadastrado</a> </Link>
                 </div>
             </div>
-            </div>
-        </>
-    )
+          </div>
+        </div>
+      </>
+    );
 }
