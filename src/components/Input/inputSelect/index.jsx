@@ -26,10 +26,6 @@ function InputSelect({label, options, setValue, value}) {
                 }
                 
             </select>
-            <div className='row'>
-                <div> </div>
-                    <pre>{JSON.stringify({label, setValue, value})} </pre>
-            </div>
         </div> 
 
 

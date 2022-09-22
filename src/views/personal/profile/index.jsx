@@ -1,6 +1,8 @@
 import Container from "react-bootstrap/Container";
 
 import Footer from "../../../components/Footer";
+import Scheduling from "../scheduling";
+import ChooseProfessional from "../chooseProfessional";
 
 import { HiChatAlt, HiOutlinePencilAlt, HiUserCircle } from "react-icons/hi";
 import { useNavigate } from "react-router-dom";
@@ -135,13 +137,15 @@ function ProfileProfessional() {
     } else {
       return (
         <Container className={`${styles.content} bg-light card`}>
-          <div className="d-flex justify-content-end">
-            <button onClick={toSchedule} className="mt-2 btn btn-primary">
+          <div>
+            {/* <button onClick={toSchedule} className="mt-2 btn btn-primary">
               <i>
                 <HiOutlinePencilAlt />
               </i>
               Agenda
-            </button>
+            </button> */}
+            <ChooseProfessional />           
+
           </div>
         </Container>
       );
