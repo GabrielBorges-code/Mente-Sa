@@ -1,18 +1,21 @@
 import Container from "react-bootstrap/Container";
 
 import Footer from "../../../components/Footer";
+import ChooseProfessional from "../chooseProfessional";
 
-import { HiChatAlt, HiOutlinePencilAlt, HiUserCircle } from "react-icons/hi";
+import { HiChatAlt, HiOutlinePencilAlt, HiUserCircle, HiOutlineLogout } from "react-icons/hi";
 import { useNavigate } from "react-router-dom";
 import styles from "./index.module.css";
 
 import { doc, setDoc, getDoc } from "firebase/firestore";
 import { db, auth } from "../../../services/firebase";
 
-import { useState, useEffect } from "react";
+import { AuthGoogleContext,} from "../../../contexts/authGoogle"
+import { useState, useEffect, useContext } from "react";
 import Image from "../../../assets/logo-mente-sa.png";
 
 function ProfileProfessional() {
+  const {logout} = useContext(AuthGoogleContext)
   const [users, setUsers] = useState(
     JSON.parse(sessionStorage.getItem("@AuthFirebase:user"))
   );
@@ -62,8 +65,20 @@ function ProfileProfessional() {
     searchData();
   }, []);
 
+  function logOut(){
+    const request = logout()
+    navigate('/login')
+    window.location.reload(true);
+    
+  }
+
   let navigate = useNavigate();
   const [currentView, setCurrentView] = useState("home");
+  
+  function handleEditProfile(){
+    navigate('/registro/profissional')
+
+  }
 
   function toSchedule() {
     //PREPARE TO SAVE
@@ -84,7 +99,7 @@ function ProfileProfessional() {
             </button>
           </div>
           {/* name, phone, dateBorn, civilState, genre, street, numberHouse, complement, district, state, city */}
-          <p>
+          {/* <p>
             Nome: <b>{name}</b>
           </p>
           <p>
@@ -116,7 +131,7 @@ function ProfileProfessional() {
           </p>
           <p>
             Cidade: <b>{city}</b>
-          </p>
+          </p> */}
         </Container>
       );
     } else if (currentView === "session") {
@@ -135,13 +150,15 @@ function ProfileProfessional() {
     } else {
       return (
         <Container className={`${styles.content} bg-light card`}>
-          <div className="d-flex justify-content-end">
-            <button onClick={toSchedule} className="mt-2 btn btn-primary">
+          <div>
+            {/* <button onClick={toSchedule} className="mt-2 btn btn-primary">
               <i>
                 <HiOutlinePencilAlt />
               </i>
               Agenda
-            </button>
+            </button> */}
+            <ChooseProfessional />           
+
           </div>
         </Container>
       );
@@ -206,7 +223,7 @@ function ProfileProfessional() {
                     <i>
                       <HiChatAlt />
                     </i>{" "}
-                    Atendimento
+                    Sessões
                   </button>
                 </div>
                 <div className="px-3">
@@ -221,8 +238,11 @@ function ProfileProfessional() {
                     <i>
                       <HiChatAlt />
                     </i>{" "}
-                    Agenda
+                    Agendamento
                   </button>
+                </div>
+                <div>
+                    <button onClick={() => logOut()} className={'btn btn-light rounded-pill'}><i><HiOutlineLogout/></i></button>
                 </div>
               </div>
             </div>
@@ -231,28 +251,7 @@ function ProfileProfessional() {
       </section>
 
       {renderButton()}
-      {/* { currentView ==='home' ?
-              <Container className={`${styles.content} bg-light card`}>
-                <div className="d-flex justify-content-end">
-                    <button className="mt-2 btn btn-primary"><i><HiOutlinePencilAlt/></i>Editar Perfil</button>
-                </div>
-                  <Form>
-                    <Form.Group className="mb-5" >
-                      <div className="row">
-                        <Input type={'text'} typeForm={'form-control'} setClassCol={'col-sm-7'} label={'Logradouro'}/>
-                        <Input type={'number'} typeForm={'form-control'} setClassCol={'col-sm'} label={'Número'}/>
-                        <Input type={'text'} typeForm={'form-control'} setClassCol={'col-sm'} label={'Complemento'}/>
-                      </div>
-                    </Form.Group>
-                  </Form>
-              </Container>
-              :
-              <Container className={`${styles.content} bg-light card`}>
-
-                <h1>Session</h1>
-        
-              </Container>
-        } */}
+      
 
       <Footer />
     </>

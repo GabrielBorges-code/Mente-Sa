@@ -1,4 +1,4 @@
-import React, { useContext } from "react"
+import React, { useContext, useEffect } from "react"
 import { AuthGoogleContext, AuthGoogleProvider } from "../../../contexts/authGoogle"
 import { SiGoogle } from "react-icons/si";
 import Footer from "../../../components/Footer";
@@ -9,7 +9,9 @@ import { db, auth } from "../../../services/firebase";
 import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword,  } from "firebase/auth";
 import {doc, setDoc} from 'firebase/firestore'
 import {toast} from "react-hot-toast";
-import VerifyErrorCode from "../../../errors/firebaseErrors" 
+import VerifyErrorCode from "../../../errors/firebaseErrors"
+import userRegistration from '../../../assets/image-userRegistration.svg'
+import professionalRegistration from '../../../assets/image-professionalRegistration.svg'
 
 
 export default function Registration() {
@@ -20,10 +22,14 @@ export default function Registration() {
         const [email, setEmail] = useState("")
         const [password, setPassword] = useState("")
         const [repeatPassword, setRepeatPassword] = useState("")
+        const [title, setTitle] = useState('paciente')
+        const [professional, setProfessional ] = useState(sessionStorage.getItem("@Land:status")==='true')
+        const [condition, setCondition] = useState()
+
+
 
 
         async function sendToLogin(){
-            
             navigate ('/login')
         }
 
@@ -37,6 +43,31 @@ export default function Registration() {
                 
             })
         }
+
+        function setSession(){
+          if(professional===null){
+            return (setProfessional(false))
+          }
+          if(professional){
+            setTitle('paciente')
+            setProfessional(false)
+            sessionStorage.setItem("@Land:status", 'false')
+          }else{
+            setTitle('profissional')
+            setProfessional(true)
+            sessionStorage.setItem("@Land:status", 'true')
+          }
+      }
+      
+
+      useEffect(() => {
+        if(professional){
+          setTitle('profissional')
+        }
+        
+        
+        
+    }, [professional, title])
     
         async function handleRegistration(e){
             e.preventDefault()
@@ -70,14 +101,30 @@ export default function Registration() {
               <div className="py-5 my-5 container-fluid h-custom">
                 <div className="row d-flex justify-content-center align-items-center h-100">
                   <div className="col-md-9 col-lg-6 col-xl-5">
-                    <img
-                      src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-login-form/draw2.webp"
-                      className="img-fluid"
+                    
+                    <img 
+                    
+                      src= {`${professional ?  professionalRegistration  : userRegistration }`}
+                      className="img-fluid w-75"
                       alt="Sample image"
                     />
                   </div>
                   <div className="col-md-8 col-lg-6 col-xl-4 offset-xl-1">
                     <form onSubmit={handleRegistration}>
+                    <div className="d-flex flex-row align-items-center justify-content-center justify-content-lg-start">
+                            {/* <p className="lead fw-normal mb-0 me-3">Registro de paciente</p> */}
+                            <h2>Olá, {title}!</h2>
+                            
+                             
+                        </div>
+                        <div className="divider d-flex justify-content-end align-items-center my-4" >
+
+                        <div className="d-flex justify-content-end align-items-center">
+                        <a onClick={() => {setSession()}} className="link-access text-body">
+                        {professional  ? 'Cadastrar como paciente ': 'Cadastrar como profissional' } 
+                        </a>
+                      </div>
+                        </div>
                       
 
                       {/* <!-- Email input --> */}
@@ -115,7 +162,7 @@ export default function Registration() {
 
                       <div className="d-flex justify-content-end align-items-center  mt-1">
                         <a onClick={() => {sendToLogin()}} className="link-access text-body">
-                          Já sou cadastrado. Quero fazer login!
+                          Já sou cadastrado
                         </a>
                       </div>
 

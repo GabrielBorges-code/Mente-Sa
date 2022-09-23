@@ -16,9 +16,6 @@ import {doc, setDoc, addDoc, getDoc, collection, updateDoc} from 'firebase/fires
 import { db, auth } from "../../../../services/firebase"; 
 import { useEffect } from "react";
 
-
-
-
 function Enterprise() {
   let navigate = useNavigate()
   const [users, setUsers] = useState(JSON.parse(sessionStorage.getItem("@AuthFirebase:user")))

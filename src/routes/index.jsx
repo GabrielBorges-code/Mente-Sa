@@ -14,8 +14,8 @@ import Registration from '../views/auth/registration';
 import ProfileUser from '../views/personal/profile';
 import PersonalUser from '../views/personal/personal';
 import ChooseProfessional from '../views/personal/chooseProfessional';
-import Scheduling from '../views/personal/scheduling';
-import LogOutScreen from "../views/auth/logOutScreen";
+//import Scheduling from '../views/personal/scheduling';
+
 
 
 import Forbidden from "../views/forbidden";
@@ -61,14 +61,14 @@ export default function Routers() {
                 <Route path ='/registro' element={<Registration/>}/>
                 <Route path ='/login' element={<Login/>}/>
                 <Route path ='/forbidden' element={<Forbidden/>}/>
-                <Route path ='/logout' element={<LogOutScreen/>}/>
+                
 
                 
                 {/* PACIENT PRIVATE ROUTE */}
                 <Route path ='/registro/usuario/' element={<PersonalUser/>}/>
                 <Route path ='/usuario/perfil' element={<ProfileUser/>}/>
                 <Route path ='/usuario/escolha-profissional' element={<ChooseProfessional/>}/>
-                <Route path ='/usuario/agendamento' element={<Scheduling/>}/>
+                {/* <Route path ='/usuario/agendamento' element={<Scheduling/>}/> */}
 
                 {/* <Route path ='/usuario/perfil' element={<RequireAuthPersonal/>}>
                     <Route path='/usuario/perfil' element={<ProfileUser /> } />

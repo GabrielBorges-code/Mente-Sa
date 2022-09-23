@@ -21,8 +21,6 @@ export default function Landing() {
         if(professional===null){return}
         
         navigate('/registro')
-            
-
         
     }
 

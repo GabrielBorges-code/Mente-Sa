@@ -30,6 +30,10 @@ export default function Schedule(props) {
     const [fileId, setFileId] = useState('')
     const [isExist, setIsExist] = useState(false)
 
+    const [hoursToSchedule, setHoursToSchedule] = useState({})
+      // let hoursToSchedule = {} // "08": true,
+      const [hoursToButton, setHoursToButton] = useState({})
+    //   let hoursToButton = []
     const timers = [
         '07',
         '08',
@@ -50,36 +54,89 @@ export default function Schedule(props) {
         '23',
     ]
 
-    const docData = {
-        uidProfessional: users.uid,
-        dateSchedule: format(day, 'yyyy-MM-dd'),
+
+let newArrayObject;
+ useEffect(() => {
+    console.log("hoursToSchedule",hoursToSchedule)
+    newArrayObject = { ...docData, "hoursAvailable": { ...hoursToSchedule } }
+    console.log("newArrayObject",newArrayObject); 
+    verifyData()   
+    }, [hoursToSchedule])
+
+  
+    function changeButtonValue(e, value) {
+        e.preventDefault()
+
+        hoursToSchedule[value] = true
+        setHoursToSchedule({...hoursToSchedule})
+        setHours((prev)=>[...prev,value])
+        
     }
 
-    let hoursToSchedule = {} // "08": true,
-    let hoursToButton = []
-    let newArrayObject = {}
-
-    async function queryElements(Collection, fCondition, sCondiditon) {
+  async function queryElements(Collection, fCondition, sCondiditon) {
         const q = query(collection(db, Collection), where(fCondition, "==", sCondiditon));
         const querySnapshot = await getDocs(q)
         return (querySnapshot)
     }
 
-    async function saveDate(e) {
+const docData = {
+        uidProfessional: users.uid,
+        dateSchedule: format(date, 'yyyy-MM-dd'),
+    }
+
+    
+     async function verifyData() { //fetch data to populate grid
+        //day
+        //fileId
+        const querySnapShot = await queryElements("Schedulers", "uidProfessional", users.uid)
+        let hoursToButtonArray;
+        
+        if (querySnapShot.empty === true) {
+            return await addDoc(collection(db, "Schedulers"), newArrayObject)
+        } else {
+            querySnapShot.forEach(async (file) => {
+                const dateSchedule = file.data().dateSchedule
+                const dFormated = format(date, 'yyyy-MM-dd')
+
+                const test = [dateSchedule].includes(dFormated)
+                if (test) { //if exists a firestore element
+
+                    const docRef = doc(db, "Schedulers", file.id);
+                    const docSnap = await getDoc(docRef);
+                    console.log('Test->true -> hoursToSchedule', hoursToSchedule)
+                    const { hoursAvailable } = docSnap.data()
+                    setHoursToButton(hoursAvailable)
+                    hoursToButtonArray = hoursAvailable
+                    console.log('Test->true -> VerifyData')
+                }
+
+                for (let x in hoursToButtonArray) {
+
+                    { `${hoursToButtonArray[x] ? "btn btn-success" : "btn btn-primary"}` }
+                    setHours((prev) => [...prev, x])
+                }
+
+            })
+        }
+    }
+
+  async function saveDate(e) {
         e.preventDefault()
+        console.log("enviou");
         let flag = null
         let fileId = null
-        console.log(day)
+        console.log(date)
+        
         console.log('testeSaveDate', newArrayObject)
 
         const querySnapShot = await queryElements("Schedulers", "uidProfessional", users.uid)
         if (querySnapShot.empty === true) {
             console.log("tamanho zero");
-            const info = await addDoc(collection(db, "Schedulers"), newArrayObject)
+            return await addDoc(collection(db, "Schedulers"), newArrayObject)
         } else {
             querySnapShot.forEach(async (file) => {
                 const dateSchedule = file.data().dateSchedule
-                const dFormated = format(day, 'yyyy-MM-dd')
+                const dFormated = format(date, 'yyyy-MM-dd')
                 console.log('dateSchedule', dateSchedule, 'dFormated', dFormated)
                 const test = [dateSchedule].includes(dFormated)
                 if (test) {
@@ -94,74 +151,30 @@ export default function Schedule(props) {
             })
         }
         if (flag === true) {
-            console.log('lets update => ', fileId)
-            const info = await updateDoc(doc(db, "Schedulers", fileId), newArrayObject)
+            console.log('lets update => ', fileId, newArrayObj)
+             console.log("hoursToButton",hoursToButton);
+            newArrayObject = { ...docData, "hoursAvailable": { ...hoursToSchedule,...hoursToButton } }
+            return await updateDoc(doc(db, "Schedulers", fileId), newArrayObject)
         } else {
             console.log('lets create')
             const newSchedulerRef = doc(collection(db, "Schedulers"))
-            const infoS = await setDoc(newSchedulerRef, newArrayObject)
+            return await setDoc(newSchedulerRef, newArrayObject)
         }
     }
+    
 
-    function changeButtonValue(e, value) {
-        e.preventDefault()
-        hoursToSchedule[value] = true
-        console.log(hoursToSchedule)
-        newArrayObject = { ...docData, "hoursAvailable": { ...hoursToSchedule } }
-        console.log('estou no new ', newArrayObject)
+    function onChangeDate(value) {
+    console.log("data",value);
+    setDate(value)
+    setHours([])
+    setHoursToSchedule({})
     }
-
-    async function verifyData() { //fetch data to populate grid
-        //day
-        //fileId
-        const querySnapShot = await queryElements("Schedulers", "uidProfessional", users.uid)
-
-
-        if (querySnapShot.empty === true) {
-            //console.log("tamanho zero");
-            const info = await addDoc(collection(db, "Schedulers"), newArrayObject)
-        } else {
-            querySnapShot.forEach(async (file) => {
-                const dateSchedule = file.data().dateSchedule
-                const dFormated = format(day, 'yyyy-MM-dd')
-
-                const test = [dateSchedule].includes(dFormated)
-                if (test) { //if exists a firestore element
-                    setFileId(file.id)
-                    setIsExist(true)
-                    const docRef = doc(db, "Schedulers", file.id);
-                    const docSnap = await getDoc(docRef);
-                    const { hoursAvailable } = docSnap.data()
-                    hoursToButton = hoursAvailable
-                    console.log(typeof(hours))
-                    console.log(typeof(hoursToButton))
-                }
-
-                for (let x in hoursToButton) {
-
-                    { `${hoursToButton[x] ? "btn btn-success" : "btn btn-primary"}` }
-                    setHours((prev) => [...prev, x])
-                }
-
-                if (hoursToButton.length === 0) {
-                    setHours([])
-                }
-            })
-        }
-
-    }
-
-    useEffect(() => {
-        console.log('sou o newArray', newArrayObj)
-        verifyData()
-        
-    }, [day, dateFormat, newArrayObj])
 
     return (
         <Container className={`${styles.min_height} bg-light card d-flex`}>
             <div className="d-flex justify-content-center mt-5 flex-wrap">
                 <div className="">
-                    <Calendar onChange={((value, event) => setDate(value))} onClickDay={((value, event) => setDay(value))} value={date} />
+                    <Calendar onChange={((value) => onChangeDate(value))} onClickDay={((value) => setDay(value))} value={date} />
                 </div>
                 <Form onSubmit={saveDate} className="d-flex flex-wrap m-2 w-25">
                     {timers.map((type) => (

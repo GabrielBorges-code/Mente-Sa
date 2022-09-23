@@ -18,7 +18,12 @@ export default function Login() {
         
         
         
+        function handleRegistration(){
+            sessionStorage.setItem("@Land:status", 'false')
+            navigate('/registro')
+        }
         
+
         //handle login and 
         async function handleLogin(e){
             e.preventDefault()

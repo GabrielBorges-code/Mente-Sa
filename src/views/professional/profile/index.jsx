@@ -20,7 +20,7 @@ import {
   HiOutlineLogout,
 } from "react-icons/hi";
 import { AuthGoogleContext } from "../../../contexts/authGoogle";
-import Image from "../../../assets/logo-mente-sa.png";
+import Image from "../../../assets/icon-mente-sa.jpg";
 import { useState, useEffect, useContext } from "react";
 
 import {
@@ -83,7 +83,7 @@ function ProfileProfessional() {
     setLogradouro(logradouro);
     setNumber(number);
     setGenre(genre);
-    setPronoun(pronoun);
+    // setPronoun(pronoun);
   }
 
   useEffect(() => {
