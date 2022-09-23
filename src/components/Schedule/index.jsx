@@ -30,9 +30,13 @@ export default function Schedule(props) {
     const [fileId, setFileId] = useState('')
     const [isExist, setIsExist] = useState(false)
 
+    
+
     const [hoursToSchedule, setHoursToSchedule] = useState({})
       // let hoursToSchedule = {} // "08": true,
-      const [hoursToButton, setHoursToButton] = useState({})
+      const [hoursToButton, setHoursToButton] = useState([])
+      const [copyHoursToButton, setCopyHoursToButton] = useState([])
+
     //   let hoursToButton = []
     const timers = [
         '07',
@@ -60,17 +64,30 @@ let newArrayObject;
     console.log("hoursToSchedule",hoursToSchedule)
     newArrayObject = { ...docData, "hoursAvailable": { ...hoursToSchedule } }
     console.log("newArrayObject",newArrayObject); 
+    console.log("horaaaas",hours); 
     verifyData()   
     }, [hoursToSchedule])
 
   
     function changeButtonValue(e, value) {
         e.preventDefault()
-
-        hoursToSchedule[value] = true
-        setHoursToSchedule({...hoursToSchedule})
-        setHours((prev)=>[...prev,value])
+        console.log("delete 1",hours); 
         
+        if(hours.includes(value)){
+        // delete hoursToSchedule[value]
+    //    console.log("delete2",hoursToSchedule); 
+
+       hours.splice(hours.indexOf(value), 1);
+  
+       console.log("delete 3",hours); 
+       return  setHours([...hours])
+    //   setHoursToSchedule({...hoursToSchedule})
+        }
+
+        // hoursToSchedule[value] = true
+        // setHoursToSchedule({...hoursToSchedule})
+        setHours((prev)=>[...prev,value])
+
     }
 
   async function queryElements(Collection, fCondition, sCondiditon) {
@@ -105,6 +122,7 @@ const docData = {
                     const docSnap = await getDoc(docRef);
                     console.log('Test->true -> hoursToSchedule', hoursToSchedule)
                     const { hoursAvailable } = docSnap.data()
+
                     setHoursToButton(hoursAvailable)
                     hoursToButtonArray = hoursAvailable
                     console.log('Test->true -> VerifyData')
@@ -113,7 +131,11 @@ const docData = {
                 for (let x in hoursToButtonArray) {
 
                     { `${hoursToButtonArray[x] ? "btn btn-success" : "btn btn-primary"}` }
-                    setHours((prev) => [...prev, x])
+                    if(!hours.includes(x)){      
+                        console.log("caiu");
+                      setHours((prev) => [...prev, x])  
+                    }
+                    
                 }
 
             })
@@ -153,7 +175,15 @@ const docData = {
         if (flag === true) {
             console.log('lets update => ', fileId, newArrayObj)
              console.log("hoursToButton",hoursToButton);
-            newArrayObject = { ...docData, "hoursAvailable": { ...hoursToSchedule,...hoursToButton } }
+
+
+           
+            for (const hour of hours ) {
+                copyHoursToButton[hour] = true
+              }
+
+             
+            newArrayObject = { ...docData, "hoursAvailable": { ...copyHoursToButton } }
             return await updateDoc(doc(db, "Schedulers", fileId), newArrayObject)
         } else {
             console.log('lets create')
