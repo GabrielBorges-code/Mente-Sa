@@ -1,15 +1,10 @@
 # 🧠 Mente Sã
 
-ONG Mente SÃ está construindo uma nova plataforma e precisa de um sistema
-web onde será possível conectar os Psicólogos/Psiquiatras com seus pacientes.
+ONG Mente SÃ está construindo uma nova plataforma e precisa de um sistema web onde será possível conectar os Psicólogos/Psiquiatras com seus pacientes.
 
 ## 🖥️ O Projeto
 
-O sistema deve permitir o cadastro de novos profissionais e seus respectivos
-pacientes, incluindo dados pessoais e dados para contato. O Paciente deve ser atrelado
-a uma ficha de anamnese (histórico clínico) onde ficarão os registros dos encontros
-Sessões: (Nome do paciente, Profissional, local (presencial/on-line), Status do
-atendimento, assunto abordado na sessão)
+O sistema deve permitir o cadastro de novos profissionais e seus respectivos pacientes, incluindo dados pessoais e dados para contato. O Paciente deve ser atrelado a uma ficha de anamnese (histórico clínico) onde ficarão os registros dos encontros Sessões: (Nome do paciente, Profissional, local (presencial/on-line), Status do atendimento, assunto abordado na sessão)
 
 Link da aplicação: [Mente Sã](https://dazzling-sundae-cf6238.netlify.app/)
 
