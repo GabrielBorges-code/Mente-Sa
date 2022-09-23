@@ -7,22 +7,11 @@ import { useNavigate } from "react-router-dom";
 import Input from "../../Input";
 import InputSelect from "../../Input/inputSelect";
 
-import { useState, useEffect } from "react";
+import { useState } from "react";
 
 function ModalAgendamento (props) {
   let navigate = useNavigate();
-
-  const [fdateScheduling, setDateScheduling] = useState('')
-  const [fhourScheduling, setHourScheduling] = useState('')
-  const [ftypeService, setTypeService] = useState('')
-
-  useEffect(() => {
-    props.setAgendamento({
-        fdateScheduling,
-        fhourScheduling,
-        ftypeService
-    });
-  }, [fdateScheduling, fhourScheduling, ftypeService, props.setAgendamento]);
+  const [] = useState();
 
   return (
     <>
@@ -40,20 +29,28 @@ function ModalAgendamento (props) {
             <Modal.Body>
                 <Form>
                     <div className="row">
-                        <Input type={'date'} typeForm={'form-control'} value={fdateScheduling} setValue={setDateScheduling} setClassCol={'col-sm'} label={'Data Agendamento'}/>
-                        <Input type={'text'} typeForm={'form-control'} value={fhourScheduling} setValue={setHourScheduling} setClassCol={'col-sm'} label={'Horario'}/>
-                        <InputSelect label={'Tipo de Atendimento'} value={ftypeService} setValue={setTypeService} options={['Online','Presencial', 'Ambos']} />
-                    </div>
-
-                    <div className="row">
-                        <Button onClick={props.onSave}>Salvar</Button>
+                        <Input
+                        type={"date"}
+                        typeForm={"form-control"}
+                        setClassCol={"col-sm"}
+                        label={"Data"}
+                        />
+                        <Input
+                        type={"time"}
+                        typeForm={"form-control"}
+                        setClassCol={"col-sm"}
+                        label={"Horário"}
+                        />
+                        <InputSelect
+                        label={"Tipo de Atendimento"}
+                        options={["Atendimento A", "Atendimento B", "Atendimento C"]}
+                        />
                     </div>
                 </Form>
       
             </Modal.Body>
             <Modal.Footer>
                 <Button onClick={props.onHide}>Close</Button>
-                
             </Modal.Footer>
         </Modal>
     </>

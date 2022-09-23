@@ -19,7 +19,7 @@ function ModalCadastroAnamnese (props) {
     //console.log(props);
 
     useEffect(() => {
-        props.setFormAnamnese({
+        props.setAnamnese({
             fdateService,
             fprice,
             ftypeService,
@@ -38,7 +38,7 @@ function ModalCadastroAnamnese (props) {
         <>            
             <Modal
             {...props}
-            size="xl"
+            size="lg"
             aria-labelledby="contained-modal-title-vcenter"
             centered
             >

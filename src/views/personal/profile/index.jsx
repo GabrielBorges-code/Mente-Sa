@@ -81,7 +81,6 @@ function ProfileProfessional() {
   }
 
   function toSchedule() {
-    //PREPARE TO SAVE
     navigate("/usuario/escolha-profissional");
   }
 
@@ -151,14 +150,7 @@ function ProfileProfessional() {
       return (
         <Container className={`${styles.content} bg-light card`}>
           <div>
-            {/* <button onClick={toSchedule} className="mt-2 btn btn-primary">
-              <i>
-                <HiOutlinePencilAlt />
-              </i>
-              Agenda
-            </button> */}
-            <ChooseProfessional />           
-
+            <ChooseProfessional />
           </div>
         </Container>
       );
@@ -167,8 +159,6 @@ function ProfileProfessional() {
 
   return (
     <>
-      {/* steper 2 */}
-
       <section className="h-100 gradient-custom-2">
         <div className="">
           <div
