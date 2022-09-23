@@ -18,14 +18,28 @@ function Session() {
     let navigate = useNavigate();
     const [users, setUsers] = useState(JSON.parse(sessionStorage.getItem("@AuthFirebase:user")))
 
-    //console.log(users);
-
     const [showModal, setShowModal] = useState(false);  
     const [sessionList, setSessionList] = useState([]);
     const [formAnamnese, setFormAnamnese] = useState({});
     const [idSessionList, setIdSessionList] = useState([]);
     const [currentIdSession, setCurrentIdSession] = useState('');
 
+    const [fdateSession, setDateSession] = useState(null);
+    const [fhourSession, setHourSession] = useState(null);
+    const [fdurationSession, setDurationSession] = useState(null);
+    const [fstatus, setStatus] = useState(null);
+    const [fidPatient, setIdPatient] = useState(null);
+    const [fnamePatient, setNamePatient] = useState(null);
+
+    // Abre Modal e seta o ID referente a sessao clicada
+    function openModal (id) {    
+        getIdSession(id) 
+        setShowModal(true);
+        handleEditSession();
+        //handleEditProfessional();
+        //handleEditPatient();
+        //handleEditAnamnese();
+    }
 
     async function handleShowSessions () {
         const q = query(collection(db, "Session"), where("professional.uid", "==", users.uid));
@@ -52,18 +66,24 @@ function Session() {
             }
         });
     }
-
-    // Abre Modal e seta o ID referente a sessao clicada
-    function openModal (id) {    
-        getIdSession(id) 
-        setShowModal(true);
-    }
+    
     
     async function handleSaveAnamnese () { 
-        //console.log("FORM ANAMNESE: ", formAnamnese);           
-        //console.log("CURRENT ID SESSION: ", currentIdSession);
+        console.log("FORM ANAMNESE: ", formAnamnese);           
+        console.log("CURRENT ID SESSION: ", currentIdSession);
 
         const info = await setDoc(doc(db, "Session", currentIdSession),{
+            dateSession: fdateSession,
+            hourSession: fhourSession,
+            durationSession: fdurationSession,
+            status: fstatus,
+            professional: {
+                uid: users.id
+            },
+            patiente: {
+                uid: fidPatient,
+                name: fnamePatient
+            },
             anamnese: {
                 dateService: formAnamnese.fdateService,
                 price: formAnamnese.fprice,
@@ -75,10 +95,53 @@ function Session() {
                 symptoms: formAnamnese.fsymptoms
             }            
         });
-
+        console.log("INFO: ", info);
+        
         toast.success("Informações salvas com sucesso!")
         setShowModal(false);
     };
+
+    async function handleEditSession () {
+        const docRef = doc(db, "Session", currentIdSession);
+        const docSnap = await getDoc(doc(db, docRef));
+        const {
+            dateSession, 
+            hourSession,
+            durationSession,
+            status
+        } = docSnap.data();
+
+        console.log("EDIT SESSION: ", dateSession, ", ", hourSession, ", ", durationSession, ", ", status)
+
+        setDateSession(dateSession);
+        setHourSession(hourSession);
+        setDurationSession(durationSession);
+        setStatus(status);
+    }
+
+    async function handleEditProfessional () {
+        const docRef = doc(db, "Session", currentIdSession);
+        const docSnap = await getDoc(doc(db, docRef, "professional"));
+        const { uid } = docSnap.data();
+
+        console.log("EDIT PROFESSIONAL: ", uid)
+
+        setUsers({uid: uid});
+    }
+
+    async function handleEditPatient () {
+        const docRef = doc(db, "Session", currentIdSession);
+        const docSnap = await getDoc(doc(db, docRef, "patient"));
+        const {
+            uid, 
+            name
+        } = docSnap.data();
+
+        console.log("EDIT PATIENT: ", uid, ", ", name)
+
+        setIdPatient(uid);
+        setNamePatient(name);
+    }
 
     async function handleEditAnamnese () {
         const docRef = doc(db, "Session", currentIdSession);
@@ -110,7 +173,7 @@ function Session() {
 
     useEffect(() => {
         handleShowSessions();
-        //handleEditAnamnese();
+        
     },[])
     
 
@@ -152,7 +215,7 @@ function Session() {
                                     <td>{item.patient.name}</td>
                                     <td>{item.dateSession}</td>
                                     <td>{item.hourSession}</td>
-                                    <td>{item.duration}</td>
+                                    <td>{item.durationSession}</td>
                                     <td><Button className="mt-2 btn btn-primary" onClick={() => openModal(index)}><i><CgFileDocument /></i></Button></td>
                                     <td>{item.status[0]}</td>                                
                                 </tr>
