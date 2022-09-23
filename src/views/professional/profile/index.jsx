@@ -19,12 +19,12 @@ import { AuthGoogleContext,} from "../../../contexts/authGoogle"
 import Image from "../../../assets/logo-mente-sa.png"
 import { useState, useEffect, useContext } from "react"
 
-import {doc, setDoc, addDoc, getDoc, collection, updateDoc} from 'firebase/firestore'
-import { db, auth } from "../../../services/firebase"; 
+import {doc,  getDoc} from 'firebase/firestore'
+import { db } from "../../../services/firebase"; 
 
 function ProfileProfessional() {
     let navigate = useNavigate()
-    const {signInGoogle,  role1, signed, formComplete} = useContext(AuthGoogleContext)
+    
     let pronoun = ''
     //controll screen
     const [currentView, setCurrentView] = useState('home')
@@ -102,7 +102,6 @@ function ProfileProfessional() {
       }else {
         return (
             <Schedule />
-
         )
       }
       
@@ -147,20 +146,18 @@ function ProfileProfessional() {
                         <div>
                           <button onClick={() => setCurrentView('home')} className={currentView == 'home' ? 'btn btn-secondary rounded-pill clicked': 'btn btn-primary rounded-pill'}><i><HiUserCircle/></i> Meu Perfil</button>
                         </div>
+
                         <div className="px-3">
-                          
                           <button onClick={() => setCurrentView('session')} className={currentView == 'session' ? 'btn btn-secondary rounded-pill clicked': 'btn btn-primary rounded-pill'}><i><HiChatAlt/></i> Atendimento</button>
                         </div>
+
                         <div>
-                          
                           <button onClick={() => setCurrentView('schedule')} className={currentView == 'schedule' ? 'btn btn-secondary rounded-pill clicked': 'btn btn-primary rounded-pill'}><i><HiChatAlt/></i> Agenda</button>
                         </div>
 
                         <div>
-                          
                           <button onClick={() => logOut()} className={'btn btn-light rounded-pill'}><i><HiOutlineLogout/></i></button>
                         </div>
-                        
                       </div>
                     </div>
                     </Container>
