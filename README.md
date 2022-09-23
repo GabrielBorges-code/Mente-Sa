@@ -4,7 +4,7 @@
 
 # 🧠 Mente Sã
 
-Esse projeto foi desenvolvido ao final do curso para aceleração de carreiras do nível Junior para Pleno em React, promovido por uma parceria educacional entre a [Acate](https://www.acate.com.br/) e a [Gama Academy](https://gama.academy/). Devido a relevância da problemática nos últimos tempos, escolhemos o ninho da saúde mental para implementarmos os conhecimentos:  ONG Mente SÃ está construindo uma nova plataforma e precisa de um sistema web onde será possível conectar os Psicólogos/Psiquiatras com seus pacientes.
+Esse projeto foi desenvolvido ao final do curso para aceleração de carreiras do nível Junior para Pleno em React, promovido por uma parceria educacional entre a [Acate](https://www.acate.com.br/) e a [Gama Academy](https://gama.academy/). Devido a relevância da problemática nos últimos tempos, escolhemos o ninho da saúde mental para implementarmos os conhecimentos para resolução da seguintes problemática:  "A ONG Mente SÃ está construindo uma nova plataforma e precisa de um sistema web onde será possível conectar os Psicólogos/Psiquiatras com seus pacientes." 
 
 ## 🖥️ O Projeto
 
@@ -28,6 +28,7 @@ Design no Figma: [Figma](https://www.figma.com/file/K8C7gVko5gSdNNG5eVdFAs/Mente
 * Firebase
 * Bootstrap
 * Netlify
+
 
 ## :computer: Instruções gerais 
 
