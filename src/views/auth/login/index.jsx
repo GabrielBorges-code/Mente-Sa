@@ -18,7 +18,11 @@ export default function Login() {
         
         
         
+        function handleRegistration(){
+            navigate('/registro')
+        }
         
+
         //handle login and 
         async function handleLogin(e){
             e.preventDefault()
@@ -70,40 +74,31 @@ export default function Login() {
                     <div className="col-md-8 col-lg-6 col-xl-4 offset-xl-1">
                         <form onSubmit={handleLogin}>
                         <div className="d-flex flex-row align-items-center justify-content-center justify-content-lg-start">
-                            <p className="lead fw-normal mb-0 me-3">Não sou cadastrado</p>
-                            <button onClick={()=>{signInGoogle()}} type="button" className="btn btn-primary btn-floating mx-1">
-                            <i> Cadastrar</i>
-                            </button>   
+                            <p className="lead fw-normal mb-0 me-3">Login Mente Sã</p>
+                             
                         </div>
-
-                        <div className="divider d-flex align-items-center my-4">
-                            <p className="text-center fw-bold mx-3 mb-0">Ou</p>
-                        </div>
-
+                        <div className="divider d-flex align-items-center my-4" />
                         {/* <!-- Email input --> */}
                         <div className="row">
                             <Input type={'text'} typeForm={'form-control'} setClassCol={'col-sm'} value={email} setValue={setEmail} label={'Email'}/>
                         </div>
                         <div className="row">
-                            <Input type={'password'} typeForm={'form-control'} setClassCol={'col-sm'} value={password} setValue={setPassword} label={'Password'}/>
+                            <Input type={'password'} typeForm={'form-control'} setClassCol={'col-sm'} value={password} setValue={setPassword} label={'Senha'}/>
                         </div>
  
                         <div className="d-flex justify-content-between align-items-center">
                             {/* <!-- Checkbox --> */}
-                            <div className="form-check mb-0">
-                            <input className="form-check-input me-2" type="checkbox" value="" id="form2Example3" />
-                            <label className="form-check-label" >
-                                Remember me
-                            </label>
-                            </div>
-                            <a href="#!" className="text-body">Esqueceu a senha?</a>
-                        </div>
+                            
+                        <a onClick={() => {handleRegistration()}} className="link-access text-body">
+                          Já sou cadastrado. Quero fazer login!
+                        </a>
+                      
+                      </div>
 
                         <div className="text-center text-lg-start mt-4 pt-2">
                             <button  type="submit" className="btn btn-primary btn-lg"
                                 style={{paddingLeft: "2.5rem", paddingRight: "2.5rem"}}>Login</button>
-                            {error && <p className="small fw-bold mt-2 pt-1 mb-0">Don't have an account? <a href="#!"
-                                className="link-danger">Register</a></p>}
+                            
                         </div>
 
                         </form>
