@@ -10,9 +10,9 @@ Esse projeto foi desenvolvido ao final do curso para aceleração de carreiras d
 
 O sistema web desenvolvido permite o cadastro de novos profissionais e seus respectivos pacientes, incluindo dados pessoais e dados para contato. O Paciente deve ser atrelado a uma ficha de anamnese (histórico clínico) onde ficarão os registros dos encontros sessões: (Nome do paciente, Profissional, local (presencial/on-line), Status do atendimento, assunto abordado na sessão, por exemplo). 
 
-Link da aplicação: [Mente Sã](https://dazzling-sundae-cf6238.netlify.app/)
+Link da aplicação: [Mente Sã](https://inquisitive-paprenjak-b4b60a.netlify.app/)
 
-[![Netlify Status](https://api.netlify.com/api/v1/badges/444c5237-669e-4c0a-925c-2eaed4106030/deploy-status)](https://app.netlify.com/sites/dazzling-sundae-cf6238/deploys)
+[![Netlify Status](https://api.netlify.com/api/v1/badges/b9fb3354-e8a1-4750-83a7-a6c89729139a/deploy-status)](https://app.netlify.com/sites/inquisitive-paprenjak-b4b60a/deploys)
 
 ## 🎨 Layout
 
