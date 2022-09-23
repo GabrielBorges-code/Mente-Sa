@@ -5,7 +5,7 @@ import Input from "../Input"
 import InputSelect from "../Input/inputSelect"
 import { Form } from "react-bootstrap"
 import { useState } from "react"
-// import TabsCustom from "../Tabs"
+
 import Calendar from 'react-calendar';
 import 'react-calendar/dist/Calendar.css';
 import { includes } from "lodash"
@@ -29,11 +29,9 @@ export default function Schedule(props) {
     const [day, setDay] = useState(new Date())
     const [fileId, setFileId] = useState('')
     const [isExist, setIsExist] = useState(false)
-
     const [hoursToSchedule, setHoursToSchedule] = useState({})
-      // let hoursToSchedule = {} // "08": true,
-      const [hoursToButton, setHoursToButton] = useState({})
-    //   let hoursToButton = []
+    const [hoursToButton, setHoursToButton] = useState({})
+
     const timers = [
         '07',
         '08',
@@ -55,42 +53,41 @@ export default function Schedule(props) {
     ]
 
 
-let newArrayObject;
- useEffect(() => {
-    console.log("hoursToSchedule",hoursToSchedule)
-    newArrayObject = { ...docData, "hoursAvailable": { ...hoursToSchedule } }
-    console.log("newArrayObject",newArrayObject); 
-    verifyData()   
+    let newArrayObject;
+    useEffect(() => {
+        console.log("hoursToSchedule", hoursToSchedule)
+        newArrayObject = { ...docData, "hoursAvailable": { ...hoursToSchedule } }
+        console.log("newArrayObject", newArrayObject);
+        verifyData()
     }, [hoursToSchedule])
 
-  
+
     function changeButtonValue(e, value) {
         e.preventDefault()
 
         hoursToSchedule[value] = true
-        setHoursToSchedule({...hoursToSchedule})
-        setHours((prev)=>[...prev,value])
-        
+        setHoursToSchedule({ ...hoursToSchedule })
+        setHours((prev) => [...prev, value])
+
     }
 
-  async function queryElements(Collection, fCondition, sCondiditon) {
+    async function queryElements(Collection, fCondition, sCondiditon) {
         const q = query(collection(db, Collection), where(fCondition, "==", sCondiditon));
         const querySnapshot = await getDocs(q)
         return (querySnapshot)
     }
 
-const docData = {
+    const docData = {
         uidProfessional: users.uid,
         dateSchedule: format(date, 'yyyy-MM-dd'),
     }
 
-    
-     async function verifyData() { //fetch data to populate grid
+    async function verifyData() { //fetch data to populate grid
         //day
         //fileId
         const querySnapShot = await queryElements("Schedulers", "uidProfessional", users.uid)
         let hoursToButtonArray;
-        
+
         if (querySnapShot.empty === true) {
             return await addDoc(collection(db, "Schedulers"), newArrayObject)
         } else {
@@ -120,13 +117,13 @@ const docData = {
         }
     }
 
-  async function saveDate(e) {
+    async function saveDate(e) {
         e.preventDefault()
-        console.log("enviou");
+        //console.log("enviou");
         let flag = null
         let fileId = null
         console.log(date)
-        
+
         console.log('testeSaveDate', newArrayObject)
 
         const querySnapShot = await queryElements("Schedulers", "uidProfessional", users.uid)
@@ -152,8 +149,8 @@ const docData = {
         }
         if (flag === true) {
             console.log('lets update => ', fileId, newArrayObj)
-             console.log("hoursToButton",hoursToButton);
-            newArrayObject = { ...docData, "hoursAvailable": { ...hoursToSchedule,...hoursToButton } }
+            console.log("hoursToButton", hoursToButton);
+            newArrayObject = { ...docData, "hoursAvailable": { ...hoursToSchedule, ...hoursToButton } }
             return await updateDoc(doc(db, "Schedulers", fileId), newArrayObject)
         } else {
             console.log('lets create')
@@ -161,13 +158,13 @@ const docData = {
             return await setDoc(newSchedulerRef, newArrayObject)
         }
     }
-    
+
 
     function onChangeDate(value) {
-    console.log("data",value);
-    setDate(value)
-    setHours([])
-    setHoursToSchedule({})
+        console.log("data", value);
+        setDate(value)
+        setHours([])
+        setHoursToSchedule({})
     }
 
     return (
