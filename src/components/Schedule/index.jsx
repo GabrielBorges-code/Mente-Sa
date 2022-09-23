@@ -29,9 +29,6 @@ export default function Schedule(props) {
     const [day, setDay] = useState(new Date())
     const [fileId, setFileId] = useState('')
     const [isExist, setIsExist] = useState(false)
-    
-    
-
 
     const timers = [
         '07',
@@ -51,8 +48,6 @@ export default function Schedule(props) {
         '21',
         '22',
         '23',
-
-
     ]
 
     const docData = {
@@ -64,25 +59,24 @@ export default function Schedule(props) {
     let hoursToButton = []
     let newArrayObject = {}
 
-    async function queryElements(Collection, fCondition, sCondiditon){
+    async function queryElements(Collection, fCondition, sCondiditon) {
         const q = query(collection(db, Collection), where(fCondition, "==", sCondiditon));
-        //const q = query(collection(db, "Schedulers"), where("uidProfessional", "==", "users.uid"), where("dateSchedule", "==", date));
         const querySnapshot = await getDocs(q)
         return (querySnapshot)
     }
 
     async function saveDate(e) {
         e.preventDefault()
-        let flag=null
+        let flag = null
         let fileId = null
         console.log(day)
         console.log('testeSaveDate', newArrayObject)
 
-        const querySnapShot = await queryElements("Schedulers", "uidProfessional", users.uid )
+        const querySnapShot = await queryElements("Schedulers", "uidProfessional", users.uid)
         if (querySnapShot.empty === true) {
             //console.log("tamanho zero");
             const info = await addDoc(collection(db, "Schedulers"), newArrayObject)
-        }else{
+        } else {
             querySnapShot.forEach(async (file) => {
                 const dateSchedule = file.data().dateSchedule
                 const dFormated = format(day, 'yyyy-MM-dd')
@@ -92,91 +86,84 @@ export default function Schedule(props) {
                     console.log("O dado retornou => ", test)
                     console.log(file.id)
                     flag = true
-                    fileId =file.id
-                } 
-                if(test === false) {
+                    fileId = file.id
+                }
+                if (test === false) {
                     console.log("O dado retornou => ", test)
                 }
             })
         }
-        if(flag===true){
+        if (flag === true) {
             console.log('lets update => ', fileId)
             const info = await updateDoc(doc(db, "Schedulers", fileId), newArrayObject)
-        }else{
+        } else {
             console.log('lets create')
             const newSchedulerRef = doc(collection(db, "Schedulers"))
             const infoS = await setDoc(newSchedulerRef, newArrayObject)
         }
-    } 
+    }
+    
 
     function changeButtonValue(e, value) {
         e.preventDefault()
         hoursToSchedule[value] = true
-        console.log(hoursToSchedule)
+        //console.log(hoursToSchedule)
         newArrayObject = { ...docData, "hoursAvailable": { ...hoursToSchedule } }
-        console.log('estou no new ', newArrayObject)
+        //setHours((prev) => [...prev, value])
+        console.log('ChangeButtonValue')
+        
+        
     }
 
-    async function verifyData(){ //fetch data to populate grid
-         //day
+    async function verifyData() { //fetch data to populate grid
+        //day
+        //fileId
+        const querySnapShot = await queryElements("Schedulers", "uidProfessional", users.uid)
 
-         //fileId
-        const querySnapShot = await queryElements("Schedulers", "uidProfessional", users.uid )
 
-        
         if (querySnapShot.empty === true) {
+<<<<<<< HEAD
             //console.log("tamanho zero");
+=======
+>>>>>>> 6ccbbddb71609877f01e996fde607d148d3f538d
             const info = await addDoc(collection(db, "Schedulers"), newArrayObject)
-        }else{
+        } else {
             querySnapShot.forEach(async (file) => {
                 const dateSchedule = file.data().dateSchedule
                 const dFormated = format(day, 'yyyy-MM-dd')
-                
+
                 const test = [dateSchedule].includes(dFormated)
-                if (test) {
-                    console.log("O dado retornou => ", test)
-                    setFileId(file.id)
-                    setIsExist(true)
+                if (test) { //if exists a firestore element
+
                     const docRef = doc(db, "Schedulers", file.id);
                     const docSnap = await getDoc(docRef);
-                    console.log(docSnap.data())
-                    const {hoursAvailable} = docSnap.data()
+                    setFileId(file.id)
+                    setIsExist(true)
+                    console.log('Test->true -> hoursToSchedule', hoursToSchedule)
+                    const { hoursAvailable } = docSnap.data()
                     hoursToButton = hoursAvailable
-                    console.log('hour', typeof(hoursToButton))
+                    console.log('Test->true -> VerifyData')
+                }
 
-                    console.log('oi')
-                    for(let x in hoursToButton){
-                    console.log('heheeh', x, '=', hoursToButton[x])
-                    {`${hoursToButton[x] ?  "btn btn-success": "btn btn-primary" }`}
-                    }
+                for (let x in hoursToButton) {
 
-                } 
-                
+                    { `${hoursToButton[x] ? "btn btn-success" : "btn btn-primary"}` }
+                    setHours((prev) => [...prev, x])
+                }
+
+                if (hoursToButton.length === 0) {
+                    setHours([])
+                }
             })
         }
-               
-    }
-    
-    function test(){
-        
-        // {timers.map((type) => (
-        //        console.log(hoursToButton)
-        //         // {/* <button onClick={(e) => changeButtonValue(e, type)} className={`${hoursToButton.find(x => x===type) ?  "btn btn-success": "btn btn-primary" }`} >{type}:00</button> */}
-
-        // ))}
-        
     }
 
     useEffect(() => {
-        console.log('sou o newArray', newArrayObj)
         verifyData()
-        test()
-
-
-    }, [day, dateFormat, newArrayObj])
+        
+    }, [day, dateFormat,  newArrayObj])
 
     return (
-
         <Container className={`${styles.min_height} bg-light card d-flex`}>
             <div className="d-flex justify-content-center mt-5 flex-wrap">
                 <div className="">
@@ -186,7 +173,7 @@ export default function Schedule(props) {
                     {timers.map((type) => (
                         <div key={type} style={{ height: "1rem" }} className=" g-3  ">
 
-                            <button onClick={(e) => changeButtonValue(e, type)} className={`${hoursToButton.find(x => x===type) ?  "btn btn-success": "btn btn-primary" }`} >{type}:00</button>
+                            <button onClick={(e) => changeButtonValue(e, type)} className={`${hours.includes(type) ? "btn btn-success" : "btn btn-primary"}`} >{type}:00</button>
                         </div>
                     ))}
                     <div className=" ">
@@ -194,7 +181,6 @@ export default function Schedule(props) {
                     </div>
                 </Form>
             </div>
-
 
 
 

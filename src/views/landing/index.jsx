@@ -81,7 +81,7 @@ export default function Landing() {
     
               </div>
               <div className="pt-4 d-grid gap-5 d-md-flex justify-content-md-center">
-              <a onClick={() => {sendToLogin()}} className="link-access">Já sou cadastrado</a>
+              <Link to="/login" ><a className="link-access">Já sou cadastrado</a> </Link>
                 </div>
             </div>
           </div>

@@ -19,7 +19,7 @@ function ModalCadastroAnamnese (props) {
     //console.log(props);
 
     useEffect(() => {
-        props.setanamnese({
+        props.setAnamnese({
             fdateService,
             fprice,
             ftypeService,
@@ -71,14 +71,14 @@ function ModalCadastroAnamnese (props) {
                             <TextArea type={'text'} typeForm={'form-control'} setSizeRow={3} setClassCol={'col-sm'} name="fsymptoms" value={fsymptoms} setValue={setSymptoms} label={'Sintomas'}/>
                         </div>
 
-                        {/* <div className="row">
+                        <div className="row">
                             <Button onClick={props.onSave}>Salvar</Button>
-                        </div> */}
+                        </div>
 
                      </Form>
                 </Modal.Body>
                 <Modal.Footer>
-                    <Button onClick={props.onSave}>Close</Button>
+                    <Button onClick={props.onHide}>Close</Button>
                 </Modal.Footer>
             </Modal>
         </>
