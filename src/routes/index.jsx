@@ -14,7 +14,7 @@ import Registration from '../views/auth/registration';
 import ProfileUser from '../views/personal/profile';
 import PersonalUser from '../views/personal/personal';
 import ChooseProfessional from '../views/personal/chooseProfessional';
-import Scheduling from '../views/personal/scheduling';
+//import Scheduling from '../views/personal/scheduling';
 
 
 
@@ -68,7 +68,7 @@ export default function Routers() {
                 <Route path ='/registro/usuario/' element={<PersonalUser/>}/>
                 <Route path ='/usuario/perfil' element={<ProfileUser/>}/>
                 <Route path ='/usuario/escolha-profissional' element={<ChooseProfessional/>}/>
-                <Route path ='/usuario/agendamento' element={<Scheduling/>}/>
+                {/* <Route path ='/usuario/agendamento' element={<Scheduling/>}/> */}
 
                 {/* <Route path ='/usuario/perfil' element={<RequireAuthPersonal/>}>
                     <Route path='/usuario/perfil' element={<ProfileUser /> } />

@@ -1,43 +1,38 @@
 import Button from "react-bootstrap/Button";
-import Container from "react-bootstrap/Container";
 import Table from "react-bootstrap/Table";
+import ModalAgendamento from "../../../components/ModalSession/ModalAgendamento";
 
 import { useNavigate } from "react-router-dom";
 
-import Footer from "../../../components/Footer";
-import Header from "../../../components/Header";
-import Stepper from "../../../components/TwoStep";
-
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import styles from "./index.module.css";
 
-function Scheduling() {
-  let navigate = useNavigate();
-  const [] = useState();
+function ChooseProfessional() {
+  let navigate = useNavigate();  
+  
+  const [showModal, setShowModal] = useState(false);  
+  const [formAgendamento, setFormAgendamento] = useState({});
 
-  function save() {
-    //PREPARE TO SAVE
-    navigate("/usuario/agendamento");
+
+  async function handleSave () {
+    console.log(formAgendamento);   
   }
 
+  useEffect(() => {
+
+  },[])
+
   return (
-    <>
-      {/* step 2 */}
-      <Header
-        message={"Escolha um profissional para te acompanhar"}
-        linkBack={"/registro/usuario/"}
-      />
-
-      <Stepper
-        step={"0%"}
-        icon={true}
-        state1={"primary"}
-        state2={"primary"}
-        state3={"secondary"}
-      />
-
-      <Container className={`${styles.content} bg-light card`}>
+     <>
         <h3>Todos os profissionais</h3>
+        <hr></hr>
+
+        <ModalAgendamento 
+          show={showModal}
+          onSave={() => handleSave()}
+          onHide={() => setShowModal(false)}
+          setAgendamento={setFormAgendamento}
+        />
 
         <div>
           <Table responsive="sm">
@@ -67,7 +62,7 @@ function Scheduling() {
                 <td>26 de maio de 2019</td>
                 <td>Psicologia Clinica</td>
                 <td>
-                  <Button>Selecionar</Button>
+                  <Button onClick={() => setShowModal(true)}>Selecionar</Button>
                 </td>
               </tr>
 
@@ -110,18 +105,9 @@ function Scheduling() {
               </tr>
             </tbody>
           </Table>
-        </div>
-
-        <div className="row d-flex justify-content-center">
-          <button onClick={save} className="btn btn-lg col-md-3 btn-primary">
-            Avançar
-          </button>
-        </div>
-      </Container>
-
-      <Footer />
+        </div>        
     </>
   );
 }
 
-export default Scheduling;
+export default ChooseProfessional;

@@ -6,25 +6,47 @@ import ModalCadastroAnamnese from "../../../components/ModalSession/ModalCadastr
 import { CgFileDocument } from "react-icons/cg"
 import { useNavigate } from "react-router-dom";
 
-import {doc, setDoc, addDoc, getDoc, collection, updateDoc} from 'firebase/firestore'
+import {doc, setDoc, addDoc, getDocs, collection, where, query} from 'firebase/firestore';
 import { db, auth } from "../../../services/firebase"; 
-import { useEffect } from "react";
-import { useRef } from "react";
 
 import styles from "./index.module.css";
-import { useState } from "react";
+import { useState, useEffect, useRef } from "react";
 
 function Session() {
     let navigate = useNavigate();
-    //const [users, setUsers] = useState(JSON.parse(sessionStorage.getItem("@AuthFirebase:user")))
+    const [users, setUsers] = useState(JSON.parse(sessionStorage.getItem("@AuthFirebase:user")))
+
+    console.log(users);
 
     const [showModal, setShowModal] = useState(false);  
+    const [sessionList, setSessionList] = useState([]);
+    const [formAnamnese, setFormAnamnese] = useState({});
+    // const [duration, setDuration] = useState('')
+    // const [hourSession, setHourSession] = useState('')
+    // const [namePatient, setNamePatient] = useState('')
+    // const [idProfessional,setIdProfessional] = useState('')
+    // const [status, setStatus] = useState('')
+
     
     const formRef = useRef();
+
+    async function handleShowSessions () {
+        const q = query(collection(db, "Session"), where("professional.uid", "==", users.uid));
+        const querySnapshot = await getDocs(q);
+        
+        querySnapshot.forEach((doc) => {
+        // doc.data() is never undefined for query doc snapshots
+            //console.log(doc.data());
+            if (sessionList.length === 0) {
+                setSessionList(response => [...response, doc.data()]);
+            } 
+        });           
+        //console.log("LIST ", sessionList);
+    }
     
-    const handleSave = () => { //PREPARE TO SAVE
-        const data = formRef.current.getData();
-        console.log(data);
+    async function handleSave () { 
+        console.log(formAnamnese);        
+        
         
         // e.preventDefault()
         //   const info = await setDoc(doc(db, "Anamnese", users.uid),{
@@ -39,6 +61,12 @@ function Session() {
         // })
     };
 
+    useEffect(() => {
+        handleShowSessions();
+        //handleSave();
+      },[])
+    
+
     return (
         <>
             <h3>Sessoes</h3>
@@ -46,9 +74,9 @@ function Session() {
 
             <ModalCadastroAnamnese
                 show={showModal}
-                onHide={() => setShowModal(false)}
-                outerRef = {formRef}
-                onOpen = {() => handleSave()}
+                onSave={() => handleSave()}
+                setAnamnese = {setFormAnamnese}
+                onHide = {() => setShowModal(false)}
             />
 
             <div>
@@ -66,13 +94,32 @@ function Session() {
                     </thead>
 
                     <tbody className={styles.color_td}>
-                        <tr>
+
+                    {
+                        sessionList?.map((item)=>{
+                            console.log("ITEM: ", item.id);
+                            return (
+                                <tr key={item.id}>
+                                    <td><img src="https://files.tecnoblog.net/wp-content/uploads/2018/09/linus-torvalds-dedo-meio.jpg" alt="foto perfil" /></td>
+                                    <td>{item.patient.name}</td>
+                                    <td>{item.dateSession}</td>
+                                    <td>{item.hourSession}</td>
+                                    <td>{item.duration}</td>
+                                    <td><Button className="mt-2 btn btn-primary" onClick={() => setShowModal(true)}><i><CgFileDocument /></i></Button></td>
+                                    <td>{item.status[0]}</td>                                
+                                </tr>
+                            )
+                        })
+                    }
+                        
+
+                        {/* <tr>
                             <td><img src="https://files.tecnoblog.net/wp-content/uploads/2018/09/linus-torvalds-dedo-meio.jpg" alt="foto perfil" /></td>
                             <td>João Sousa</td>
                             <td>20/09/2022</td>
                             <td>14:00</td>
                             <td>50min</td>
-                            <td><Button className="mt-2 btn btn-primary" onClick={() => setShowModal(true)}><i><CgFileDocument /></i></Button></td>
+                            <td><Button className="mt-2 btn btn-primary" onClick={() => handleSave()}><i><CgFileDocument /></i></Button></td>
                             <td>Pendente</td>
                         </tr>
 
@@ -85,7 +132,7 @@ function Session() {
                             <td>50min</td>
                             <td><Button className="mt-2 btn btn-primary"><i><CgFileDocument /></i></Button></td>
                             <td>Pendente</td>
-                        </tr>
+                        </tr> */}
 
                     </tbody>
                 </Table>
