@@ -109,19 +109,19 @@ function Personal() {
 
       <Container className={`${styles.min_height} bg-light card`}>
         <Form noValidate validated={validated} onSubmit={handleSubmit}>
-        <Form.Group className="mb-5" >
-        <h3>Dados Pessoais</h3>
+        <Form.Group className="mb-1" >
+        <h3>Dados pessoais</h3>
             <div className="row">     
             <Input type={'text'} typeForm={'form-control'} value={name} setValue={setName} label={'Nome Completo'}required={true}/>
             </div>
 
-            <div className="row">
+            <div className="row mt-1">
             
             <Input type={'text'} typeForm={'form-control'} value={phone} setValue={setPhone} setClassCol={'col-sm'} label={'Telefone'} required={true}/>
             
             </div>
-            <div className="row">
-              <Input type={'date'} typeForm={'form-control'} value={dateBorn} setValue={setDateBorn} setClassCol={'col-sm'} label={'Data Nascimento'} />
+            <div className="row mt-1">
+              <Input type={'date'} typeForm={'form-control'} value={dateBorn} setValue={setDateBorn} setClassCol={'col-sm'} label={'Data de Nascimento'} />
               <InputSelect label={'Estado Civil'} value={civilState} setValue={setCivilState} options={['Solteiro','Casado','Divorciado','Viúvo']} />
               <InputSelect label={'Sexo'} value={genre} setValue={setGenre} options={['Masculino','Feminino', 'Prefiro não responder']} />
             </div>
@@ -131,13 +131,13 @@ function Personal() {
           <Form.Group className="mb-5" >
           
           <h3>Endereço</h3>
-          <div className="row">
+          <div className="row mt-1">
             <Input type={'text'} typeForm={'form-control'} value={street} setValue={setStreet} setClassCol={'col-sm-7'} label={'Logradouro'} />
             <Input type={'text'} typeForm={'form-control'} value={numberHouse} setValue={setNumberHouse} setClassCol={'col-sm'} label={'Número'}/>
             <Input type={'text'} typeForm={'form-control'} value={complement} setValue={setComplement} setClassCol={'col-sm'} label={'Complemento'}/>
             </div>
 
-            <div className="row g-3">
+            <div className="row g-3 mt-1">
             <Input type={'text'} typeForm={'form-control'} value={district} setValue={setDistrict} setClassCol={'col-sm-7'} label={'Bairro'}/>
             <Input type={'text'} typeForm={'form-control'} value={state} setValue={setState} setClassCol={'col-sm'} label={'Estado'}/>
             <Input type={'text'} typeForm={'form-control col-sm'} value={city} setValue={setCity} setClassCol={'col-sm'} label={'Cidade'}/>
@@ -146,7 +146,7 @@ function Personal() {
 
           
 
-          <div className="row d-flex justify-content-center"> 
+          <div className="row d-flex justify-content-center mb-4"> 
               <button type="submit"   className='btn btn-lg col-md-3 btn-primary'>Avançar</button>
           </div>
         </Form>

@@ -80,7 +80,7 @@ export default function Landing() {
                 </div>
     
               </div>
-              <div className="pt-4 d-grid gap-5 d-md-flex justify-content-md-center">
+              <div className="pt-4 d-grid gap-5 text-center d-md-flex justify-content-md-center">
               <Link to="/login" ><a className="link-access">Já sou cadastrado</a> </Link>
                 </div>
             </div>

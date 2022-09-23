@@ -92,7 +92,7 @@ export default function Registration() {
                         />
                       </div>
 
-                      <div className="row">
+                      <div className="row  mt-1">
                         <Input
                           type={"password"}
                           typeForm={"form-control"}
@@ -102,7 +102,7 @@ export default function Registration() {
                           label={"Senha"}
                         />
                       </div>
-                      <div className="row">
+                      <div className="row mt-1">
                         <Input
                           type={"password"}
                           typeForm={"form-control"}
@@ -113,13 +113,13 @@ export default function Registration() {
                         />
                       </div>
 
-                      <div className="d-flex justify-content-end align-items-center">
+                      <div className="d-flex justify-content-end align-items-center  mt-1">
                         <a onClick={() => {sendToLogin()}} className="link-access text-body">
                           Já sou cadastrado. Quero fazer login!
                         </a>
                       </div>
 
-                      <div className="text-center text-lg-start mt-4 pt-2">
+                      <div className="text-center text-lg-center mt-4 pt-2">
                         <button
                           type="submit"
                           className="btn btn-primary btn-lg"
