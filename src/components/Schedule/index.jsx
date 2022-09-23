@@ -29,9 +29,15 @@ export default function Schedule(props) {
     const [day, setDay] = useState(new Date())
     const [fileId, setFileId] = useState('')
     const [isExist, setIsExist] = useState(false)
-    const [hoursToSchedule, setHoursToSchedule] = useState({})
-    const [hoursToButton, setHoursToButton] = useState({})
 
+    
+
+    const [hoursToSchedule, setHoursToSchedule] = useState({})
+      // let hoursToSchedule = {} // "08": true,
+      const [hoursToButton, setHoursToButton] = useState([])
+      const [copyHoursToButton, setCopyHoursToButton] = useState([])
+
+    //   let hoursToButton = []
     const timers = [
         '07',
         '08',
@@ -53,21 +59,34 @@ export default function Schedule(props) {
     ]
 
 
-    let newArrayObject;
-    useEffect(() => {
-        console.log("hoursToSchedule", hoursToSchedule)
-        newArrayObject = { ...docData, "hoursAvailable": { ...hoursToSchedule } }
-        console.log("newArrayObject", newArrayObject);
-        verifyData()
+let newArrayObject;
+ useEffect(() => {
+    console.log("hoursToSchedule",hoursToSchedule)
+    newArrayObject = { ...docData, "hoursAvailable": { ...hoursToSchedule } }
+    console.log("newArrayObject",newArrayObject); 
+    console.log("horaaaas",hours); 
+    verifyData()   
     }, [hoursToSchedule])
 
 
     function changeButtonValue(e, value) {
         e.preventDefault()
+        console.log("delete 1",hours); 
+        
+        if(hours.includes(value)){
+        // delete hoursToSchedule[value]
+    //    console.log("delete2",hoursToSchedule); 
 
-        hoursToSchedule[value] = true
-        setHoursToSchedule({ ...hoursToSchedule })
-        setHours((prev) => [...prev, value])
+       hours.splice(hours.indexOf(value), 1);
+  
+       console.log("delete 3",hours); 
+       return  setHours([...hours])
+    //   setHoursToSchedule({...hoursToSchedule})
+        }
+
+        // hoursToSchedule[value] = true
+        // setHoursToSchedule({...hoursToSchedule})
+        setHours((prev)=>[...prev,value])
 
     }
 
@@ -102,6 +121,7 @@ export default function Schedule(props) {
                     const docSnap = await getDoc(docRef);
                     console.log('Test->true -> hoursToSchedule', hoursToSchedule)
                     const { hoursAvailable } = docSnap.data()
+
                     setHoursToButton(hoursAvailable)
                     hoursToButtonArray = hoursAvailable
                     console.log('Test->true -> VerifyData')
@@ -110,7 +130,11 @@ export default function Schedule(props) {
                 for (let x in hoursToButtonArray) {
 
                     { `${hoursToButtonArray[x] ? "btn btn-success" : "btn btn-primary"}` }
-                    setHours((prev) => [...prev, x])
+                    if(!hours.includes(x)){      
+                        console.log("caiu");
+                      setHours((prev) => [...prev, x])  
+                    }
+                    
                 }
 
             })
@@ -149,8 +173,16 @@ export default function Schedule(props) {
         }
         if (flag === true) {
             console.log('lets update => ', fileId, newArrayObj)
-            console.log("hoursToButton", hoursToButton);
-            newArrayObject = { ...docData, "hoursAvailable": { ...hoursToSchedule, ...hoursToButton } }
+             console.log("hoursToButton",hoursToButton);
+
+
+           
+            for (const hour of hours ) {
+                copyHoursToButton[hour] = true
+              }
+
+             
+            newArrayObject = { ...docData, "hoursAvailable": { ...copyHoursToButton } }
             return await updateDoc(doc(db, "Schedulers", fileId), newArrayObject)
         } else {
             console.log('lets create')
@@ -197,48 +229,4 @@ export default function Schedule(props) {
 
 
 
- // async function changeDate() {
-    //     setDate(day)
-    //     const q = query(collection(db, "Schedulers"), where("uidProfessional", "==", users.uid));
-    //     //const q = query(collection(db, "Schedulers"), where("uidProfessional", "==", "users.uid"), where("dateSchedule", "==", date));
-    //     //const q2 = query(collection(db, "Schedulers"), where('dateSchedule', '==', date))
-
-    //     const querySnapshot = await getDocs(q)
-
-    //     if (querySnapshot.empty === true) {
-    //         console.log("tamnho zero");
-    //         const info = await addDoc(collection(db, "Schedulers"), docData)
-    //     } else {
-    //         querySnapshot.forEach(async (file) => {
-    //             const dateSchedule = file.data().dateSchedule
-    //             const dFormated = format(date, 'yyyy-MM-dd')
-    //             console.log('dateSchedule', dateSchedule, 'dFormated', dFormated)
-    //             const test = [dateSchedule].includes(dFormated)
-
-    //             if (test) {
-    //                 console.log("O dado retornou => ", test);
-    //                 console.log(file.id)
-
-    //                 const info = await updateDoc(doc(db, "Schedulers", file.id), docData)
-
-    //             } else {
-    //                 console.log("O dado retornou => ", test);
-    //                 const newSchedulerRef = doc(collection(db, "Schedulers"));
-    //                 const infoS = await setDoc(newSchedulerRef, docData);
-    //                 //const info = await setDoc(doc(collection((db, "Schedulers"), docData)))
-    //             }
-    //         })
-    //     }
-    // }
-
-
-
-    // console.log('day', format(day, 'yyyy-MM-dd'))
-        // console.log('estou no docData', Object.keys(docData))
-
-        // Object.keys(docData).forEach(key => {
-        //     let value = docData[key]
-        //     console.log(`${key}: ${value}`)
-        //     objectKeys.push(value)
-        // })
-// console.log("objkeys",objectKeys)
+ 
