@@ -122,10 +122,6 @@ export default function Schedule(props) {
 
 
         if (querySnapShot.empty === true) {
-<<<<<<< HEAD
-            //console.log("tamanho zero");
-=======
->>>>>>> 6ccbbddb71609877f01e996fde607d148d3f538d
             const info = await addDoc(collection(db, "Schedulers"), newArrayObject)
         } else {
             querySnapShot.forEach(async (file) => {

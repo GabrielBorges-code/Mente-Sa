@@ -109,7 +109,7 @@ function Session() {
     }
 
     useEffect(() => {
-        //handleShowSessions();
+        handleShowSessions();
         //handleEditAnamnese();
     },[])
     
@@ -122,7 +122,7 @@ function Session() {
             <ModalCadastroAnamnese
                 show={showModal}
                 onSave={() => handleSaveAnamnese()}
-                setanamnese = {setFormAnamnese}
+                setAnamnese = {setFormAnamnese}
                 onHide = {() => setShowModal(false)}
             />
 
