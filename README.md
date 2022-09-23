@@ -37,7 +37,7 @@ Para ter acesso à aplicação em sua máquina, faz-se necessário seguir as ins
 1. Clone o repositório do github
 
 ```sh
-   git clone https://github.com/GabrielBorges-code/Mente-Sa/tree/main
+   git clone https://github.com/GabrielBorges-code/Mente-Sa
 ```
 2. Instale todos os módulos necessários
 
