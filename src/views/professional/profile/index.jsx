@@ -65,7 +65,6 @@ function ProfileProfessional() {
       const request = logout()
       navigate('/login')
       window.location.reload(true);
-      
     }
     
     

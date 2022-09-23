@@ -12,7 +12,7 @@ import Stepper from "../../../components/Stepper";
 import { useState } from "react";
 import styles from "./index.module.css";
 
-import { doc, setDoc, getDoc } from "firebase/firestore";
+import { doc, setDoc, getDoc, updateDoc } from "firebase/firestore";
 import { db, auth } from "../../../services/firebase";
 import { useEffect } from "react";
 
@@ -22,7 +22,7 @@ function Personal() {
     JSON.parse(sessionStorage.getItem("@AuthFirebase:user"))
   );
   const [name, setName] = useState(null);
-
+  const [validated, setValidated] = useState(false);
   const [phone, setPhone] = useState(null);
   const [dateBorn, setDateBorn] = useState(null);
   const [civilState, setCivilState] = useState(null);
@@ -51,8 +51,9 @@ function Personal() {
       state: state,
       city: city,
     });
+    changeStatusCompleted()
 
-    navigate("/usuario/perfil");
+    //navigate("/usuario/perfil");
   }
 
   async function handleEdit() {
@@ -84,12 +85,21 @@ function Personal() {
       setStreet(street)  
   }
 
+  async function changeStatusCompleted() {
+    const usersRef = doc(db, 'Users', users.uid)
+    console.log(usersRef)
+    const request = await updateDoc(usersRef,{formCompleted: true})
+
+  navigate('/usuario/perfil') //NEXT BUTTON
+
+  }
+
   useEffect(() => {
     console.log(users);
     handleEdit();
   }, []);
 
-  const [validated, setValidated] = useState(false);
+  
 
   const handleSubmit = (event) => {
     const form = event.currentTarget;
@@ -146,7 +156,7 @@ function Personal() {
 
             <div className="row">
               <Input
-                type={"text"}
+                type={"date"}
                 typeForm={"form-control"}
                 setClassCol={"col-sm"}
                 label={"Data Nascimento"}

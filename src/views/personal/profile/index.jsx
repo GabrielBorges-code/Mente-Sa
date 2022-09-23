@@ -74,6 +74,11 @@ function ProfileProfessional() {
 
   let navigate = useNavigate();
   const [currentView, setCurrentView] = useState("home");
+  
+  function handleEditProfile(){
+    navigate('/registro/profissional')
+
+  }
 
   function toSchedule() {
     //PREPARE TO SAVE
@@ -94,7 +99,7 @@ function ProfileProfessional() {
             </button>
           </div>
           {/* name, phone, dateBorn, civilState, genre, street, numberHouse, complement, district, state, city */}
-          <p>
+          {/* <p>
             Nome: <b>{name}</b>
           </p>
           <p>
@@ -126,7 +131,7 @@ function ProfileProfessional() {
           </p>
           <p>
             Cidade: <b>{city}</b>
-          </p>
+          </p> */}
         </Container>
       );
     } else if (currentView === "session") {
