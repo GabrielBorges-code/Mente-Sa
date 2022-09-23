@@ -1,0 +1,36 @@
+.content {
+    min-height: 40rem;
+    margin-top: 3em;
+    padding: 3%;
+
+}
+
+span{
+    padding-top: 1rem !important;
+}
+
+.bar{
+    width: 0%;
+}
+
+.progressB{
+    height: 1px;
+}
+
+.bar Button{
+    width: 2rem;
+    height: 2rem;
+}
+
+.divBtnAccess {
+    display: block;
+}
+
+.divBtnAccess button {
+    margin-left: 45%;
+}
+
+.forget_pass {
+    margin-top: 2rem;
+    text-align: center;
+}

@@ -12,11 +12,13 @@ import Stepper from "../../../../components/Stepper";
 
 import styles from "./index.module.css";
 import { useState } from "react";
+import toast from "react-hot-toast";
 
 //credentials of firebase
 import {doc, setDoc, getDoc} from 'firebase/firestore'
 import { db, auth } from "../../../../services/firebase"; 
 import { useEffect } from "react";
+
 
 function Personal() {
   let navigate = useNavigate()
@@ -43,9 +45,9 @@ function Personal() {
       const info = await setDoc(doc(db, "Personal", users.uid),{
           name: name,
           phone: phone,
-          dateBorn:dateBorn,
-          civilState: civilState,
-          genre:genre,
+          dateBorn:dateBorn || "",
+          civilState: civilState || "",
+          genre:genre || "",
           street: street,
           numberHouse: numberHouse,
           complement: complement,
@@ -53,7 +55,8 @@ function Personal() {
           state: state,
           city: city,
       })
-  
+      
+    toast.success("Informações salvas com sucesso!")
     navigate('/registro/profissional/sobre')
   }
 
@@ -61,7 +64,7 @@ function Personal() {
 
     const docRef = doc(db, "Personal", users.uid);
     const docSnap = await getDoc(docRef);
-    const {name, phone, dateBorn, street, numberHouse, complement, district, state, city} = docSnap.data()
+    const {name, phone, dateBorn, street, numberHouse, complement, district, state, city, genre, civilState} = docSnap.data()
     setName(name)
     setPhone(phone)
     setDateBorn(dateBorn)
@@ -71,6 +74,8 @@ function Personal() {
     setDistrict(district)
     setState(state)
     setCity(city)
+    setGenre(genre)
+    setCivilState(civilState)
 }
 
   

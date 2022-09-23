@@ -16,9 +16,6 @@ import {doc, setDoc, addDoc, getDoc, collection, updateDoc} from 'firebase/fires
 import { db, auth } from "../../../../services/firebase"; 
 import { useEffect } from "react";
 
-
-
-
 function Enterprise() {
   let navigate = useNavigate()
   const [users, setUsers] = useState(JSON.parse(sessionStorage.getItem("@AuthFirebase:user")))
@@ -47,7 +44,7 @@ function Enterprise() {
   };
   
   async function handleSaveorEdit(e){ //PREPARE TO SAVE OR EDIT
-    //TODO we have changing fiels: "data nascimento", "estado civil", "sexo"
+    //TODO we have changing fields: "data nascimento", "estado civil", "sexo"
     
       const info = await setDoc(doc(db, "Enterprise", users.uid),{
           logradouro: logradouro,
@@ -65,7 +62,7 @@ function Enterprise() {
   }
 
   async function handleEdit(){
-
+      
       const docRef = doc(db, "Enterprise", users.uid);
       const docSnap = await getDoc(docRef);
       const {city, complement, district, emailEnterprise, logradouro, number, phoneEnterprise, state} = docSnap.data()

@@ -12,121 +12,178 @@ import Stepper from "../../../components/Stepper";
 import { useState } from "react";
 import styles from "./index.module.css";
 
-import {doc, setDoc, getDoc} from 'firebase/firestore'
-import { db, auth } from "../../../services/firebase"; 
+import { doc, setDoc, getDoc, updateDoc } from "firebase/firestore";
+import { db, auth } from "../../../services/firebase";
 import { useEffect } from "react";
 
 function Personal() {
   let navigate = useNavigate();
-  const [users, setUsers] = useState(JSON.parse(sessionStorage.getItem("@AuthFirebase:user")))
+  const [users, setUsers] = useState(
+    JSON.parse(sessionStorage.getItem("@AuthFirebase:user"))
+  );
+  const [name, setName] = useState(null);
+  const [validated, setValidated] = useState(false);
+  const [phone, setPhone] = useState(null);
+  const [dateBorn, setDateBorn] = useState(null);
+  const [civilState, setCivilState] = useState(null);
+  const [genre, setGenre] = useState(null);
+  const [street, setStreet] = useState(null);
+  const [numberHouse, setNumberHouse] = useState(null);
+  const [complement, setComplement] = useState(null);
+  const [district, setDistrict] = useState(null);
+  const [state, setState] = useState(null);
+  const [city, setCity] = useState(null);
 
-  const [name, setName] = useState('')
-  
-  const [phone, setPhone] = useState('')
-  const [dateBorn, setDateBorn] = useState()
-  const [civilState, setCivilState] = useState('')
-  const [genre, setGenre] = useState('')
-  const [street, setStreet] = useState('')
-  const [numberHouse, setNumberHouse] = useState('')
-  const [complement, setComplement] = useState('')
-  const [district, setDistrict] = useState('')
-  const [state, setState] = useState('')
-  const [city, setCity] = useState('')
-
-  async function handleSave(e){ //PREPARE TO SAVE
+  async function handleSave(e) {
+    //PREPARE TO SAVE
 
     //TODO we have changing fiels: "data nascimento", "estado civil", "sexo"
-    e.preventDefault()
-      const info = await setDoc(doc(db, "PatientePersonal", users.uid),{
-          name: name,
-          phone: phone,
-          street: street,
-          numberHouse: numberHouse,
-          complement: complement,
-          district: district,
-          state: state,
-          city: city,
-      })
-  
-    navigate('/usuario/perfil')
+    const info = await setDoc(doc(db, "PatientePersonal", users.uid), {
+      name: name,
+      phone: phone,
+      dateBorn: dateBorn,
+      civilState: civilState,
+      genre: genre,
+      street: street,
+      numberHouse: numberHouse,
+      complement: complement,
+      district: district,
+      state: state,
+      city: city,
+    });
+    changeStatusCompleted()
+
+    //navigate("/usuario/perfil");
   }
+
+  async function handleEdit() {
+    const docRef = doc(db, "PatientePersonal", users.uid);
+    const docSnap = await getDoc(docRef);
+    const {
+      city,
+      complement,
+      district,
+      name,
+      numberHouse,
+      phone,
+      state,
+      street,      
+      civilState,
+      dateBorn,
+      genre,
+    } = docSnap.data();
+      setCity(city)
+      setCivilState(civilState)
+      setComplement(complement)
+      setDateBorn(dateBorn)
+      setDistrict(district)
+      setGenre(genre)
+      setName(name)
+      setNumberHouse(numberHouse)
+      setPhone(phone)
+      setState(state)
+      setStreet(street)  
+  }
+
+  async function changeStatusCompleted() {
+    const usersRef = doc(db, 'Users', users.uid)
+    console.log(usersRef)
+    const request = await updateDoc(usersRef,{formCompleted: true})
+
+  navigate('/usuario/perfil') //NEXT BUTTON
+
+  }
+
+  useEffect(() => {
+    console.log(users);
+    handleEdit();
+  }, []);
+
+  
+
+  const handleSubmit = (event) => {
+    const form = event.currentTarget;
+    event.preventDefault();
+
+    if (form.checkValidity() === false) {
+      event.stopPropagation();
+      return setValidated(true);
+    }
+    setValidated(true);
+    handleSave();
+  };
 
   return (
     <>
       <Header message={"Olá paciente, queremos te conhecer!"} linkBack={"/"} />
       {/* steper */}
-      <Stepper
-        step={'0'}
+      {/* <Stepper
+        step={"0"}
         icon={true}
         state1={"primary"}
         state2={"secondary"}
         state3={"secondary"}
-      />
+      /> */}
 
       <Container className={`${styles.content} bg-light card`}>
-        <Form onSubmit={handleSave}>
+        <Form noValidate validated={validated} onSubmit={handleSubmit}>
           <Form.Group className="mb-5">
             <h3>Dados Pessoais</h3>
 
             <div className="row">
-            <Input
+              <Input
                 type={"text"}
                 typeForm={"form-control"}
                 setClassCol={"col-sm"}
                 label={"Nome"}
-                value={name} 
+                value={name}
                 setValue={setName}
+                required={true}
               />
             </div>
 
-             <div className="row">
-             
+            <div className="row">
               <Input
                 type={"number"}
                 typeForm={"form-control"}
                 setClassCol={"col-sm"}
                 label={"Telefone"}
-                value={phone} 
+                value={phone}
                 setValue={setPhone}
+                required={true}
               />
             </div>
 
             <div className="row">
               <Input
-                type={"text"}
+                type={"date"}
                 typeForm={"form-control"}
                 setClassCol={"col-sm"}
                 label={"Data Nascimento"}
-                value={dateBorn} 
+                value={dateBorn}
                 setValue={setDateBorn}
               />
-                
-              <InputSelect
-                label={"Estado Civil"}
-                value={civilState} 
-                setValue={setCivilState}
-                options={["Solteiro", "Casado", "Separado", "Divorciado", "Viúvo"]}
-              />
+
+              <InputSelect label={'Estado Civil'} value={civilState} setValue={setCivilState} options={['Solteiro','Casado','Divorciado','Viúvo']} />
+
 
               <InputSelect
                 label={"Sexo"}
-                value={genre} 
+                value={genre}
                 setValue={setGenre}
                 options={["Masculino", "Feminino"]}
               />
-              
             </div>
 
             <h3>Endereço</h3>
 
             <div className="row">
-
               <Input
                 type={"text"}
                 typeForm={"form-control"}
                 setClassCol={"col-sm-8"}
                 label={"Logradouro"}
-                value={street} 
+                value={street}
                 setValue={setStreet}
               />
               <Input
@@ -143,10 +200,9 @@ function Personal() {
                 typeForm={"form-control"}
                 setClassCol={"col-sm"}
                 label={"Complemento"}
-                value={complement} 
+                value={complement}
                 setValue={setComplement}
               />
-              
             </div>
 
             <div className="row">
@@ -163,7 +219,7 @@ function Personal() {
                 typeForm={"form-control"}
                 setClassCol={"col-sm"}
                 label={"Estado"}
-                value={state} 
+                value={state}
                 setValue={setState}
               />
 
@@ -172,12 +228,10 @@ function Personal() {
                 typeForm={"form-control"}
                 setClassCol={"col-sm"}
                 label={"Cidade"}
-                value={city} 
+                value={city}
                 setValue={setCity}
               />
-            
             </div>
-
           </Form.Group>
 
           <div className="row d-flex justify-content-center">
@@ -185,7 +239,6 @@ function Personal() {
               Avançar
             </button>
           </div>
-          
         </Form>
       </Container>
 

@@ -7,7 +7,8 @@
 
 .color_td tr td {
     background-color: #B2DAFA;
-    vertical-align: middle;    
+    vertical-align: middle;
+    
 }
 
 .color_td tr td img {
@@ -15,4 +16,8 @@
     border-radius: 50%;
     height: 100px;
     width: 100px;
+}
+
+h3 {
+    padding-top: 30px;
 }
