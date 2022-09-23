@@ -4,7 +4,7 @@
 
 # 🧠 Mente Sã
 
-Esse projeto foi desenvolvido ao final do curso para aceleração de carreiras do nível Junior para Pleno em React, promovido por uma parceria educacional entre a [Acate] (https://www.acate.com.br/) e a [Gama Academy] (https://gama.academy/). Devido a relevância da problemática nos últimos tempos, escolhemos o ninho da saúde mental para implementarmos os conhecimentos:  ONG Mente SÃ está construindo uma nova plataforma e precisa de um sistema web onde será possível conectar os Psicólogos/Psiquiatras com seus pacientes.
+Esse projeto foi desenvolvido ao final do curso para aceleração de carreiras do nível Junior para Pleno em React, promovido por uma parceria educacional entre a [Acate](https://www.acate.com.br/) e a [Gama Academy](https://gama.academy/). Devido a relevância da problemática nos últimos tempos, escolhemos o ninho da saúde mental para implementarmos os conhecimentos:  ONG Mente SÃ está construindo uma nova plataforma e precisa de um sistema web onde será possível conectar os Psicólogos/Psiquiatras com seus pacientes.
 
 ## 🖥️ O Projeto
 
@@ -19,12 +19,48 @@ Link da aplicação: [Mente Sã](https://dazzling-sundae-cf6238.netlify.app/)
 Design no Figma: [Figma](https://www.figma.com/file/K8C7gVko5gSdNNG5eVdFAs/Mente-Sa---Project-Gama-Academy-team-library?node-id=0%3A1)
 
 ## :green_book: Documentação
-[Product Backlog] (https://docs.google.com/document/d/1rvyLv8miQansTGXsydFrw3JySvP8n8wkF5xNwUIG_u8/edit)
+[Product Backlog](https://docs.google.com/document/d/1rvyLv8miQansTGXsydFrw3JySvP8n8wkF5xNwUIG_u8/edit)
 
-## ⚛️ Tecnologias
+## ⚛️ Tecnologias 
 
 * JavaScript
 * React
 * Firebase
 * Bootstrap
 * Netlify
+
+## :computer: Instruções gerais 
+
+Para ter acesso à aplicação em sua máquina, faz-se necessário seguir as instruções abaixo:
+
+1. Clone o repositório do github
+
+```sh
+   git clone https://github.com/GabrielBorges-code/Mente-Sa/tree/main
+```
+2. Instale todos os módulos necessários
+
+```sh
+    npm install --global yarn
+```
+```sh
+   yarn create @vitejs/app my-react-app --template react
+```
+3. Execute
+```sh 
+   yarn dev
+ ```
+4. Acesse a API localmente
+ ```sh
+No browser:
+    http://localhost:5173/
+```
+
+## :heart: Time de desenvolvedores
+Turma 01 - React - Professor: Kelvin Frade
+
+* [Douglas Mendes](https://github.com/mendesdouglas)
+* [Fernando Neto](https://github.com/FernandoNeto96)
+* [Gabriel Borges](https://github.com/GabrielBorges-code)
+* [Maria Alice](https://github.com/alicemelosousa)
+* [Mariana Leite](https://github.com/marianalm123)
