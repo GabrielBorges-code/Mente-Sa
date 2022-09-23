@@ -51,14 +51,12 @@ export default function Registration() {
           if(professional){
             setTitle('Paciente')
             setProfessional(false)
+            sessionStorage.setItem("@Land:status", 'false')
           }else{
             setTitle('Profissional')
             setProfessional(true)
+            sessionStorage.setItem("@Land:status", 'true')
           }
-          
-            sessionStorage.setItem("@Land:status", professional)
-          
-          
       }
       
 
