@@ -80,7 +80,7 @@ export default function Schedule(props) {
 
         const querySnapShot = await queryElements("Schedulers", "uidProfessional", users.uid )
         if (querySnapShot.empty === true) {
-            console.log("tamanho zero");
+            //console.log("tamanho zero");
             const info = await addDoc(collection(db, "Schedulers"), newArrayObject)
         }else{
             querySnapShot.forEach(async (file) => {
@@ -125,7 +125,7 @@ export default function Schedule(props) {
 
         
         if (querySnapShot.empty === true) {
-            console.log("tamanho zero");
+            //console.log("tamanho zero");
             const info = await addDoc(collection(db, "Schedulers"), newArrayObject)
         }else{
             querySnapShot.forEach(async (file) => {

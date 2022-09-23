@@ -45,9 +45,9 @@ function Personal() {
       const info = await setDoc(doc(db, "Personal", users.uid),{
           name: name,
           phone: phone,
-          dateBorn:dateBorn,
-          civilState: civilState,
-          genre:genre,
+          dateBorn:dateBorn || "",
+          civilState: civilState || "",
+          genre:genre || "",
           street: street,
           numberHouse: numberHouse,
           complement: complement,

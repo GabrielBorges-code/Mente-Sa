@@ -45,9 +45,9 @@ function ModalAgendamento (props) {
                         <InputSelect label={'Tipo de Atendimento'} value={ftypeService} setValue={setTypeService} options={['Online','Presencial', 'Ambos']} />
                     </div>
 
-                    <div className="row">
+                    {/* <div className="row">
                         <Button onClick={props.onSave}>Salvar</Button>
-                    </div>
+                    </div> */}
                 </Form>
       
             </Modal.Body>

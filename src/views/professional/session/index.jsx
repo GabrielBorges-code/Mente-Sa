@@ -5,66 +5,113 @@ import ModalCadastroAnamnese from "../../../components/ModalSession/ModalCadastr
 
 import { CgFileDocument } from "react-icons/cg"
 import { useNavigate } from "react-router-dom";
+import toast from "react-hot-toast";
 
 import {doc, setDoc, addDoc, getDocs, collection, where, query} from 'firebase/firestore';
 import { db, auth } from "../../../services/firebase"; 
 
 import styles from "./index.module.css";
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect } from "react";
+import { forEach } from "lodash";
 
 function Session() {
     let navigate = useNavigate();
     const [users, setUsers] = useState(JSON.parse(sessionStorage.getItem("@AuthFirebase:user")))
 
-    console.log(users);
+    //console.log(users);
 
     const [showModal, setShowModal] = useState(false);  
     const [sessionList, setSessionList] = useState([]);
     const [formAnamnese, setFormAnamnese] = useState({});
-    // const [duration, setDuration] = useState('')
-    // const [hourSession, setHourSession] = useState('')
-    // const [namePatient, setNamePatient] = useState('')
-    // const [idProfessional,setIdProfessional] = useState('')
-    // const [status, setStatus] = useState('')
+    const [idSessionList, setIdSessionList] = useState([]);
+    const [currentIdSession, setCurrentIdSession] = useState('');
 
-    
-    const formRef = useRef();
 
     async function handleShowSessions () {
         const q = query(collection(db, "Session"), where("professional.uid", "==", users.uid));
         const querySnapshot = await getDocs(q);
-        
+       
         querySnapshot.forEach((doc) => {
         // doc.data() is never undefined for query doc snapshots
-            //console.log(doc.data());
+            console.log("DATA: ", doc.data());
             if (sessionList.length === 0) {
-                setSessionList(response => [...response, doc.data()]);
+                setIdSessionList((response) => [...response, doc.id]);
+                setSessionList((response) => [...response, doc.data()]);
             } 
-        });           
+        });
+        //console.log("ID LIST ", idSessionList);
         //console.log("LIST ", sessionList);
     }
+
+    // Get o ID da sessao
+    function getIdSession (id) {
+        idSessionList.forEach((item, index) => {
+            if (index == id) {                
+                //console.log("ACHOU", item);
+                setCurrentIdSession(item);
+            }
+        });
+    }
+
+    // Abre Modal e seta o ID referente a sessao clicada
+    function openModal (id) {    
+        getIdSession(id) 
+        setShowModal(true);
+    }
     
-    async function handleSave () { 
-        console.log(formAnamnese);        
-        
-        
-        // e.preventDefault()
-        //   const info = await setDoc(doc(db, "Anamnese", users.uid),{
-        //       dateService: dateService,
-        //       price: price,
-        //       typeService: typeService,
-        //       complaint: complaint,
-        //       evolutionComplaint: evolutionComplaint,
-        //       typeComplaint: typeComplaint,
-        //       transformationComplaint: transformationComplaint,
-        //       symptoms: symptoms,
-        // })
+    async function handleSaveAnamnese () { 
+        //console.log("FORM ANAMNESE: ", formAnamnese);           
+        //console.log("CURRENT ID SESSION: ", currentIdSession);
+
+        const info = await setDoc(doc(db, "Session", currentIdSession),{
+            anamnese: {
+                dateService: formAnamnese.fdateService,
+                price: formAnamnese.fprice,
+                typeService: formAnamnese.ftypeService,
+                complaint: formAnamnese.fcomplaint,
+                evolutionComplaint: formAnamnese.fevolutionComplaint,
+                typeComplaint: formAnamnese.ftypeComplaint,
+                transformationComplaint: formAnamnese.ftransformationComplaint,
+                symptoms: formAnamnese.fsymptoms
+            }            
+        });
+
+        toast.success("Informações salvas com sucesso!")
+        setShowModal(false);
     };
 
+    async function handleEditAnamnese () {
+        const docRef = doc(db, "Session", currentIdSession);
+        const docSnap = await getDoc(doc(db, docRef, "anamnese"));
+        const {
+            dateService, 
+            price, 
+            typeService, 
+            complaint, 
+            evolutionComplaint, 
+            typeComplaint, 
+            transformationComplaint, 
+            symptoms
+        } = docSnap.data();
+
+        setFormAnamnese({
+            dateService, 
+            price, 
+            typeService, 
+            complaint, 
+            evolutionComplaint, 
+            typeComplaint, 
+            transformationComplaint, 
+            symptoms
+        });
+
+        console.log("SET FORM ANAMNESE: ", setFormAnamnese);
+    }
+
     useEffect(() => {
-        handleShowSessions();
-        //handleSave();
-      },[])
+        //handleShowSessions();
+        //handleEditAnamnese();
+    },[])
     
 
     return (
@@ -74,8 +121,8 @@ function Session() {
 
             <ModalCadastroAnamnese
                 show={showModal}
-                onSave={() => handleSave()}
-                setAnamnese = {setFormAnamnese}
+                onSave={() => handleSaveAnamnese()}
+                setanamnese = {setFormAnamnese}
                 onHide = {() => setShowModal(false)}
             />
 
@@ -96,16 +143,17 @@ function Session() {
                     <tbody className={styles.color_td}>
 
                     {
-                        sessionList?.map((item)=>{
-                            console.log("ITEM: ", item.id);
+                        sessionList?.map((item, index)=>{
+                            //console.log("INDEX: ", getCurrentIdSession(index));
+                            
                             return (
-                                <tr key={item.id}>
+                                <tr key={index}>
                                     <td><img src="https://files.tecnoblog.net/wp-content/uploads/2018/09/linus-torvalds-dedo-meio.jpg" alt="foto perfil" /></td>
                                     <td>{item.patient.name}</td>
                                     <td>{item.dateSession}</td>
                                     <td>{item.hourSession}</td>
                                     <td>{item.duration}</td>
-                                    <td><Button className="mt-2 btn btn-primary" onClick={() => setShowModal(true)}><i><CgFileDocument /></i></Button></td>
+                                    <td><Button className="mt-2 btn btn-primary" onClick={() => openModal(index)}><i><CgFileDocument /></i></Button></td>
                                     <td>{item.status[0]}</td>                                
                                 </tr>
                             )
