@@ -4,6 +4,7 @@ import ModalAgendamento from "../../../components/ModalSession/ModalAgendamento"
 
 import { useNavigate } from "react-router-dom";
 
+<<<<<<< HEAD
 import { db } from "../../../services/firebase";
 
 import {
@@ -145,4 +146,112 @@ function ChooseProfessional() {
   );
 }
 // C:/Users/Gabriel/Documents/Projetos/Dev-For-Tech-React/outra/Mente-Sa/src/views/personal/chooseProfessional/index.jsx:3:29
+=======
+import { useState, useEffect } from "react";
+import styles from "./index.module.css";
+
+function ChooseProfessional() {
+  let navigate = useNavigate();  
+  
+  const [showModal, setShowModal] = useState(false);  
+  const [formAgendamento, setFormAgendamento] = useState({});
+
+
+  async function handleSave () {
+    console.log(formAgendamento);   
+  }
+
+  useEffect(() => {
+
+  },[])
+
+  return (
+     <>
+        <h3>Todos os profissionais</h3>
+        <hr></hr>
+
+        <ModalAgendamento 
+          show={showModal}
+          onSave={() => handleSave()}
+          onHide={() => setShowModal(false)}
+          setAgendamento={setFormAgendamento}
+        />
+
+        <div>
+          <Table responsive="sm">
+            <thead>
+              <tr>
+                <th></th>
+                <th>Nome</th>
+                <th>Cargo</th>
+                <th>CRM / CRP</th>
+                <th>Data</th>
+                <th>Área de Atuação</th>
+                <th></th>
+              </tr>
+            </thead>
+
+            <tbody className={styles.color_td}>
+              <tr>
+                <td>
+                  <img
+                    src="https://files.tecnoblog.net/wp-content/uploads/2018/09/linus-torvalds-dedo-meio.jpg"
+                    alt="foto perfil"
+                  />
+                </td>
+                <td>João Sousa</td>
+                <td>Psicólogo</td>
+                <td>08/65974</td>
+                <td>26 de maio de 2019</td>
+                <td>Psicologia Clinica</td>
+                <td>
+                  <Button onClick={() => setShowModal(true)}>Selecionar</Button>
+                </td>
+              </tr>
+
+              <br />
+
+              <tr>
+                <td>
+                  <img
+                    src="https://files.tecnoblog.net/wp-content/uploads/2018/09/linus-torvalds-dedo-meio.jpg"
+                    alt="foto perfil"
+                  />
+                </td>
+                <td>Beatriz Brum</td>
+                <td>Psicólogo</td>
+                <td>06/97536</td>
+                <td>26 de maio de 2019</td>
+                <td>Psicologia Clinica</td>
+                <td>
+                  <Button>Selecionar</Button>
+                </td>
+              </tr>
+
+              <br />
+
+              <tr>
+                <td>
+                  <img
+                    src="https://files.tecnoblog.net/wp-content/uploads/2018/09/linus-torvalds-dedo-meio.jpg"
+                    alt="foto perfil"
+                  />
+                </td>
+                <td>Camila Fellix</td>
+                <td>Psicanalista</td>
+                <td>06/97536</td>
+                <td>26 de maio de 2019</td>
+                <td>Psicanalista Clinica</td>
+                <td>
+                  <Button>Selecionar</Button>
+                </td>
+              </tr>
+            </tbody>
+          </Table>
+        </div>        
+    </>
+  );
+}
+
+>>>>>>> 9214c64b70c7aec4d2a1d9cc1c801181055211be
 export default ChooseProfessional;

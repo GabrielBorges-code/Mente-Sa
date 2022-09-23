@@ -22,7 +22,8 @@ function Footer() {
               </a>
             </li>
           </ul>
-          <p className="text-center text-muted">Mente Sã © 2022</p>
+          <a href="/" className="nav-link">
+          <p className="text-center text-muted">Mente Sã © 2022</p></a>
         </footer>
       </div>
     </>

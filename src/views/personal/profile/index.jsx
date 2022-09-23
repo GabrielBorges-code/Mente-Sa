@@ -150,7 +150,18 @@ function ProfileProfessional() {
       return (
         <Container className={`${styles.content} bg-light card`}>
           <div>
+<<<<<<< HEAD
             <ChooseProfessional />
+=======
+            {/* <button onClick={toSchedule} className="mt-2 btn btn-primary">
+              <i>
+                <HiOutlinePencilAlt />
+              </i>
+              Agenda
+            </button> */}
+            <ChooseProfessional />           
+
+>>>>>>> 9214c64b70c7aec4d2a1d9cc1c801181055211be
           </div>
         </Container>
       );

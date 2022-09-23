@@ -19,7 +19,11 @@ function ModalCadastroAnamnese (props) {
     //console.log(props);
 
     useEffect(() => {
+<<<<<<< HEAD
         props.setAnamnese({
+=======
+        props.setFormAnamnese({
+>>>>>>> 9214c64b70c7aec4d2a1d9cc1c801181055211be
             fdateService,
             fprice,
             ftypeService,

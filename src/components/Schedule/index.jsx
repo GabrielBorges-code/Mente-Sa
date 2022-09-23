@@ -90,7 +90,7 @@ let newArrayObject;
 
     }
 
-    async function queryElements(Collection, fCondition, sCondiditon) {
+  async function queryElements(Collection, fCondition, sCondiditon) {
         const q = query(collection(db, Collection), where(fCondition, "==", sCondiditon));
         const querySnapshot = await getDocs(q)
         return (querySnapshot)
@@ -106,7 +106,6 @@ let newArrayObject;
         //fileId
         const querySnapShot = await queryElements("Schedulers", "uidProfessional", users.uid)
         let hoursToButtonArray;
-
         if (querySnapShot.empty === true) {
             return await addDoc(collection(db, "Schedulers"), newArrayObject)
         } else {
@@ -121,7 +120,6 @@ let newArrayObject;
                     const docSnap = await getDoc(docRef);
                     console.log('Test->true -> hoursToSchedule', hoursToSchedule)
                     const { hoursAvailable } = docSnap.data()
-
                     setHoursToButton(hoursAvailable)
                     hoursToButtonArray = hoursAvailable
                     console.log('Test->true -> VerifyData')
@@ -190,6 +188,7 @@ let newArrayObject;
             return await setDoc(newSchedulerRef, newArrayObject)
         }
     }
+    
 
 
     function onChangeDate(value) {

@@ -22,7 +22,11 @@ export default function Registration() {
         const [email, setEmail] = useState("")
         const [password, setPassword] = useState("")
         const [repeatPassword, setRepeatPassword] = useState("")
+<<<<<<< HEAD
         const [title, setTitle] = useState('Paciente')
+=======
+        const [title, setTitle] = useState('paciente')
+>>>>>>> 9214c64b70c7aec4d2a1d9cc1c801181055211be
         const [professional, setProfessional ] = useState(sessionStorage.getItem("@Land:status")==='true')
         const [condition, setCondition] = useState()
 
@@ -49,11 +53,19 @@ export default function Registration() {
             return (setProfessional(false))
           }
           if(professional){
+<<<<<<< HEAD
             setTitle('Paciente')
             setProfessional(false)
             sessionStorage.setItem("@Land:status", 'false')
           }else{
             setTitle('Profissional')
+=======
+            setTitle('paciente')
+            setProfessional(false)
+            sessionStorage.setItem("@Land:status", 'false')
+          }else{
+            setTitle('profissional')
+>>>>>>> 9214c64b70c7aec4d2a1d9cc1c801181055211be
             setProfessional(true)
             sessionStorage.setItem("@Land:status", 'true')
           }
@@ -62,7 +74,11 @@ export default function Registration() {
 
       useEffect(() => {
         if(professional){
+<<<<<<< HEAD
           setTitle('Profissional')
+=======
+          setTitle('profissional')
+>>>>>>> 9214c64b70c7aec4d2a1d9cc1c801181055211be
         }
         
         
@@ -113,6 +129,7 @@ export default function Registration() {
                     <form onSubmit={handleRegistration}>
                     <div className="d-flex flex-row align-items-center justify-content-center justify-content-lg-start">
                             {/* <p className="lead fw-normal mb-0 me-3">Registro de paciente</p> */}
+<<<<<<< HEAD
                             <h2>OLÁ {title.toUpperCase()}</h2>
                             
                              
@@ -122,6 +139,17 @@ export default function Registration() {
                         <div className="d-flex justify-content-end align-items-center">
                         <a onClick={() => {setSession()}} className="link-access text-body">
                         {professional  ? 'Registrar como Paciente ': 'Registrar como Profissional' } 
+=======
+                            <h2>Olá, {title}!</h2>
+                            
+                             
+                        </div>
+                        <div className="divider d-flex justify-content-end align-items-center my-4" >
+
+                        <div className="d-flex justify-content-end align-items-center">
+                        <a onClick={() => {setSession()}} className="link-access text-body">
+                        {professional  ? 'Cadastrar como paciente ': 'Cadastrar como profissional' } 
+>>>>>>> 9214c64b70c7aec4d2a1d9cc1c801181055211be
                         </a>
                       </div>
                         </div>
@@ -139,7 +167,7 @@ export default function Registration() {
                         />
                       </div>
 
-                      <div className="row">
+                      <div className="row  mt-1">
                         <Input
                           type={"password"}
                           typeForm={"form-control"}
@@ -149,7 +177,7 @@ export default function Registration() {
                           label={"Senha"}
                         />
                       </div>
-                      <div className="row">
+                      <div className="row mt-1">
                         <Input
                           type={"password"}
                           typeForm={"form-control"}
@@ -160,13 +188,13 @@ export default function Registration() {
                         />
                       </div>
 
-                      <div className="d-flex justify-content-end align-items-center">
+                      <div className="d-flex justify-content-end align-items-center  mt-1">
                         <a onClick={() => {sendToLogin()}} className="link-access text-body">
                           Já sou cadastrado
                         </a>
                       </div>
 
-                      <div className="text-center text-lg-start mt-4 pt-2">
+                      <div className="text-center text-lg-center mt-4 pt-2">
                         <button
                           type="submit"
                           className="btn btn-primary btn-lg"

@@ -30,6 +30,11 @@ export default function Login() {
             const logIn = await signInGoogle(email, password)
         }
 
+        async function sendToRegistration(){
+            
+            navigate ('/registro')
+        }
+
         function sendUrl(){
             
             if(role1 === 'true'){
@@ -64,8 +69,9 @@ export default function Login() {
         }, [ formComplete])
 
         return (
-            <>
+          <>
             <section className="">
+<<<<<<< HEAD
                 <div className="py-5 my-5 container-fluid h-custom">
                     <div className="row d-flex justify-content-center align-items-center h-100">
                     <div className="col-md-9 col-lg-6 col-xl-5">
@@ -101,17 +107,101 @@ export default function Login() {
                                 style={{paddingLeft: "2.5rem", paddingRight: "2.5rem"}}>Login</button>
                             
                         </div>
+=======
+              <div className="py-5 my-5 container-fluid h-custom">
+                <div className="row d-flex justify-content-center align-items-center h-100">
+                  <div className="col-md-9 col-lg-6 col-xl-5">
+                    <img
+                      src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-login-form/draw2.webp"
+                      className="img-fluid"
+                      alt="Sample image"
+                    />
+                  </div>
+                  <div className="col-md-8 col-lg-6 col-xl-4 offset-xl-1">
+                    <form onSubmit={handleLogin}>
+                      {/*<div className="d-flex flex-row align-items-center justify-content-center justify-content-lg-start">
+                         <p className="lead fw-normal mb-0 me-3">
+                          Não sou cadastrado
+                        </p>
+                        <button
+                          onClick={() => {
+                            sendToRegistration();
+                          }}
+                          type="button"
+                          className="btn btn-primary btn-floating mx-1"
+                        >
+                          <i> Cadastrar</i>
+                        </button>
+                      </div>
 
-                        </form>
-                    </div>
-                    </div>
-                </div>
-                <div>
-                    <Footer/>
+                      <div className="divider d-flex align-items-center my-4">
+                        <p className="text-center fw-bold mx-3 mb-0">Ou</p>
+                      </div> */}
                     
-                </div>
-                </section>
+                    <div className="d-flex justify-content-end align-items-center">
+                        <p className="mx-2 my-0">Novo aqui na ONG? </p>
+                        <a
+                          onClick={() => {
+                            sendToRegistration();
+                          }}
+                          className="link-access text-body"
+                        >
+                            Cadastre-se 
+                        </a>
+                      </div>
 
-            </>
-        )
+                      {/* <!-- Email input --> */}
+                      <div className="row">
+                        <Input
+                          type={"text"}
+                          typeForm={"form-control"}
+                          setClassCol={"col-sm"}
+                          value={email}
+                          setValue={setEmail}
+                          label={"Email"}
+                        />
+                      </div>
+                      <div className="row mt-1">
+                        <Input
+                          type={"password"}
+                          typeForm={"form-control"}
+                          setClassCol={"col-sm"}
+                          value={password}
+                          setValue={setPassword}
+                          label={"Senha"}
+                        />
+                      </div>
+
+>>>>>>> 9214c64b70c7aec4d2a1d9cc1c801181055211be
+
+                      <div className="text-center text-lg-center mt-4 pt-2">
+                        <button
+                          type="submit"
+                          className="btn btn-primary btn-lg"
+                          style={{
+                            paddingLeft: "2.5rem",
+                            paddingRight: "2.5rem",
+                          }}
+                        >
+                          Login
+                        </button>
+                        {error && (
+                          <p className="small fw-bold mt-2 pt-1 mb-0">
+                            Don't have an account?{" "}
+                            <a href="#!" className="link-danger">
+                              Register
+                            </a>
+                          </p>
+                        )}
+                      </div>
+                    </form>
+                  </div>
+                </div>
+              </div>
+              <div>
+                <Footer />
+              </div>
+            </section>
+          </>
+        );
 }

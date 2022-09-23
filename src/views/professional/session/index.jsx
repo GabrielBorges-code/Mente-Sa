@@ -7,20 +7,34 @@ import { CgFileDocument } from "react-icons/cg"
 import { useNavigate } from "react-router-dom";
 import toast from "react-hot-toast";
 
+<<<<<<< HEAD
 import {doc, setDoc, addDoc, getDoc,  getDocs, collection, where, query, connectFirestoreEmulator} from 'firebase/firestore';
 import { db, auth } from "../../../services/firebase"; 
 
 import styles from "./index.module.css";
 import { useState, useEffect } from "react";
 import { forEach } from "lodash";
+=======
+import {doc, setDoc, addDoc, getDocs, collection, where, query} from 'firebase/firestore';
+import { db, auth } from "../../../services/firebase"; 
+
+import styles from "./index.module.css";
+import { useState, useEffect, useRef } from "react";
+>>>>>>> 9214c64b70c7aec4d2a1d9cc1c801181055211be
 
 function Session() {
     let navigate = useNavigate();
     const [users, setUsers] = useState(JSON.parse(sessionStorage.getItem("@AuthFirebase:user")))
+<<<<<<< HEAD
+=======
+
+    console.log(users);
+>>>>>>> 9214c64b70c7aec4d2a1d9cc1c801181055211be
 
     const [showModal, setShowModal] = useState(false);  
     const [sessionList, setSessionList] = useState([]);
     const [formAnamnese, setFormAnamnese] = useState({});
+<<<<<<< HEAD
     const [idSessionList, setIdSessionList] = useState([]);
     const [currentIdSession, setCurrentIdSession] = useState('');
 
@@ -119,11 +133,40 @@ function Session() {
         //     }            
         // });
         //console.log("INFO: ", info);
+=======
+    // const [duration, setDuration] = useState('')
+    // const [hourSession, setHourSession] = useState('')
+    // const [namePatient, setNamePatient] = useState('')
+    // const [idProfessional,setIdProfessional] = useState('')
+    // const [status, setStatus] = useState('')
+
+    
+    const formRef = useRef();
+
+    async function handleShowSessions () {
+        const q = query(collection(db, "Session"), where("professional.uid", "==", users.uid));
+        const querySnapshot = await getDocs(q);
+        
+        querySnapshot.forEach((doc) => {
+        // doc.data() is never undefined for query doc snapshots
+            //console.log(doc.data());
+            if (sessionList.length === 0) {
+                setSessionList(response => [...response, doc.data()]);
+            } 
+        });           
+        //console.log("LIST ", sessionList);
+    }
+    
+    async function handleSave () { 
+        console.log(formAnamnese);        
+        
+>>>>>>> 9214c64b70c7aec4d2a1d9cc1c801181055211be
         
         toast.success("Informações salvas com sucesso!")
         setShowModal(false);
     };
 
+<<<<<<< HEAD
     async function handleEditSession () {
         console.log('im', currentIdSession)
         const docRef = doc(db, "Session", currentIdSession);
@@ -199,6 +242,12 @@ function Session() {
         handleShowSessions();
         
     },[])
+=======
+    useEffect(() => {
+        handleShowSessions();
+        //handleSave();
+      },[])
+>>>>>>> 9214c64b70c7aec4d2a1d9cc1c801181055211be
     
 
     return (
@@ -208,7 +257,11 @@ function Session() {
 
             <ModalCadastroAnamnese
                 show={showModal}
+<<<<<<< HEAD
                 onSave={() => handleSaveAnamnese()}
+=======
+                onSave={() => handleSave()}
+>>>>>>> 9214c64b70c7aec4d2a1d9cc1c801181055211be
                 setAnamnese = {setFormAnamnese}
                 onHide = {() => setShowModal(false)}
             />
@@ -230,18 +283,31 @@ function Session() {
                     <tbody className={styles.color_td}>
 
                     {
+<<<<<<< HEAD
                         sessionList?.map((item, index)=>{
                             //console.log("INDEX: ", getCurrentIdSession(index));
                             
                             return (
                                 <tr key={index}>
+=======
+                        sessionList?.map((item)=>{
+                            console.log("ITEM: ", item.id);
+                            return (
+                                <tr key={item.id}>
+>>>>>>> 9214c64b70c7aec4d2a1d9cc1c801181055211be
                                     <td><img src="https://files.tecnoblog.net/wp-content/uploads/2018/09/linus-torvalds-dedo-meio.jpg" alt="foto perfil" /></td>
                                     <td>{item.patient.name}</td>
                                     <td>{item.dateSession}</td>
                                     <td>{item.hourSession}</td>
+<<<<<<< HEAD
                                     <td>{item.durationSession}</td>
                                     <td><Button className="mt-2 btn btn-primary" onClick={() => openModal(index.id)}><i><CgFileDocument /></i></Button></td>
                                     <td>{item.status}</td>                                
+=======
+                                    <td>{item.duration}</td>
+                                    <td><Button className="mt-2 btn btn-primary" onClick={() => setShowModal(true)}><i><CgFileDocument /></i></Button></td>
+                                    <td>{item.status[0]}</td>                                
+>>>>>>> 9214c64b70c7aec4d2a1d9cc1c801181055211be
                                 </tr>
                             )
                         })

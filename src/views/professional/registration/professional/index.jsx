@@ -98,7 +98,7 @@ function Professional() {
   return (
     <>
       <Header
-        message={"só mais um pouquinho..."}
+        message={"Só mais um pouquinho..."}
         linkBack={"/registro/profissional/"}
       />
       {/* steper 2 */}
@@ -113,9 +113,9 @@ function Professional() {
       <Container className={`${styles.min_height} bg-light card`}>
         <Form noValidate validated={validated} onSubmit={handleSubmit}>
           <Form.Group className="mb-5">
-            <h3>Dados Profissionais</h3>
+            <h3>Dados profissionais</h3>
 
-            <div className="row">
+            <div className="row  mt-1">
               <Input
                 type={"text"}
                 typeForm={"form-control"}
@@ -131,11 +131,11 @@ function Professional() {
                 setClassCol={"col-sm"}
                 value={dateFinishCollege}
                 setValue={setDateFinishCollege}
-                label={"Quando Concluiu?"}
+                label={"Quando concluiu?"}
               />
             </div>
 
-            <div className="row">
+            <div className="row mt-1">
               <Input
                 type={"text"}
                 typeForm={"form-control"}
@@ -150,11 +150,11 @@ function Professional() {
                 setClassCol={"col-sm"}
                 value={regionalCouncilNumber}
                 setValue={setRegionalCouncilNumber}
-                label={"CRM / CRP"}
+                label={"CRM/ CRP"}
               />
             </div>
 
-            <div className="row">
+            <div className="row mt-1">
               <Input
                 type={"text"}
                 value={postGraduate}
@@ -169,11 +169,11 @@ function Professional() {
                 setValue={setDateFinishPostGraduate}
                 typeForm={"form-control"}
                 setClassCol={"col-sm"}
-                label={"Quando Concluiu?"}
+                label={"Quando concluiu?"}
               />
             </div>
 
-            <div className="row">
+            <div className="row mt-1">
               <Input
                 type={"text"}
                 value={masterDegree}
@@ -188,11 +188,11 @@ function Professional() {
                 setValue={setDateMasterDegree}
                 typeForm={"form-control"}
                 setClassCol={"col-sm"}
-                label={"Quando Concluiu?"}
+                label={"Quando concluiu?"}
               />
             </div>
 
-            <div className="row">
+            <div className="row mt-1">
               <Input
                 type={"text"}
                 value={doctorateDegree}
@@ -207,11 +207,11 @@ function Professional() {
                 setValue={setDateDoctorateDegree}
                 typeForm={"form-control"}
                 setClassCol={"col-sm"}
-                label={"Quando Concluiu?"}
+                label={"Quando concluiu?"}
               />
             </div>
 
-            <div className="row">
+            <div className="row mt-1">
               <TextArea
                 type={"text"}
                 typeForm={"form-control"}
@@ -226,7 +226,7 @@ function Professional() {
             </div>
           </Form.Group>
 
-          <div className="row d-flex justify-content-center">
+          <div className="row d-flex justify-content-center mb-4">
             <button type="submit" className="btn btn-lg col-md-3 btn-primary">
               Avançar
             </button>

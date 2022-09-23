@@ -95,7 +95,7 @@ function Enterprise() {
 
   return (
     <>
-      <Header message={'finalizando!'} linkBack={'/registro/profissional/sobre'} edit/>
+      <Header message={'Finalizando!'} linkBack={'/registro/profissional/sobre'} edit/>
 
       {/* steper 3 */}
       <Stepper step={'100%'} state1={'success'} state2={'success'} state3={'primary'} />
@@ -104,19 +104,19 @@ function Enterprise() {
       <Container className={`${styles.min_height} bg-light card`}>
       <Form noValidate validated={validated} onSubmit={handleSubmit}>
         <Form.Group className="mb-5" >
-        <h3>Dados Empresa</h3> 
-            <div className="row">
+        <h3>Dados da empresa</h3> 
+            <div className="row mt-2">
                 <Input type={'text'} value={logradouro} setValue={setLogradouro} typeForm={'form-control'} setClassCol={'col-sm-7'} label={'Logradouro'}required={true}/>
                 <Input type={'number'} value={number} setValue={setNumber} typeForm={'form-control'} setClassCol={'col-sm'} label={'Número'}required={true} />
                 <Input type={'text'} value={complement} setValue={setComplement} typeForm={'form-control'} setClassCol={'col-sm'} label={'Complemento'}/>
             </div>
-            <div className="row">
+            <div className="row mt-2">
                 <Input type={'text'} value={district} setValue={setDistrict} typeForm={'form-control'} setClassCol={'col-sm'} label={'Bairro'}/>
                 <Input type={'text'} value={state} setValue={setState} typeForm={'form-control'} setClassCol={'col-sm'} label={'Estado'}/>
                 <Input type={'text'} value={city} setValue={setCity} typeForm={'form-control'} setClassCol={'col-sm'} label={'Cidade'}/>
             </div>
-            <div className="row">
-                <Input type={'text'} value={emailEnterprise} setValue={setEmailEnterprise} typeForm={'form-control'} setClassCol={'col-sm'} label={'Email da Empresa'}/>
+            <div className="row mt-2">
+                <Input type={'text'} value={emailEnterprise} setValue={setEmailEnterprise} typeForm={'form-control'} setClassCol={'col-sm'} label={'Email da empresa'}/>
                 <Input type={'text'} value={phoneEnterprise} setValue={setPhoneEnterprise} typeForm={'form-control'} setClassCol={'col-sm'} label={'Telefone'}/>
             </div>
             
