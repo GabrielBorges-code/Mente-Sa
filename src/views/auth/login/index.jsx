@@ -19,6 +19,7 @@ export default function Login() {
         
         
         function handleRegistration(){
+            sessionStorage.setItem("@Land:status", 'false')
             navigate('/registro')
         }
         
@@ -90,7 +91,7 @@ export default function Login() {
                             {/* <!-- Checkbox --> */}
                             
                         <a onClick={() => {handleRegistration()}} className="link-access text-body">
-                          Já sou cadastrado. Quero fazer login!
+                          Não sou cadastrado!
                         </a>
                       
                       </div>
