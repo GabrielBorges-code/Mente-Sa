@@ -50,7 +50,7 @@ Para ter acesso à aplicação em sua máquina, faz-se necessário seguir as ins
 ```sh 
    yarn dev
  ```
-4. Acesse a API localmente
+4. Acesse a aplicação localmente
  ```sh
 No browser:
     http://localhost:5173/
